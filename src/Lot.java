@@ -10,7 +10,16 @@ public class Lot {
         }
     }
 
+    public Tile[][] getTiles() {
+        return this.tiles;
+    }
+
     public Tile getTile(int i, int j) {
         return this.tiles[i][j];
+    }
+
+    public boolean isFruitTreePlantable() {
+        //TODO: Implement
+        return true;
     }
 }
