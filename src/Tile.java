@@ -91,30 +91,34 @@ public class Tile {
         }
     }
 
-    public int harvest() {
+    public double harvest() {
         if (this.isHarvestable) {
-            this.clearTile();
-
             //TODO: compute and return the harvest value
-            return 100;
+            //may kulang pa sa computation formula
+            //might have to move this part to the Farmer class
+            double reward = this.cropPlanted.generateProductAmount() * (this.cropPlanted.getSellingPrice() /* + FarmerTypeEarningBonus */);
+            
+            this.clearTile();
+            return reward;
+
         } else {
             return 0;
         }
     }
 
-    public boolean hasRock() {
-        return this.hasRock;
-    }
-
-    public boolean hasWitheredCrop() {
-        return this.hasWitheredCrop;
-    }
-
-    public boolean isPlowed() {
-        return this.isPlowed;
-    }
-
-    public Crop getCropPlanted() {
-        return this.cropPlanted;
+    public int getStatus() {
+        if (this.hasRock) {
+            return 0;
+        } else if (this.hasWitheredCrop) {
+            return 5;
+        } else if (!this.isPlowed) {
+            return 1;
+        } else if (this.isHarvestable) {
+            return 4;
+        } else if (this.cropPlanted != null) {
+            return 3;
+        } else {
+            return 2;
+        }
     }
 }
