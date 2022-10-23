@@ -69,11 +69,13 @@ public class Farmer {
 
     }
 
-    //need getters for tile to check if can buy seed
-    public boolean buySeed(Tile tile){
+    public boolean useTool (Tool tool, Tile tile)
+    {
+
         return false;
     }
 
+    /*
     public boolean usePlow(Tile tile){
         return false;
     }
@@ -101,6 +103,7 @@ public class Farmer {
     public void harvestCrop(Tile tile){
         return;
     }
+    */
 
     //override tostring
     @Override
