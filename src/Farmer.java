@@ -26,7 +26,7 @@ public class Farmer {
     }
 
     public boolean loseCoins(int amount){
-        if (this.objectcoins =< 0){
+        if (this.objectcoins <= 0){
             return false;
         }
         else{
@@ -40,7 +40,7 @@ public class Farmer {
     }
 
     public boolean register() {
-        if (this.type = "Distinguished Farmer" && this.level >= 15 && this.objectcoins >= 400){
+        if (this.type == "Distinguished Farmer" && this.level >= 15 && this.objectcoins >= 400){
             this.type = "Legendary Farmer";
             this.bonusEarningsPerProduce = 4;
             this.seedCostReduction = 3;
@@ -49,7 +49,7 @@ public class Farmer {
             return true;
         }
 
-        else if (this.type = "Registered Farmer" && this.level >= 10 && this.objectcoins >= 300){
+        else if (this.type == "Registered Farmer" && this.level >= 10 && this.objectcoins >= 300){
             this.type = "Distiguished Farmer";
             this.bonusEarningsPerProduce = 2;
             this.seedCostReduction = 2;
@@ -98,7 +98,7 @@ public class Farmer {
         return false;
     }
 
-    public void plantSeed(Seed seed, Tile tile){
+    public void plantSeed(Crop crop, Tile tile){
         return;
     }
 
