@@ -1,24 +1,20 @@
 public class Farmer {
-    private String name;
-    private int objectcoins;
-    private int level;
-    private float exp;
-    private String type;
-    private int bonusEarningsPerProduce;
-    private int seedCostReduction;
-    private int waterBonusLimitIncrease;
-    private int fertilizerBonusLimitIncrease;
+    private String name = null;
+    private int objectcoins = 100;
+    private int level = 0;
+    private float exp = 0;
+    private String type = "Farmer";
+    private int bonusEarningsPerProduce = 0;
+    private int seedCostReduction = 0;
+    private int waterBonusLimitIncrease = 0;
+    private int fertilizerBonusLimitIncrease = 0;
 
     public Farmer(String name) {
         this.name = name;
-        this.objectcoins = 100;
-        this.level = 0;
-        this.exp = 0;
-        this.type = "Farmer";
-        this.bonusEarningsPerProduce = 0;
-        this.seedCostReduction = 0;
-        this.waterBonusLimitIncrease = 0;
-        this.fertilizerBonusLimitIncrease = 0;
+    }
+
+    public Farmer() {
+        // Default constructor
     }
 
     public void gainCoins(int amount){
@@ -104,6 +100,11 @@ public class Farmer {
 
     public void harvestCrop(Tile tile){
         return;
+    }
+
+    //override tostring
+    public String toString(){
+        return "Farmer: " + this.name + " | Coins: " + this.objectcoins + " | Level: " + this.level + " | Exp: " + this.exp + " | Type: " + this.type;
     }
 
 

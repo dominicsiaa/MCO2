@@ -10,12 +10,29 @@ public class Lot {
         }
     }
 
+    public Lot(int rows, int cols) {
+        this.tiles = new Tile[rows][cols];
+        for (int i = 0; i < this.tiles.length; i++) {
+            for (int j = 0; j < this.tiles[i].length; j++) {
+                this.tiles[i][j] = new Tile();
+            }
+        }
+    }
+
     public Tile[][] getTiles() {
         return this.tiles;
     }
 
     public Tile getTile(int i, int j) {
         return this.tiles[i][j];
+    }
+
+    public void advanceDay() {
+        for (Tile[] tileRow : this.tiles) {
+            for (Tile tile : tileRow) {
+                tile.advanceDay();
+            }
+        }
     }
 
     public boolean isFruitTreePlantable() {
