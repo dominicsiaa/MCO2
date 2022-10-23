@@ -72,7 +72,7 @@ public class Farmer {
 
     public boolean useTool (Tool tool, Tile tile)
     {
-        if(tool.getCost() > this.objectcoins) {
+        if(tool.getCost() <= this.objectcoins) {
             String toolName = tool.getName();
             int tileStatus = tile.getStatus();
 

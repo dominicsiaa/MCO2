@@ -47,9 +47,15 @@ public class MyFarm {
         System.out.println("2. View lot");
         System.out.println("3. Use Tools");
         System.out.println("4. Plant Seed");
-        System.out.println("5. Advance day");
-        System.out.println("6. Exit game");
+        System.out.println("5. Harvest Crop");
+        System.out.println("6. Advance day");
+        System.out.println("7. Exit game");
         System.out.println("Please enter your choice: ");
+    }
+
+    public void advanceDay() {
+        this.day++;
+        lot.advanceDay();
     }
 
     public void run() {
@@ -64,8 +70,8 @@ public class MyFarm {
         this.farmer = new Farmer(name);
         this.lot = new Lot();
 
+        System.out.println("<< Day " + this.day + " >>");
         while(true) {
-            System.out.println("<< Day " + this.day + " >>");
 
             this.showChoices();
             switch(sc.nextInt()) {
@@ -105,17 +111,43 @@ public class MyFarm {
                 case 4:
                     System.out.println("\n[SELECTED CHOICE] Plant Seed");
                     //temporary plant turnip in tile00 for MCO1
-                    this.lot.getTile(0,0).plant(cropList.get(0));
+                    System.out.println("Crop defaulted to TURNIP, Tile defaulted to (0,0)");
+
+                    if(this.lot.getTile(0,0).plant(cropList.get(0))) {
+                        System.out.println("You have successfully planted a turnip in tile (0,0)");
+                        System.out.println(this.lot.getTile(0,0));
+                    } else {
+                        System.out.println("Improper use of Plant Seed");   
+                    }
                     break;
 
                 case 5:
-                    System.out.println("\n[SELECTED CHOICE] Advance day");
-                    this.day++;
-                    lot.advanceDay();
-                    this.lot.displayTiles();
+                    System.out.println("\n[SELECTED CHOICE] Harvest Crop");
+                    System.out.println("Tile defaulted to (0,0)");
+
+                    Crop harvest = this.lot.getTile(0,0).harvest();
+                    if(harvest != null) {
+                        System.out.println("You have successfully harvested " + harvest.getName() + " in tile (0,0)");
+                        System.out.println(this.lot.getTile(0,0));
+                        //TODO: Implement
+                        //double reward = this.cropPlanted.generateProductAmount() * (this.cropPlanted.getSellingPrice() /* + FarmerTypeEarningBonus */);
+                        //need to somehow get the tile number of watered and fertilizer
+                        System.out.println("You gained X gold and X exp");
+                    } else {
+                        System.out.println("Improper use of Harvest Crop");   
+                    }
+
                     break;
 
                 case 6:
+                    System.out.println("\n[SELECTED CHOICE] Advance day");
+                    this.advanceDay();
+                    System.out.println("\n--------------------------------------\n\n");
+                    System.out.println("<< Day " + this.day + " >>");
+                    this.lot.displayTiles();
+                    break;
+
+                case 7:
                     System.out.println("\n[SELECTED CHOICE] Exit game");
                     this.isRunning = false;
                     break;
@@ -125,10 +157,12 @@ public class MyFarm {
             }
             System.out.println();
 
-            if(this.isRunning == false) {
+            if(!this.isRunning) {
                 break;
             }
         }
+
+        System.out.println("Game ended!");
 
         sc.close();
     }

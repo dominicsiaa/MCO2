@@ -91,18 +91,13 @@ public class Tile {
         }
     }
 
-    public double harvest() {
+    public Crop harvest() {
         if (this.isHarvestable) {
-            //TODO: compute and return the harvest value
-            //may kulang pa sa computation formula
-            //might have to move this part to the Farmer class
-            double reward = this.cropPlanted.generateProductAmount() * (this.cropPlanted.getSellingPrice() /* + FarmerTypeEarningBonus */);
-            
             this.clearTile();
-            return reward;
+            return this.cropPlanted;
 
         } else {
-            return 0;
+            return null;
         }
     }
 
