@@ -4,7 +4,6 @@ public class FarmerType {
     private int seedCostReduction;
     private int waterBonusLimitIncrease;
     private int fertilizerBonusLimitIncrease;
-}
 
     public FarmerType(String type, int bonusEarningsPerProduce, int seedCostReduction, int waterBonusLimitIncrease, int fertilizerBonusLimitIncrease) {
         this.type = type;
@@ -33,3 +32,4 @@ public class FarmerType {
     public int getFertilizerBonusLimitIncrease() {
         return this.fertilizerBonusLimitIncrease;
     }
+}
