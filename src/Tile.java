@@ -146,6 +146,6 @@ public class Tile {
                 break;
 
         }
-        return "\n _____ \n" + "|     |\n" + "|  " + this.getStatus() + "  |\n" + "|_____|\n Status: " + status;
+        return "\n _____ \n" + "|     |\n" + "|  " + this.getStatus() + "  |\n" + "|_____|\n Status: (" + this.getStatus() + ") " + status;
     }
 }

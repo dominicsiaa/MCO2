@@ -2,7 +2,7 @@ public class Farmer {
     private String name = null;
     private int objectcoins = 100;
     private int level = 0;
-    private float exp = 0;
+    private double exp = 0;
     private String type = "Farmer";
     private int bonusEarningsPerProduce = 0;
     private int seedCostReduction = 0;
@@ -31,7 +31,8 @@ public class Farmer {
         }
     }
 
-    public void gainExp(float amount){
+    //TODO: add levelup function
+    public void gainExp(double amount){
         this.exp += amount;
     }
 
@@ -71,6 +72,47 @@ public class Farmer {
 
     public boolean useTool (Tool tool, Tile tile)
     {
+        if(tool.getCost() > this.objectcoins) {
+            String toolName = tool.getName();
+            int tileStatus = tile.getStatus();
+
+            if(toolName.equals("Plow") && tileStatus == 1) {
+                this.gainExp(tool.getExpGain());
+                this.loseCoins(tool.getCost());
+
+                tile.plow();
+                return true;
+
+            } else if(toolName.equals("Watering Can") && tileStatus == 3) {
+                this.gainExp(tool.getExpGain());
+                this.loseCoins(tool.getCost());
+
+                tile.water();
+                return true;
+
+            } else if(toolName.equals("Fertilizer") && tileStatus == 3) {
+                this.gainExp(tool.getExpGain());
+                this.loseCoins(tool.getCost());
+
+                tile.fertilize();
+                return true;
+
+            } else if(toolName.equals("Pickaxe") && tileStatus == 0) {
+                this.gainExp(tool.getExpGain());
+                this.loseCoins(tool.getCost());
+
+                tile.removeRock();
+                return true;
+
+            } else if(toolName.equals("Shovel")) {
+                this.gainExp(tool.getExpGain());
+                this.loseCoins(tool.getCost());
+
+                tile.clearTile();
+                return true;
+
+            }
+        }
 
         return false;
     }
@@ -104,6 +146,23 @@ public class Farmer {
         return;
     }
     */
+
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getObjectcoins() {
+        return this.objectcoins;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public double getExp() {
+        return this.exp;
+    }
 
     //override tostring
     @Override
