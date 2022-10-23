@@ -36,7 +36,15 @@ public class Lot {
     }
 
     public boolean isFruitTreePlantable() {
-        //TODO: Implement
-        return true;
+        //TODO: Implement for MCO2
+
+        return false;
+    }
+
+    public void displayTiles() {
+        //TODO: Implement for MCO2, one tile only for MCO1
+
+        System.out.println("Tile 1: ");
+        System.out.println(tiles[1][1]);
     }
 }

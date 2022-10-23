@@ -103,6 +103,7 @@ public class Farmer {
     }
 
     //override tostring
+    @Override
     public String toString(){
         return "Farmer: " + this.name + " | Coins: " + this.objectcoins + " | Level: " + this.level + " | Exp: " + this.exp + " | Type: " + this.type;
     }

@@ -121,4 +121,9 @@ public class Tile {
             return 2;
         }
     }
+
+    @Override
+    public String toString() {
+        return "\n ___ \n" + "|   |\n" + "| " + this.getStatus() + " |\n" + "|___|\n\n";
+    }
 }

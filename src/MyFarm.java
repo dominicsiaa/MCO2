@@ -9,11 +9,6 @@ public class MyFarm {
         // Default constructor
     }
 
-    private void displayTiles() {
-        // Which is text-based for now until GUI
-        //TODO: Implement
-    }
-
     private void showChoices() {
         System.out.println("What would you like to do?");
         System.out.println("1. View farmer");
@@ -41,27 +36,30 @@ public class MyFarm {
             this.showChoices();
             switch(sc.nextInt()) {
                 case 1:
+                    System.out.println("[SELECTED CHOICE] View farmer");    
                     System.out.println(farmer);
                     break;
                 case 2:
-                    System.out.println("show lot");
+                    System.out.println("[SELECTED CHOICE] View lot");
+                    this.lot.displayTiles();
                     break;
                 case 3:
-                    System.out.println("use tools");
+                    System.out.println("[SELECTED CHOICE] Use Tools");
                     break;
                 case 4:
-                    System.out.println("plant seed");
+                    System.out.println("[SELECTED CHOICE] Plant Seed");
                     break;
                 case 5:
+                    System.out.println("[SELECTED CHOICE] Advance day");
                     this.day++;
                     lot.advanceDay();
                     break;
                 case 6:
-                    System.out.println("Exiting game...");
+                    System.out.println("[SELECTED CHOICE] Exit game");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid choice");
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
