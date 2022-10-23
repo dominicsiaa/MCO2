@@ -1,6 +1,8 @@
 public class Lot {
     private Tile[][] tiles;
 
+    //TODO: There should be constructor for Lot with rocks next time
+
     public Lot() {
         this.tiles = new Tile[1][1];
         for (int i = 0; i < this.tiles.length; i++) {
@@ -17,10 +19,6 @@ public class Lot {
                 this.tiles[i][j] = new Tile();
             }
         }
-    }
-
-    public Tile[][] getTiles() {
-        return this.tiles;
     }
 
     public Tile getTile(int i, int j) {
@@ -44,7 +42,7 @@ public class Lot {
     public void displayTiles() {
         //TODO: Implement for MCO2, one tile only for MCO1
 
-        System.out.println("Tile 1: ");
-        System.out.println(tiles[1][1]);
+        System.out.print("\nTile 1: ");
+        System.out.println(tiles[0][0]);
     }
 }

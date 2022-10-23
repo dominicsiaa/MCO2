@@ -124,6 +124,28 @@ public class Tile {
 
     @Override
     public String toString() {
-        return "\n ___ \n" + "|   |\n" + "| " + this.getStatus() + " |\n" + "|___|\n\n";
+        String status = "Error";
+        switch(this.getStatus()) {
+            case 0:
+                status = "Has Rock";
+                break;
+            case 1:
+                status = "Unplowed";
+                break;
+            case 2:
+                status = "Plowed";
+                break;
+            case 3:
+                status = "Planted\nPlant: " + this.cropPlanted.getName() + " | Days Past: " + this.daysPast + " | Watered: " + this.timesWatered + " | Fertilized: " + this.timesFertilized;
+                break;
+            case 4:
+                status = "Harvestable\nPlant: " + this.cropPlanted.getName() + " | Days Past: " + this.daysPast + " | Watered: " + this.timesWatered + " | Fertilized: " + this.timesFertilized;
+                break;
+            case 5:
+                status = "Has Withered Crop";
+                break;
+
+        }
+        return "\n _____ \n" + "|     |\n" + "|  " + this.getStatus() + "  |\n" + "|_____|\n Status: " + status;
     }
 }

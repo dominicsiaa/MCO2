@@ -2,9 +2,9 @@ public class Tool {
     private String name;
     private String function;
     private int cost;
-    private int expGain;
+    private double expGain;
 
-    public Tool(String name, String function, int cost, int expGain) {
+    public Tool(String name, String function, int cost, double expGain) {
         this.name = name;
         this.function = function;
         this.cost = cost;
@@ -23,7 +23,7 @@ public class Tool {
         return this.cost;
     }
 
-    public int getExpGain() {
+    public double getExpGain() {
         return this.expGain;
     }
 

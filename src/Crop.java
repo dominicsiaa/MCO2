@@ -15,7 +15,17 @@ public class Crop {
     private int sellingPrice;
     private float experienceYield;
 
-    public Crop(String name, String type, int harvestTime, int waterNeeds, int fertilizerNeeds, int minProductsProduced, int maxProductsProduced, int seedCost, int sellingPrice, float experienceYield) {
+    public Crop(String name, 
+                String type, 
+                int harvestTime, 
+                int waterNeeds, 
+                int fertilizerNeeds, 
+                int minProductsProduced, 
+                int maxProductsProduced, 
+                int seedCost, 
+                int sellingPrice, 
+                float experienceYield) 
+    {
         this.name = name;
         this.type = type;
         this.harvestTime = harvestTime;
