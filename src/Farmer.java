@@ -3,11 +3,7 @@ public class Farmer {
     private int objectcoins = 100;
     private int level = 0;
     private double exp = 0;
-    private String type = "Farmer";
-    private int bonusEarningsPerProduce = 0;
-    private int seedCostReduction = 0;
-    private int waterBonusLimitIncrease = 0;
-    private int fertilizerBonusLimitIncrease = 0;
+    private FarmerType type = new FarmerType("Farmer", 0, 0, 0, 0);
 
     public Farmer(String name) {
         this.name = name;
@@ -37,6 +33,7 @@ public class Farmer {
     }
 
     public boolean register() {
+        /* 
         if (this.type == "Distinguished Farmer" && this.level >= 15 && this.objectcoins >= 400){
             this.type = "Legendary Farmer";
             this.bonusEarningsPerProduce = 4;
@@ -67,7 +64,9 @@ public class Farmer {
         else{
             return false;
         }
+        */
 
+        return false;
     }
 
     public boolean useTool (Tool tool, Tile tile)

@@ -55,8 +55,9 @@ public class MyFarm {
         System.out.println("3. Use Tools");
         System.out.println("4. Plant Seed");
         System.out.println("5. Harvest Crop");
-        System.out.println("6. Advance day");
-        System.out.println("7. Exit game");
+        System.out.println("6. Register Farmer");
+        System.out.println("7. Advance Day");
+        System.out.println("8. Exit game");
         System.out.println("Please enter your choice: ");
     }
 
@@ -98,12 +99,14 @@ public class MyFarm {
             //TODO: GUI implenetation for MCO2
             this.showChoices();
             switch(sc.nextInt()) {
+                //CHOICE: VIEW FARMER
                 case 1:
                     System.out.println("\n[SELECTED CHOICE] View farmer");    
                     System.out.println(farmer);
 
                     break;
 
+                //CHOICE: VIEW LOT
                 case 2:
                     System.out.println("\n[SELECTED CHOICE] View lot");
 
@@ -113,6 +116,7 @@ public class MyFarm {
 
                     break;
 
+                //CHOICE: USE TOOLS
                 case 3:
                     System.out.println("\n[SELECTED CHOICE] Use Tools");
                     System.out.println("Please select a tool: ");
@@ -138,6 +142,7 @@ public class MyFarm {
                     }
                     break;
 
+                //CHOICE: PLANT SEED
                 case 4:
                     System.out.println("\n[SELECTED CHOICE] Plant Seed");
                 
@@ -153,8 +158,10 @@ public class MyFarm {
                     } else {
                         System.out.println("Improper use of Plant Seed");   
                     }
+
                     break;
 
+                //CHOICE: HARVEST CROP
                 case 5:
                     //TODO: Use Farmer harvest function
                     //TODO: 1 tile for MCO1
@@ -176,7 +183,14 @@ public class MyFarm {
 
                     break;
 
+                //CHOICE: REGISTER FARMER
                 case 6:
+                    System.out.println("\n[SELECTED CHOICE] Register Farmer");
+
+                    break;
+
+                //CHOICE: ADVANCE DAY
+                case 7:
                     System.out.println("\n[SELECTED CHOICE] Advance day");
                     this.advanceDay();
                     System.out.println("\n--------------------------------------\n\n");
@@ -188,9 +202,11 @@ public class MyFarm {
 
                     break;
 
-                case 7:
+                //CHOICE: EXIT GAME
+                case 8:
                     System.out.println("\n[SELECTED CHOICE] Exit game");
                     this.isRunning = false;
+
                     break;
 
                 default:
