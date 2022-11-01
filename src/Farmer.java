@@ -3,7 +3,7 @@ public class Farmer {
     private int objectcoins = 100;
     private int level = 0;
     private double exp = 0;
-    private FarmerType type = new FarmerType("Farmer", 0, 0, 0, 0);
+    private FarmerType type = new FarmerType("Farmer", 0, 0, 0, 0, 0, 0);
 
     public Farmer(String name) {
         this.name = name;
