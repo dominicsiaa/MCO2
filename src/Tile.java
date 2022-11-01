@@ -1,4 +1,5 @@
 public class Tile {
+
     private boolean hasRock = false;
     private boolean hasWitheredCrop = false;
 
@@ -58,9 +59,12 @@ public class Tile {
         this.hasRock = false;
     }
 
+    /* kinda useless now?
+
     public void removeWitheredCrop() {
         this.hasWitheredCrop = false;
     }
+     */
 
     public void clearTile() {
         this.isHarvestable = false;
@@ -69,6 +73,7 @@ public class Tile {
         this.daysPast = 0;
         this.timesFertilized = 0;
         this.timesWatered = 0;
+        this.hasWitheredCrop = false;
     }
 
     public void advanceDay() {
@@ -93,8 +98,9 @@ public class Tile {
 
     public Crop harvest() {
         if (this.isHarvestable) {
+            Crop crop = this.cropPlanted;
             this.clearTile();
-            return this.cropPlanted;
+            return crop;
 
         } else {
             return null;
