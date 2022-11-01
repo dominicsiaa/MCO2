@@ -25,6 +25,13 @@ public class MyFarm {
                 7, 2)
     ));
 
+    public static final List<FarmerType> farmerTypeList = new ArrayList<FarmerType>(Arrays.asList(
+            new FarmerType("Farmer", 0, 0, 0, 0),
+            new FarmerType("Registered Farmer", 1, -1, 0, 0),
+            new FarmerType("Distinguished Farmer", 2, -2, 1, 0),
+            new FarmerType("Legendary Farmer", 4, -3, 2, 1)
+    ));
+
     public static final List<Crop> cropList = new ArrayList<Crop>(Arrays.asList(
         new Crop("Turnip", "rootcrop", 2, 
         1, 0, 
