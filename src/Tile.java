@@ -66,9 +66,12 @@ public class Tile {
         this.hasRock = false;
     }
 
+    /* kinda useless now?
+
     public void removeWitheredCrop() {
         this.hasWitheredCrop = false;
     }
+     */
 
     public void clearTile() {
         this.isHarvestable = false;
@@ -77,6 +80,7 @@ public class Tile {
         this.daysPast = 0;
         this.timesFertilized = 0;
         this.timesWatered = 0;
+        this.hasWitheredCrop = false;
     }
 
     public void advanceDay() {
@@ -99,18 +103,14 @@ public class Tile {
         }
     }
 
-    public double harvest() {
+    public Crop harvest() {
         if (this.isHarvestable) {
-            //TODO: compute and return the harvest value
-            //may kulang pa sa computation formula
-            //might have to move this part to the Farmer class
-            double reward = this.cropPlanted.generateProductAmount() * (this.cropPlanted.getSellingPrice() /* + FarmerTypeEarningBonus */);
-            
+            Crop crop = this.cropPlanted;
             this.clearTile();
-            return reward;
+            return crop;
 
         } else {
-            return 0;
+            return null;
         }
     }
 

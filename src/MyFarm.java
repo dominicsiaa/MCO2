@@ -40,7 +40,7 @@ public class MyFarm {
 
     // Declare variables
     private Farmer farmer = null;
-    private Lot lot = null;
+    private Tile[][] lot = null;
     private int day = 1;
     private boolean isRunning = false;
 
@@ -54,9 +54,19 @@ public class MyFarm {
         System.out.println("2. View lot");
         System.out.println("3. Use Tools");
         System.out.println("4. Plant Seed");
-        System.out.println("5. Advance day");
-        System.out.println("6. Exit game");
+        System.out.println("5. Harvest Crop");
+        System.out.println("6. Advance day");
+        System.out.println("7. Exit game");
         System.out.println("Please enter your choice: ");
+    }
+
+    public void advanceDay() {
+        this.day++;
+        for(Tile lotRow[] : this.lot) {
+            for(Tile tile : lotRow) {
+                tile.advanceDay();
+            }
+        }
     }
 
     public void run() {
@@ -68,22 +78,39 @@ public class MyFarm {
         String name = sc.nextLine();
         System.out.println();
 
+        // Create farmer
         this.farmer = new Farmer(name);
-        this.lot = new Lot();
+        // Create lot - TODO: 1 tile for MCO1
+        this.lot = new Tile[1][1];
+        for(int i = 0; i < 1; i++) {
+            for(int j = 0; j < 1; j++) {
+                this.lot[i][j] = new Tile();
+            }
+        }
 
+        System.out.println("<< Day " + this.day + " >>");
         while(true) {
-            System.out.println("<< Day " + this.day + " >>");
+            //Variable setup
+            Tile tile;
+            Tool tool;
+            Crop crop;
 
+            //TODO: GUI implenetation for MCO2
             this.showChoices();
             switch(sc.nextInt()) {
                 case 1:
                     System.out.println("\n[SELECTED CHOICE] View farmer");    
                     System.out.println(farmer);
+
                     break;
 
                 case 2:
                     System.out.println("\n[SELECTED CHOICE] View lot");
-                    this.lot.displayTiles();
+
+                    //Display Tiles - TODO: 1 tile for MCO1, GUI for MCO2
+                    System.out.print("\nTile 1: ");
+                    System.out.println(lot[0][0]);
+
                     break;
 
                 case 3:
@@ -94,11 +121,13 @@ public class MyFarm {
                     }
                     System.out.println("Please enter your choice: ");
                     int toolChoice = sc.nextInt();
+                    tool = toolList.get(toolChoice - 1);
+
+                    //TODO: 1 tile for MCO1
                     System.out.println("Please select a tile: ");
                     System.out.println("For MCO1, defaulted to (0,0)");
 
-                    Tool tool = toolList.get(toolChoice - 1);
-                    Tile tile = this.lot.getTile(0, 0);
+                    tile = lot[0][0];
 
                     if(farmer.useTool(tool, tile)) {
                         System.out.println("\nYou have successfully used " + tool.getName() + " on tile (0,0)");
@@ -111,18 +140,55 @@ public class MyFarm {
 
                 case 4:
                     System.out.println("\n[SELECTED CHOICE] Plant Seed");
-                    //temporary plant turnip in tile00 for MCO1
-                    this.lot.getTile(0,0).plant(cropList.get(0));
+                
+                    //TODO: Selecting crop - use Farmer plant function
+                    //TODO: 1 tile for MCO1
+                    System.out.println("Crop defaulted to TURNIP, Tile defaulted to (0,0)");
+                    crop = cropList.get(0);
+                    tile = lot[0][0];
+
+                    if(tile.plant(crop)) {
+                        System.out.println("You have successfully planted a turnip in tile (0,0)");
+                        System.out.println(tile);
+                    } else {
+                        System.out.println("Improper use of Plant Seed");   
+                    }
                     break;
 
                 case 5:
-                    System.out.println("\n[SELECTED CHOICE] Advance day");
-                    this.day++;
-                    lot.advanceDay();
-                    this.lot.displayTiles();
+                    //TODO: Use Farmer harvest function
+                    //TODO: 1 tile for MCO1
+                    System.out.println("\n[SELECTED CHOICE] Harvest Crop");
+                    System.out.println("Tile defaulted to (0,0)");
+                    tile = lot[0][0];
+
+                    Crop harvest = tile.harvest();
+                    if(harvest != null) {
+                        System.out.println("You have successfully harvested " + harvest.getName() + " in tile (0,0)");
+                        System.out.println(tile);
+                        //TODO: Implement
+                        //double reward = this.cropPlanted.generateProductAmount() * (this.cropPlanted.getSellingPrice() /* + FarmerTypeEarningBonus */);
+                        //need to somehow get the tile number of watered and fertilizer
+                        System.out.println("You gained X gold and X exp");
+                    } else {
+                        System.out.println("Improper use of Harvest Crop");   
+                    }
+
                     break;
 
                 case 6:
+                    System.out.println("\n[SELECTED CHOICE] Advance day");
+                    this.advanceDay();
+                    System.out.println("\n--------------------------------------\n\n");
+                    System.out.println("<< Day " + this.day + " >>");
+
+                    //Display Tiles - TODO: 1 tile for MCO1, GUI for MCO2
+                    System.out.print("\nTile 1: ");
+                    System.out.println(lot[0][0]);
+
+                    break;
+
+                case 7:
                     System.out.println("\n[SELECTED CHOICE] Exit game");
                     this.isRunning = false;
                     break;
@@ -132,10 +198,12 @@ public class MyFarm {
             }
             System.out.println();
 
-            if(this.isRunning == false) {
+            if(!this.isRunning) {
                 break;
             }
         }
+
+        System.out.println("Game ended!");
 
         sc.close();
     }

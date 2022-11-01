@@ -1,7 +1,7 @@
 public class Lot {
     private Tile[][] tiles;
 
-    //TODO: There should be constructor for Lot with rocks next time
+    //TODO: There should be constructor for Lot with rocks for MCO2
 
     public Lot() {
         this.tiles = new Tile[1][1];
