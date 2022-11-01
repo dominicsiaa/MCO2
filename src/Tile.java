@@ -1,4 +1,12 @@
 public class Tile {
+
+    public static final int HASROCK = 0;
+    public static final int ISUNPLOWED = 1;
+    public static final int ISPLOWED = 2;
+    public static final int ISPLANTED = 3;
+    public static final int ISHARVESTABLE = 4;
+    public static final int HASWITHERED = 5;
+
     private boolean hasRock = false;
     private boolean hasWitheredCrop = false;
 
@@ -108,17 +116,17 @@ public class Tile {
 
     public int getStatus() {
         if (this.hasRock) {
-            return 0;
+            return HASROCK;
         } else if (this.hasWitheredCrop) {
-            return 5;
+            return HASWITHERED;
         } else if (!this.isPlowed) {
-            return 1;
+            return ISUNPLOWED;
         } else if (this.isHarvestable) {
-            return 4;
+            return ISHARVESTABLE;
         } else if (this.cropPlanted != null) {
-            return 3;
+            return ISPLANTED;
         } else {
-            return 2;
+            return ISPLOWED;
         }
     }
 
@@ -126,22 +134,22 @@ public class Tile {
     public String toString() {
         String status = "Error";
         switch(this.getStatus()) {
-            case 0:
+            case HASROCK:
                 status = "Has Rock";
                 break;
-            case 1:
+            case ISUNPLOWED:
                 status = "Unplowed";
                 break;
-            case 2:
+            case ISPLOWED:
                 status = "Plowed";
                 break;
-            case 3:
+            case ISPLANTED:
                 status = "Planted\nPlant: " + this.cropPlanted.getName() + " | Days Past: " + this.daysPast + " | Watered: " + this.timesWatered + " | Fertilized: " + this.timesFertilized;
                 break;
-            case 4:
+            case ISHARVESTABLE:
                 status = "Harvestable\nPlant: " + this.cropPlanted.getName() + " | Days Past: " + this.daysPast + " | Watered: " + this.timesWatered + " | Fertilized: " + this.timesFertilized;
                 break;
-            case 5:
+            case HASWITHERED:
                 status = "Has Withered Crop";
                 break;
 
