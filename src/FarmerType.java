@@ -1,5 +1,5 @@
 public class FarmerType {
-    private String type;
+    private String name;
     private int levelRequirement;
     private int bonusEarningsPerProduce;
     private int seedCostReduction;
@@ -7,8 +7,8 @@ public class FarmerType {
     private int fertilizerBonusLimitIncrease;
     private int registrationFee;
 
-    public FarmerType(String type, int levelRequirement, int bonusEarningsPerProduce, int seedCostReduction, int waterBonusLimitIncrease, int fertilizerBonusLimitIncrease, int registrationFee) {
-        this.type = type;
+    public FarmerType(String name, int levelRequirement, int bonusEarningsPerProduce, int seedCostReduction, int waterBonusLimitIncrease, int fertilizerBonusLimitIncrease, int registrationFee) {
+        this.name = name;
         this.levelRequirement = levelRequirement;
         this.bonusEarningsPerProduce = bonusEarningsPerProduce;
         this.seedCostReduction = seedCostReduction;
@@ -17,8 +17,12 @@ public class FarmerType {
         this.registrationFee = registrationFee;
     }
 
-    public String getType() {
-        return this.type;
+    public String getName() {
+        return this.name;
+    }
+
+    public int getLevelRequirement() {
+        return this.levelRequirement;
     }
 
     public int getBonusEarningsPerProduce() {
@@ -35,5 +39,14 @@ public class FarmerType {
 
     public int getFertilizerBonusLimitIncrease() {
         return this.fertilizerBonusLimitIncrease;
+    }
+
+    public int getRegistrationFee() {
+        return this.registrationFee;
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
     }
 }

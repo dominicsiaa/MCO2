@@ -107,4 +107,9 @@ public class Crop {
         return this.experienceYield;
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
 }

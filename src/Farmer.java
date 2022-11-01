@@ -1,7 +1,7 @@
 public class Farmer {
     private String name = null;
-    private int objectcoins = 100;
-    private int level = 0;
+    private int objectcoins = 10000;    //TODO: Change back to original value is 100
+    private int level = 100;            //TODO: Change back to original value is 0
     private double exp = 0;
     private FarmerType type = new FarmerType("Farmer", 0, 0, 0, 0, 0, 0);
 
@@ -17,14 +17,8 @@ public class Farmer {
         this.objectcoins += amount;
     }
 
-    public boolean loseCoins(int amount){
-        if (this.objectcoins <= 0){
-            return false;
-        }
-        else{
-            this.objectcoins -= amount;
-            return true;
-        }
+    public void loseCoins(int amount){
+        this.objectcoins -= amount;
     }
 
     //TODO: add levelup function
@@ -32,87 +26,78 @@ public class Farmer {
         this.exp += amount;
     }
 
-    public boolean register() {
-        /* 
-        if (this.type == "Distinguished Farmer" && this.level >= 15 && this.objectcoins >= 400){
-            this.type = "Legendary Farmer";
-            this.bonusEarningsPerProduce = 4;
-            this.seedCostReduction = 3;
-            this.waterBonusLimitIncrease = 2;
-            this.fertilizerBonusLimitIncrease = 1;
-            return true;
+    public boolean register(FarmerType farmerType) {
+        
+        if( (farmerType.getLevelRequirement() == this.type.getLevelRequirement() + 5) && //order of type
+            (this.level >= farmerType.getLevelRequirement()) && //meets level req
+            (this.objectcoins >= farmerType.getRegistrationFee()) //has enough coins
+        ){
+                this.type = farmerType;
+                this.loseCoins(farmerType.getRegistrationFee());
+                return true;
         }
-
-        else if (this.type == "Registered Farmer" && this.level >= 10 && this.objectcoins >= 300){
-            this.type = "Distiguished Farmer";
-            this.bonusEarningsPerProduce = 2;
-            this.seedCostReduction = 2;
-            this.waterBonusLimitIncrease = 1;
-            this.fertilizerBonusLimitIncrease = 0;
-            return true;
-        }
-
-        else if (this.level >= 5 && this.objectcoins >= 200){
-            this.type = "Registered Farmer";
-            this.bonusEarningsPerProduce = 1;
-            this.seedCostReduction = 1;
-            this.waterBonusLimitIncrease = 0;
-            this.fertilizerBonusLimitIncrease = 0;
-            return true;
-        }
-
-        else{
-            return false;
-        }
-        */
-
         return false;
     }
 
     public boolean useTool (Tool tool, Tile tile)
     {
+        //Check if user has enough coins
+        boolean success = false;
         if(tool.getCost() <= this.objectcoins) {
             String toolName = tool.getName();
             int tileStatus = tile.getStatus();
 
-            if(toolName.equals("Plow") && tileStatus == 1) {
+            switch(toolName) {
+                case "Plow":
+                    if(tileStatus == Tile.ISUNPLOWED) {
+                        tile.plow();
+                        success = true;
+                    }
+                    break;
+
+                case "Watering Can":
+                    if(tileStatus == Tile.ISPLANTED) {
+                        tile.water();
+                        success = true;
+                    }
+                    break;
+
+                case "Fertilizer":
+                    if(tileStatus == Tile.ISPLANTED) {
+                        tile.fertilize();
+                        success = true;
+                    }
+                    break;
+
+                case "Pickaxe":
+                    if(tileStatus == Tile.HASROCK) {
+                        tile.removeRock();
+                        success = true;
+                    }
+                    break;
+
+                case "Shovel":
+                    tile.clearTile();
+                    success = true;
+                    
+                    break;
+            }
+
+            if(success) {
                 this.gainExp(tool.getExpGain());
                 this.loseCoins(tool.getCost());
-
-                tile.plow();
-                return true;
-
-            } else if(toolName.equals("Watering Can") && tileStatus == 3) {
-                this.gainExp(tool.getExpGain());
-                this.loseCoins(tool.getCost());
-
-                tile.water();
-                return true;
-
-            } else if(toolName.equals("Fertilizer") && tileStatus == 3) {
-                this.gainExp(tool.getExpGain());
-                this.loseCoins(tool.getCost());
-
-                tile.fertilize();
-                return true;
-
-            } else if(toolName.equals("Pickaxe") && tileStatus == 0) {
-                this.gainExp(tool.getExpGain());
-                this.loseCoins(tool.getCost());
-
-                tile.removeRock();
-                return true;
-
-            } else if(toolName.equals("Shovel")) {
-                this.gainExp(tool.getExpGain());
-                this.loseCoins(tool.getCost());
-
-                tile.clearTile();
-                return true;
-
             }
         }
+        return success;
+    }
 
+    //TODO: implement harvest tile function
+    public boolean harvestTile(Tile tile) {
+        return false;
+    }
+
+    //TODO: implement plant crop function
+    public boolean plantCrop(Crop crop, Tile tile) {
         return false;
     }
 
@@ -163,16 +148,15 @@ public class Farmer {
         return this.exp;
     }
 
+    public FarmerType getType() {
+        return this.type;
+    }
+
     //override tostring
     @Override
     public String toString(){
-        return "Farmer: " + this.name + " | Coins: " + this.objectcoins + " | Level: " + this.level + " | Exp: " + this.exp + " | Type: " + this.type;
+        return "Farmer: " + this.name + " | Type: " + this.type.getName() + " | Coins: " + this.objectcoins + " | Level: " + this.level + " | Exp: " + this.exp;
     }
-
-
-
-
-
 
 }
 

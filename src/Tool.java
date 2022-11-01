@@ -28,10 +28,9 @@ public class Tool {
         return this.expGain;
     }
 
-    /*
-    public int[] getValidTiles() {
-        return this.validTiles;
+    @Override
+    public String toString(){
+        return this.name;
     }
-    */
 
 }
