@@ -36,6 +36,12 @@ public class Farmer {
         this.exp += amount;
     }
 
+    public void levelUp(int level, double exp){
+        if ((exp/100) >  level){
+            this.level = exp/100;
+        }
+    }
+
     public boolean register() {
         if (this.type == "Distinguished Farmer" && this.level >= 15 && this.objectcoins >= 400){
             this.type = "Legendary Farmer";
