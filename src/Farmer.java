@@ -1,7 +1,7 @@
 public class Farmer {
     private String name = null;
-    private int objectcoins = 10000;    //TODO: Change back to original value is 100
-    private int level = 100;            //TODO: Change back to original value is 0
+    private int objectcoins = 100;    //TODO: Change back to original value is 100
+    private int level = 0;            //TODO: Change back to original value is 0
     private double exp = 0;
     private FarmerType type = new FarmerType("Farmer", 0, 0, 0, 0, 0, 0);
 
@@ -27,9 +27,11 @@ public class Farmer {
     }
 
     public void levelUp () {
-        if (this.exp / 100 > level) {
-            this.level = (int) (this.exp / 100);
-            System.out.println("You have leveled up! You are now level " + this.level);
+        if (this.exp >=100) {
+            if ((int) (this.exp / 100) > level) {
+                this.level = (int) (this.exp / 100);
+                System.out.println("You have leveled up! You are now level " + getLevel());
+            }
         }
     }
 
