@@ -100,9 +100,20 @@ public class Farmer {
         return success;
     }
 
-    //TODO: implement harvest tile function
-    public boolean harvestTile(Tile tile) {
-        return false;
+    //TODO: Not sure if int or double ung objectcoins
+    public Crop harvestTile(Tile tile) {
+        if(tile.getStatus() == Tile.ISHARVESTABLE) {
+            Crop harvest = tile.getCropPlanted();
+
+            double harvestTotal = harvest.generateProductAmount() * (harvest.getSellingPrice() + this.type.getBonusEarningsPerProduce());
+            double waterBonus = harvestTotal * 0.2 * (Math.min(tile.getTimesWatered(), harvest.getWaterNeedsBonusLimit() + this.getType().getWaterBonusLimitIncrease()) - 1);
+            double fertilzierBonus = harvestTotal * 0.5 * Math.min(tile.getTimesFertilized(), harvest.getFertilizerNeedsBonusLimit() + this.getType().getFertilizerBonusLimitIncrease());
+
+            this.gainCoins((int) (harvestTotal + waterBonus + fertilzierBonus));
+            tile.harvest();
+            return harvest;
+        }
+        return null;
     }
 
     //TODO: implement plant crop function

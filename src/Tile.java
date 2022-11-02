@@ -103,15 +103,26 @@ public class Tile {
         }
     }
 
-    public Crop harvest() {
+    public boolean harvest() {
         if (this.isHarvestable) {
-            Crop crop = this.cropPlanted;
             this.clearTile();
-            return crop;
+            return true;
 
         } else {
-            return null;
+            return false;
         }
+    }
+
+    public int getTimesWatered() {
+        return this.timesWatered;
+    }
+
+    public int getTimesFertilized() {
+        return this.timesFertilized;
+    }
+
+    public Crop getCropPlanted() {
+        return this.cropPlanted;
     }
 
     public int getStatus() {
