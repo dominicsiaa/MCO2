@@ -26,6 +26,12 @@ public class Farmer {
         this.exp += amount;
     }
 
+    public void levelUp () {
+        if (this.exp / 100 > level) {
+            this.level = (int) (this.exp / 100);
+        }
+    }
+
     public boolean register(FarmerType farmerType) {
         
         if( (farmerType.getLevelRequirement() == this.type.getLevelRequirement() + 5) && //order of type
