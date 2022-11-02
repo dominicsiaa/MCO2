@@ -238,6 +238,7 @@ public class MyFarm {
                 default:
                     System.out.println("\nInvalid choice, please try again");
             }
+            farmer.levelUp();
             System.out.println();
 
             if(!this.isRunning) {
