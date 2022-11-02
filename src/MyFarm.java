@@ -172,13 +172,10 @@ public class MyFarm {
                     System.out.println("Tile defaulted to (0,0)");
                     tile = lot[0][0];
 
-                    Crop harvest = tile.harvest();
+                    Crop harvest = farmer.harvestTile(tile);
                     if(harvest != null) {
-                        System.out.println("You have successfully harvested " + harvest.getName() + " in tile (0,0)");
+                        System.out.println("You have successfully harvested the tile");
                         System.out.println(tile);
-                        //TODO: Implement
-                        //double reward = this.cropPlanted.generateProductAmount() * (this.cropPlanted.getSellingPrice() /* + FarmerTypeEarningBonus */);
-                        //need to somehow get the tile number of watered and fertilizer
                         System.out.println("You gained X gold and X exp");
                     } else {
                         System.out.println("Invalid use of Harvest Crop");   
