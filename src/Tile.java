@@ -35,7 +35,7 @@ public class Tile {
     }
 
     public boolean plant(Crop crop) {
-        if (this.isPlowed) {
+        if (this.isPlowed && this.cropPlanted == null) {
             this.cropPlanted = crop;
             return true;
         }

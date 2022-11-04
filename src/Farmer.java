@@ -1,7 +1,7 @@
 public class Farmer {
     private String name = null;
-    private int objectcoins = 5;    //TODO: Change back to original value is 100
-    private int level = 0;            //TODO: Change back to original value is 0
+    private int objectcoins = 100;      //TODO: Change back to original value is 100
+    private int level = 0;              //TODO: Change back to original value is 0
     private double exp = 0;
     private FarmerType type = null;
 
@@ -14,21 +14,27 @@ public class Farmer {
         this.objectcoins += amount;
 
         //TODO: Temporary here before GUI in MCO2
-        System.out.println("You have earned " + amount + " objectcoins");
+        if(amount > 0) {
+            System.out.println("You have earned " + amount + " objectcoins");
+        }
     }
 
     public void loseCoins(int amount){
         this.objectcoins -= amount;
 
         //TODO: Temporary here before GUI in MCO2
-        System.out.println("You have lost " + amount + " objectcoins");
+        if(amount > 0) {
+            System.out.println("You have lost " + amount + " objectcoins");
+        }
     }
 
     public void gainExp(double amount){
         this.exp += amount;
 
         //TODO: Temporary here before GUI in MCO2
-        System.out.println("You have gained " + amount + " exp");
+        if(amount > 0) {
+            System.out.println("You have gained " + amount + " exp");
+        }
 
         if (this.exp >=100) {
             if ((int) (this.exp / 100) > level) {
