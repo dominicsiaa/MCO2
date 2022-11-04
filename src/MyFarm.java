@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class MyFarm {
 
     // Declare global variables
-    public static final List<Tool> toolList = new ArrayList<Tool>(Arrays.asList(
+    public static final List<Tool> TOOLLIST = new ArrayList<Tool>(Arrays.asList(
         new Tool("Plow",
                 "Converts an unplowed tile to a plowed tile. Can only be performed on an unplowed tile.",
                 0, 0.5),
@@ -25,17 +25,23 @@ public class MyFarm {
                 7, 2)
     ));
 
-    public static final List<FarmerType> farmerTypeList = new ArrayList<FarmerType>(Arrays.asList(
+    public static final List<FarmerType> FARMERTYPELIST = new ArrayList<FarmerType>(Arrays.asList(
         new FarmerType("Farmer", 0, 0, 0, 0, 0, 0),
         new FarmerType("Registered Farmer",5, 1, -1, 0, 0, 200),
         new FarmerType("Distinguished Farmer", 10, 2, -2, 1, 0, 300),
         new FarmerType("Legendary Farmer", 15, 4, -3, 2, 1, 400)
     ));
 
-    public static final List<Crop> cropList = new ArrayList<Crop>(Arrays.asList(
+    public static final List<Crop> CROPLIST = new ArrayList<Crop>(Arrays.asList(
         new Crop("Turnip", "rootcrop", 2, 
-        1, 0, 
-        1, 2, 5, 6, 5)
+                1, 0, 
+                1, 2, 5, 6, 5) /*,
+        new Crop("Carrot", "rootcrop", 3, 
+                1, 0, 
+                1, 2, 10, 9, 7.5),
+        new Crop("Potato", "rootcrop", 5,
+                3, 1, 
+                1, 10, 20, 3, 12.5)*/
     ));
 
     // Declare variables
@@ -48,27 +54,42 @@ public class MyFarm {
         // Default constructor
     }
 
-    private void showChoices() {
-        System.out.println("What would you like to do?");
-        System.out.println("1. View farmer");
-        System.out.println("2. View lot");
-        System.out.println("3. Use Tools");
-        System.out.println("4. Plant Seed");
-        System.out.println("5. Harvest Crop");
-        System.out.println("6. Register Farmer");
-        System.out.println("7. Advance Day");
-        System.out.println("8. Exit game");
-        System.out.println("Please enter your choice: ");
-    }
-
-    public void advanceDay() {
+    //Advances day and checks if game is over
+    private boolean advanceDay() {
         this.day++;
+
+        //Advances day for each tile
+        boolean lotHasCrops = false;
         for(Tile lotRow[] : this.lot) {
             for(Tile tile : lotRow) {
                 tile.advanceDay();
+
+                //Checks if at least one tile has crop
+                if(tile.getStatus() == Tile.ISPLANTED || tile.getStatus() == Tile.ISHARVESTABLE) {
+                    lotHasCrops = true;
+                }
             }
         }
+
+        //Determine cheapest seed available
+        int cheapestCropPrice = CROPLIST.get(0).getSeedCost();
+        for(Crop crop : CROPLIST) {
+            cheapestCropPrice = Math.min(cheapestCropPrice, crop.getSeedCost());
+        }
+
+        //Checks if game is over
+        if(lotHasCrops && (this.farmer.getObjectcoins() < cheapestCropPrice)) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    /*
+     * 
+     * ----------------RUN FUNCTION---------------------
+     * 
+     */
 
     public void run() {
         this.isRunning = true;
@@ -79,9 +100,10 @@ public class MyFarm {
         String name = sc.nextLine();
         System.out.println();
 
-        // Create farmer
+        //Create farmer
         this.farmer = new Farmer(name);
-        // Create lot - TODO: 1 tile for MCO1
+
+        //Create lot - TODO: 1 tile for MCO1
         this.lot = new Tile[1][1];
         for(int i = 0; i < 1; i++) {
             for(int j = 0; j < 1; j++) {
@@ -89,9 +111,13 @@ public class MyFarm {
             }
         }
 
+        //Display - TODO: 1 tile for MCO1, GUI for MCO2
+        System.out.print("\nTile 1: ");
+        System.out.println(lot[0][0] + "\n");
         System.out.println("<< Day " + this.day + " >>");
+
         while(true) {
-            //Variable setup
+            //Variables setup
             Tile tile;
             Tool tool;
             Crop crop;
@@ -100,7 +126,19 @@ public class MyFarm {
             /*
             TODO: GUI implementation for MCO2
             */
-            this.showChoices();
+
+            //SHOW MENU
+            System.out.println("What would you like to do?");
+            System.out.println("1. View farmer");
+            System.out.println("2. View lot");
+            System.out.println("3. Use Tools");
+            System.out.println("4. Plant Seed");
+            System.out.println("5. Harvest Crop");
+            System.out.println("6. Register Farmer");
+            System.out.println("7. Advance Day");
+            System.out.println("8. Exit game");
+            System.out.println("Please enter your choice: ");
+
             switch(sc.nextInt()) {
                 //CHOICE: VIEW FARMER
                 case 1:
@@ -122,20 +160,22 @@ public class MyFarm {
                 //CHOICE: USE TOOLS
                 case 3:
                     System.out.println("\n[SELECTED CHOICE] Use Tools");
+
+                    //USER INPUT: SELECT TOOL
                     System.out.println("Please select a tool: ");
-                    for (int i = 0; i < toolList.size(); i++) {
-                        System.out.println((i + 1) + ". " + toolList.get(i).getName());
+                    for (int i = 0; i < TOOLLIST.size(); i++) {
+                        System.out.println((i + 1) + ". " + TOOLLIST.get(i).getName());
                     }
                     System.out.println("Please enter your choice: ");
-                    int toolChoice = sc.nextInt();
-                    tool = toolList.get(toolChoice - 1);
+                    tool = TOOLLIST.get(sc.nextInt() - 1);
 
+                    //USER INPUT: SELECT TILE
                     //TODO: 1 tile for MCO1
                     System.out.println("Please select a tile: ");
-                    System.out.println("For MCO1, defaulted to (0,0)");
-
+                    System.out.println("For MCO1, defaulted to (0,0)\n");
                     tile = lot[0][0];
 
+                    //ACTION: USE TOOL ON TILE
                     if(farmer.useTool(tool, tile)) {
                         System.out.println("\nYou have successfully used " + tool + " on tile (0,0)");
                         System.out.println(tile);
@@ -149,15 +189,27 @@ public class MyFarm {
                 case 4:
                     System.out.println("\n[SELECTED CHOICE] Plant Seed");
                 
-                    //TODO: Selecting crop - use Farmer plant function
+                    //USER INPUT: SELECT SEED
+                    //TODO: Different crop types for MCO2
+                    System.out.println("Please select a crop to plant: ");
+                    for (int i = 0; i < CROPLIST.size(); i++) {
+                        Crop selectedCrop = CROPLIST.get(i);
+                        System.out.println((i + 1) + ". " + selectedCrop + " (" + selectedCrop.getSeedCost() + " coins)");
+                    }
+                    System.out.println("Please enter your choice: ");
+                    crop = CROPLIST.get(sc.nextInt() - 1);
+
+                    //USER INPUT: SELECT TILE
                     //TODO: 1 tile for MCO1
-                    System.out.println("Crop defaulted to TURNIP, Tile defaulted to (0,0)");
-                    crop = cropList.get(0);
+                    System.out.println("Please select a tile: ");
+                    System.out.println("For MCO1, defaulted to (0,0)\n");
                     tile = lot[0][0];
 
-                    if(tile.plant(crop)) {
-                        System.out.println("You have successfully planted a turnip in tile (0,0)");
+                    //ACTION: PLANT CROP ON TILE
+                    if(farmer.plantCrop(crop, tile)) {
+                        System.out.println("You have successfully planted a " + crop + " in tile (0,0)");
                         System.out.println(tile);
+                        System.out.println("New balance: " + farmer.getObjectcoins());
                     } else {
                         System.out.println("Invalid use of Plant Seed");   
                     }
@@ -166,17 +218,19 @@ public class MyFarm {
 
                 //CHOICE: HARVEST CROP
                 case 5:
-                    //TODO: Use Farmer harvest function
-                    //TODO: 1 tile for MCO1
                     System.out.println("\n[SELECTED CHOICE] Harvest Crop");
-                    System.out.println("Tile defaulted to (0,0)");
+
+                    //USER INPUT: SELECT TILE
+                    //TODO: 1 tile for MCO1
+                    System.out.println("Please select a tile: ");
+                    System.out.println("For MCO1, defaulted to (0,0)\n");
                     tile = lot[0][0];
 
+                    //ACTION: HARVEST CROP ON TILE
                     Crop harvest = farmer.harvestTile(tile);
                     if(harvest != null) {
-                        System.out.println("You have successfully harvested the tile");
                         System.out.println(tile);
-                        System.out.println("You gained X gold and X exp");
+                        System.out.println(farmer);
                     } else {
                         System.out.println("Invalid use of Harvest Crop");   
                     }
@@ -187,22 +241,21 @@ public class MyFarm {
                 case 6:
                     System.out.println("\n[SELECTED CHOICE] Register Farmer");
 
-                    //Display farmer types
+                    //USER INPUT: SELECT FARMER TYPE
                     System.out.println("Please select a farmer type: ");
-                    for (int i = 0; i < farmerTypeList.size(); i++) {
-                        FarmerType selectedFT = farmerTypeList.get(i);
+                    for (int i = 0; i < FARMERTYPELIST.size(); i++) {
+                        FarmerType selectedFT = FARMERTYPELIST.get(i);
                         if(farmer.getType().getName().equals(selectedFT.getName())) {
                             System.out.println((i + 1) + ". " + selectedFT.getName() + " (Current)");
                         }
                         else {
-                            System.out.println((i + 1) + ". " + selectedFT.getName() + " (" + farmerTypeList.get(i).getRegistrationFee() + " coins)");
+                            System.out.println((i + 1) + ". " + selectedFT.getName() + " (" + FARMERTYPELIST.get(i).getRegistrationFee() + " coins)");
                         }
                     }
                     System.out.println("Please enter your choice: ");
-                    int farmerTypeChoice = sc.nextInt();
-                    farmerType = farmerTypeList.get(farmerTypeChoice - 1);
+                    farmerType = FARMERTYPELIST.get(sc.nextInt() - 1);
 
-                    //Register
+                    //ACTION: REGISTER FARMER TYPE
                     if(farmer.register(farmerType)) {
                         System.out.println("\nYou have successfully registered as a " + farmerType);
                         System.out.println(farmer);
@@ -212,12 +265,12 @@ public class MyFarm {
 
                     break;
 
-                //CHOICE: ADVANCE DAY
+                //CHOICE: ADVANCE DAY AND CHECK GAME OVER CONDITIONS
                 case 7:
                     System.out.println("\n[SELECTED CHOICE] Advance day");
-                    this.advanceDay();
-                    System.out.println("\n--------------------------------------\n\n");
-                    System.out.println("<< Day " + this.day + " >>");
+                    System.out.println("\n-------------------------------------------\n\n");
+                    System.out.println("<< Day " + (this.day+1) + " >>");
+                    this.isRunning = this.advanceDay();
 
                     //Display Tiles - TODO: 1 tile for MCO1, GUI for MCO2
                     System.out.print("\nTile 1: ");
@@ -235,15 +288,20 @@ public class MyFarm {
                 default:
                     System.out.println("\nInvalid choice, please try again");
             }
-            farmer.levelUp();
             System.out.println();
+
+            //END OF SWITCH STATEMENT
 
             if(!this.isRunning) {
                 break;
             }
         }
 
+        //END OF WHILE LOOP
+
+        System.out.println("\n-------------------------------------------\n\n");
         System.out.println("Game ended!");
+        System.out.println("\n-------------------------------------------\n\n");
 
         sc.close();
     }

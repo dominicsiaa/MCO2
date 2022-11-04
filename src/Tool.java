@@ -3,7 +3,6 @@ public class Tool {
     private String function;
     private int cost;
     private double expGain;
-    //private int[] validTiles;
 
     public Tool(String name, String function, int cost, double expGain) {
         this.name = name;

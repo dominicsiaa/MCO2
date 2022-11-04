@@ -1,36 +1,39 @@
 public class Farmer {
     private String name = null;
-    private int objectcoins = 100;    //TODO: Change back to original value is 100
+    private int objectcoins = 5;    //TODO: Change back to original value is 100
     private int level = 0;            //TODO: Change back to original value is 0
     private double exp = 0;
-    private FarmerType type = new FarmerType("Farmer", 0, 0, 0, 0, 0, 0);
+    private FarmerType type = null;
 
     public Farmer(String name) {
         this.name = name;
-    }
-
-    public Farmer() {
-        // Default constructor
+        this.type = new FarmerType("Farmer", 0, 0, 0, 0, 0, 0);
     }
 
     public void gainCoins(int amount){
         this.objectcoins += amount;
+
+        //TODO: Temporary here before GUI in MCO2
+        System.out.println("You have earned " + amount + " objectcoins");
     }
 
     public void loseCoins(int amount){
         this.objectcoins -= amount;
+
+        //TODO: Temporary here before GUI in MCO2
+        System.out.println("You have lost " + amount + " objectcoins");
     }
 
-    //TODO: add levelup function
     public void gainExp(double amount){
         this.exp += amount;
-    }
 
-    public void levelUp () {
+        //TODO: Temporary here before GUI in MCO2
+        System.out.println("You have gained " + amount + " exp");
+
         if (this.exp >=100) {
             if ((int) (this.exp / 100) > level) {
                 this.level = (int) (this.exp / 100);
-                System.out.println("You have leveled up! You are now level " + getLevel());
+                System.out.println("You have leveled up! You are now level " + this.level);
             }
         }
     }
@@ -54,41 +57,27 @@ public class Farmer {
         boolean success = false;
         if(tool.getCost() <= this.objectcoins) {
             String toolName = tool.getName();
-            int tileStatus = tile.getStatus();
 
             switch(toolName) {
                 case "Plow":
-                    if(tileStatus == Tile.ISUNPLOWED) {
-                        tile.plow();
-                        success = true;
-                    }
+                    success = tile.plow();
                     break;
 
                 case "Watering Can":
-                    if(tileStatus == Tile.ISPLANTED) {
-                        tile.water();
-                        success = true;
-                    }
+                    success = tile.water();
                     break;
 
                 case "Fertilizer":
-                    if(tileStatus == Tile.ISPLANTED) {
-                        tile.fertilize();
-                        success = true;
-                    }
+                    success = tile.fertilize();
                     break;
 
                 case "Pickaxe":
-                    if(tileStatus == Tile.HASROCK) {
-                        tile.removeRock();
-                        success = true;
-                    }
+                    success = tile.removeRock();
                     break;
 
                 case "Shovel":
                     tile.clearTile();
                     success = true;
-                    
                     break;
             }
 
@@ -100,57 +89,38 @@ public class Farmer {
         return success;
     }
 
-    //TODO: Not sure if int or double ung objectcoins
+    //TODO: Implementation for fruit tree conditions for MCO2
+    public boolean plantCrop(Crop crop, Tile tile) {
+        if(tile.plant(crop)) {
+            this.loseCoins(crop.getSeedCost() - this.type.getSeedCostReduction());
+            return true;
+        }
+        return false;
+    }
+
+    //TODO: Implementation for flower seeds for MCO2
     public Crop harvestTile(Tile tile) {
         if(tile.getStatus() == Tile.ISHARVESTABLE) {
             Crop harvest = tile.getCropPlanted();
+            int productAmount = harvest.generateProductAmount();
 
-            double harvestTotal = harvest.generateProductAmount() * (harvest.getSellingPrice() + this.type.getBonusEarningsPerProduce());
+            double harvestTotal = productAmount * (harvest.getSellingPrice() + this.type.getBonusEarningsPerProduce());
             double waterBonus = harvestTotal * 0.2 * (Math.min(tile.getTimesWatered(), harvest.getWaterNeedsBonusLimit() + this.getType().getWaterBonusLimitIncrease()) - 1);
             double fertilzierBonus = harvestTotal * 0.5 * Math.min(tile.getTimesFertilized(), harvest.getFertilizerNeedsBonusLimit() + this.getType().getFertilizerBonusLimitIncrease());
 
-            this.gainCoins((int) (harvestTotal + waterBonus + fertilzierBonus));
+            //not sure if this is int or double
+            int total = (int) (harvestTotal + waterBonus + fertilzierBonus);
+
+            //TODO: Temporary here before GUI in MCO2
+            System.out.println("You have harvested " + productAmount + " " + harvest.getName() + "/s");
+
+            this.gainCoins(total);
+            this.gainExp(harvest.getExpGain());
             tile.harvest();
             return harvest;
         }
         return null;
     }
-
-    //TODO: implement plant crop function
-    public boolean plantCrop(Crop crop, Tile tile) {
-        return false;
-    }
-
-    /*
-    public boolean usePlow(Tile tile){
-        return false;
-    }
-
-    public boolean useWateringCan(Tile tile){
-        return false;
-    }
-
-    public boolean useFertilizer(Tile tile){
-        return false;
-    }
-
-    public boolean usePickaxe(Tile tile){
-        return false;
-    }
-
-    public boolean useShovel(Tile tile){
-        return false;
-    }
-
-    public void plantSeed(Crop crop, Tile tile){
-        return;
-    }
-
-    public void harvestCrop(Tile tile){
-        return;
-    }
-    */
-
 
     public String getName() {
         return this.name;

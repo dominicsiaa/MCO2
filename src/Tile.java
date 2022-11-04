@@ -30,48 +30,51 @@ public class Tile {
         if (!this.hasRock) {
             this.isPlowed = true;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public boolean plant(Crop crop) {
         if (this.isPlowed) {
             this.cropPlanted = crop;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public boolean water() {
         if (this.cropPlanted != null) {
             timesWatered++;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public boolean fertilize() {
         if (this.cropPlanted != null) {
             timesFertilized++;
             return true;
+        }
+        return false;
+    }
+
+    public boolean removeRock() {
+        if (this.hasRock) {
+            this.hasRock = false;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean harvest() {
+        if (this.isHarvestable) {
+            this.clearTile();
+            return true;
+
         } else {
             return false;
         }
     }
-
-    public void removeRock() {
-        this.hasRock = false;
-    }
-
-    /* kinda useless now?
-
-    public void removeWitheredCrop() {
-        this.hasWitheredCrop = false;
-    }
-     */
 
     public void clearTile() {
         this.isHarvestable = false;
@@ -88,28 +91,22 @@ public class Tile {
             this.daysPast++;
 
             // Check if crop is harvestable
+            //TODO: Change print statements to gui in MCO2
             if (this.daysPast == this.cropPlanted.getHarvestTime()) {
                 if(this.timesWatered >= this.cropPlanted.getWaterNeeds() && this.timesFertilized >= this.cropPlanted.getFertilizerNeeds()) {
                     this.isHarvestable = true;
+                    System.out.println("A crop is ready to harvest!");
                 } else {
-                    this.hasWitheredCrop = true;
                     this.clearTile();
+                    this.hasWitheredCrop = true;
+                    System.out.println("A crop has withered!");
                 }
             } 
             else if (this.daysPast > this.cropPlanted.getHarvestTime()) {
-                this.hasWitheredCrop = true;
                 this.clearTile();
+                this.hasWitheredCrop = true;
+                System.out.println("A crop has withered!");
             }
-        }
-    }
-
-    public boolean harvest() {
-        if (this.isHarvestable) {
-            this.clearTile();
-            return true;
-
-        } else {
-            return false;
         }
     }
 
@@ -165,6 +162,6 @@ public class Tile {
                 break;
 
         }
-        return "\n _____ \n" + "|     |\n" + "|  " + this.getStatus() + "  |\n" + "|_____|\n Status: (" + this.getStatus() + ") " + status;
+        return "\n _____ \n" + "|     |\n" + "|  " + this.getStatus() + "  |\n" + "|_____|\nStatus: (" + this.getStatus() + ") " + status;
     }
 }

@@ -13,7 +13,7 @@ public class Crop {
 
     private int seedCost;
     private int sellingPrice;
-    private float experienceYield;
+    private double expGain;
 
     public Crop(String name, 
                 String type, 
@@ -24,7 +24,7 @@ public class Crop {
                 int maxProductsProduced, 
                 int seedCost, 
                 int sellingPrice, 
-                float experienceYield) 
+                double expGain) 
     {
         this.name = name;
         this.type = type;
@@ -48,7 +48,7 @@ public class Crop {
 
         this.seedCost = seedCost;
         this.sellingPrice = sellingPrice;
-        this.experienceYield = experienceYield;
+        this.expGain = expGain;
     }
 
     public int generateProductAmount() {
@@ -103,8 +103,8 @@ public class Crop {
         return this.sellingPrice;
     }
 
-    public float getExperienceYield() {
-        return this.experienceYield;
+    public double getExpGain() {
+        return this.expGain;
     }
 
     @Override
