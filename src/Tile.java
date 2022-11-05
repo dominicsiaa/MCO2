@@ -27,7 +27,7 @@ public class Tile {
     }
 
     public boolean plow() {
-        if (!this.hasRock) {
+        if (!this.hasRock && !this.isPlowed && this.cropPlanted == null && !this.isHarvestable && !this.hasWitheredCrop) {
             this.isPlowed = true;
             return true;
         }
