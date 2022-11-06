@@ -78,10 +78,10 @@ public class MyFarm {
         }
 
         //Checks if game is over
-        if(lotHasCrops && (this.farmer.getObjectcoins() < cheapestCropPrice + this.farmer.getType().getSeedCostReduction())) {
-            return true;
-        } else {
+        if(!lotHasCrops && (this.farmer.getObjectcoins() < cheapestCropPrice + this.farmer.getType().getSeedCostReduction())) {
             return false;
+        } else {
+            return true;
         }
     }
 

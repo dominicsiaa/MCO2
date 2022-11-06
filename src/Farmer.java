@@ -7,7 +7,7 @@ public class Farmer {
 
     public Farmer(String name) {
         this.name = name;
-        this.type = new FarmerType("Farmer", 0, 0, 0, 0, 0, 0);
+        this.type = MyFarm.FARMERTYPELIST.get(0);
     }
 
     public void gainCoins(int amount){
