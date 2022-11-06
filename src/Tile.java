@@ -1,3 +1,10 @@
+/**
+ * Represents a tile in the game.
+ * Contains statuses of the tile, (has rock,
+ * has withered crop, is plowed, what crop is planted,
+ * times watered, times fertilized, if plant is harvestable,
+ * and days past.
+ */
 public class Tile {
 
     public static final int HASROCK = 0;
@@ -18,14 +25,25 @@ public class Tile {
     private boolean isHarvestable = false;
     private int daysPast = 0;
 
+    /**
+     * This constructor initializes a tile object
+     */
     public Tile() {
         // Default constructor
     }
 
+    /**
+     * This constructor initializes a tile object
+     * @param hasRock
+     */
     public Tile(boolean hasRock) {
         this.hasRock = hasRock;
     }
 
+    /**
+     * This method plows a tile
+     * @return true if successfully plowed, false otherwise
+     */
     public boolean plow() {
         if (!this.hasRock && !this.isPlowed && this.cropPlanted == null && !this.isHarvestable && !this.hasWitheredCrop) {
             this.isPlowed = true;
@@ -34,6 +52,11 @@ public class Tile {
         return false;
     }
 
+    /**
+     * This method plants a crop on a tile
+     * @param crop
+     * @return true if successfully planted, false otherwise
+     */
     public boolean plant(Crop crop) {
         if (this.isPlowed && this.cropPlanted == null) {
             this.cropPlanted = crop;
@@ -42,6 +65,10 @@ public class Tile {
         return false;
     }
 
+    /**
+     * This method waters a crop on a tile
+     * @return true if successfully watered, false otherwise
+     */
     public boolean water() {
         if (this.cropPlanted != null) {
             timesWatered++;
@@ -50,6 +77,10 @@ public class Tile {
         return false;
     }
 
+    /**
+     * This method fertilizes a crop on a tile
+     * @return true if successfully fertilized, false otherwise
+     */
     public boolean fertilize() {
         if (this.cropPlanted != null) {
             timesFertilized++;
@@ -58,6 +89,10 @@ public class Tile {
         return false;
     }
 
+    /**
+     * This method removes a rock on a tile
+     * @return true if successfully removed, false otherwise
+     */
     public boolean removeRock() {
         if (this.hasRock) {
             this.hasRock = false;
@@ -66,6 +101,10 @@ public class Tile {
         return false;
     }
 
+    /**
+     * This method harvests a crop
+     * @return true if successfully harvested, false otherwise
+     */
     public boolean harvest() {
         if (this.isHarvestable) {
             this.clearTile();
@@ -76,6 +115,9 @@ public class Tile {
         }
     }
 
+    /**
+     * This method clears a tile
+     */
     public void clearTile() {
         this.isHarvestable = false;
         this.cropPlanted = null;
@@ -86,6 +128,9 @@ public class Tile {
         this.hasWitheredCrop = false;
     }
 
+    /**
+     * This method advances the day
+     */
     public void advanceDay() {
         if (this.cropPlanted != null) {
             this.daysPast++;
@@ -110,18 +155,34 @@ public class Tile {
         }
     }
 
+    /**
+     * This method returns the times a crop has been watered
+     * @return timesWatered
+     */
     public int getTimesWatered() {
         return this.timesWatered;
     }
 
+    /**
+     * This method returns the times a crop has been fertilized
+     * @return timesFertilized
+     */
     public int getTimesFertilized() {
         return this.timesFertilized;
     }
 
+    /**
+     * This method returns the crop planted on a tile
+     * @return cropPlanted
+     */
     public Crop getCropPlanted() {
         return this.cropPlanted;
     }
 
+    /**
+     * This method returns the status of the tile
+     * @return status
+     */
     public int getStatus() {
         if (this.hasRock) {
             return HASROCK;

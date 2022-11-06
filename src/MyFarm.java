@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * Represents the farm in the game.
+ */
 public class MyFarm {
 
     // Declare global variables
@@ -50,11 +53,17 @@ public class MyFarm {
     private int day = 1;
     private boolean isRunning = false;
 
+    /**
+     * Constructor for MyFarm.
+     */
     public MyFarm() {
         // Default constructor
     }
 
-    //Advances day and checks if game is over
+    /**
+     * This method advances the day and checks if the game is over.
+     * @return false if the game is no longer running, true otherwise
+     */
     private boolean advanceDay() {
         this.day++;
 
@@ -91,6 +100,9 @@ public class MyFarm {
      * 
      */
 
+    /**
+     * This method runs the game.
+     */
     public void run() {
         this.isRunning = true;
         Scanner sc = new Scanner(System.in);

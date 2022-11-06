@@ -1,15 +1,28 @@
+/**
+ * Represents a farmer in the game.
+ * Contains the farmer name, amount of objectcoins,
+ * level, experience points, and farmer type
+ */
 public class Farmer {
     private String name = null;
-    private int objectcoins = 100;      //TODO: Change back to original value is 100
-    private int level = 0;              //TODO: Change back to original value is 0
+    private int objectcoins = 100;
+    private int level = 0;
     private double exp = 0;
     private FarmerType type = null;
 
+    /**
+     * This constructor initializes a farmer object
+     * @param name
+     */
     public Farmer(String name) {
         this.name = name;
         this.type = MyFarm.FARMERTYPELIST.get(0);
     }
 
+    /**
+     * This method adds objectcoins to the farmer's objectcoins
+     * @param amount
+     */
     public void gainCoins(int amount){
         this.objectcoins += amount;
 
@@ -19,6 +32,10 @@ public class Farmer {
         }
     }
 
+    /**
+     * This method subtracts objectcoins from the farmer's objectcoins
+     * @param amount
+     */
     public void loseCoins(int amount){
         this.objectcoins -= amount;
 
@@ -28,6 +45,10 @@ public class Farmer {
         }
     }
 
+    /**
+     * This method adds experience points to the farmer's experience points
+     * @param amount
+     */
     public void gainExp(double amount){
         this.exp += amount;
 
@@ -44,6 +65,11 @@ public class Farmer {
         }
     }
 
+    /**
+     * This method allows a farmer to register if they meet the minimum requirements
+     * @param farmerType
+     * @return true if the farmer meets the minimum requirements
+     */
     public boolean register(FarmerType farmerType) {
         
         if( (farmerType.getLevelRequirement() == this.type.getLevelRequirement() + 5) && //order of type
@@ -57,6 +83,11 @@ public class Farmer {
         return false;
     }
 
+    /**
+     * This method allows a farmer to use a tool
+     * @param tool
+     * @return true if the farmer has enough objectcoins to use the tool
+     */
     public boolean useTool (Tool tool, Tile tile)
     {
         //Check if user has enough coins
@@ -96,6 +127,12 @@ public class Farmer {
     }
 
     //TODO: Implementation for fruit tree conditions for MCO2
+    /**
+     * This method allows a farmer to plant a crop
+     * @param crop
+     * @param tile
+     * @return true if the farmer successfully plants the crop
+     */
     public boolean plantCrop(Crop crop, Tile tile) {
         if(tile.plant(crop)) {
             this.loseCoins(crop.getSeedCost() - this.type.getSeedCostReduction());
@@ -105,6 +142,11 @@ public class Farmer {
     }
 
     //TODO: Implementation for flower seeds for MCO2
+    /**
+     * This method allows a farmer to harvest a crop
+     * @param tile
+     * @return crop harvested
+     */
     public Crop harvestTile(Tile tile) {
         if(tile.getStatus() == Tile.ISHARVESTABLE) {
             Crop harvest = tile.getCropPlanted();
@@ -128,27 +170,52 @@ public class Farmer {
         return null;
     }
 
+    /**
+     * This method gets the farmer's name
+     * @return name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * This method gets the farmer's objectcoins
+     * @return objectcoins
+     */
     public int getObjectcoins() {
         return this.objectcoins;
     }
 
+    /**
+     * This method gets the farmer's level
+     * @return level
+     */
     public int getLevel() {
         return this.level;
     }
 
+    /**
+     * This method gets the farmer's experience points
+     * @return exp
+     */
     public double getExp() {
         return this.exp;
     }
 
+    /**
+     * This method gets the farmer's type
+     * @return type
+     */
     public FarmerType getType() {
         return this.type;
     }
 
+
     //override tostring
+    /**
+     * This method returns a string representation of the farmer
+     * @return string representation of the farmer
+     */
     @Override
     public String toString(){
         return "Farmer: " + this.name + " | Type: " + this.type.getName() + " | Coins: " + this.objectcoins + " | Level: " + this.level + " | Exp: " + this.exp;
