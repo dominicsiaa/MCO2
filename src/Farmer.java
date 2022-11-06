@@ -5,7 +5,7 @@
  */
 public class Farmer {
     private String name = null;
-    private int objectcoins = 100;
+    private double objectcoins = 100;
     private int level = 0;
     private double exp = 0;
     private FarmerType type = null;
@@ -182,7 +182,7 @@ public class Farmer {
      * This method gets the farmer's objectcoins
      * @return objectcoins
      */
-    public int getObjectcoins() {
+    public double getObjectcoins() {
         return this.objectcoins;
     }
 
