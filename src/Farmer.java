@@ -155,10 +155,10 @@ public class Farmer {
 
             double harvestTotal = productAmount * (harvest.getSellingPrice() + this.type.getBonusEarningsPerProduce());
             double waterBonus = harvestTotal * 0.2 * (Math.min(tile.getTimesWatered(), harvest.getWaterNeedsBonusLimit() + this.getType().getWaterBonusLimitIncrease()) - 1);
-            double fertilzierBonus = harvestTotal * 0.5 * Math.min(tile.getTimesFertilized(), harvest.getFertilizerNeedsBonusLimit() + this.getType().getFertilizerBonusLimitIncrease());
+            double fertilizerBonus = harvestTotal * 0.5 * Math.min(tile.getTimesFertilized(), harvest.getFertilizerNeedsBonusLimit() + this.getType().getFertilizerBonusLimitIncrease());
 
             //not sure if this is int or double
-            double total = harvestTotal + waterBonus + fertilzierBonus;
+            double total = harvestTotal + waterBonus + fertilizerBonus;
 
             //TODO: Temporary here before GUI in MCO2
             System.out.println("You have harvested " + productAmount + " " + harvest.getName() + "/s");
