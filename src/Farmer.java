@@ -8,7 +8,7 @@ public class Farmer {
     private double objectcoins = 100;
     private int level = 0;
     private double exp = 0;
-    private FarmerType type = null;
+    private FarmerType type = MyFarm.FARMERTYPELIST.get(0);
 
     /**
      * This constructor initializes a farmer object
@@ -16,14 +16,13 @@ public class Farmer {
      */
     public Farmer(String name) {
         this.name = name;
-        this.type = MyFarm.FARMERTYPELIST.get(0);
     }
 
     /**
      * This method adds objectcoins to the farmer's objectcoins
      * @param amount
      */
-    public void gainCoins(int amount){
+    public void gainCoins(double amount){
         this.objectcoins += amount;
 
         //TODO: Temporary here before GUI in MCO2
@@ -36,7 +35,7 @@ public class Farmer {
      * This method subtracts objectcoins from the farmer's objectcoins
      * @param amount
      */
-    public void loseCoins(int amount){
+    public void loseCoins(double amount){
         this.objectcoins -= amount;
 
         //TODO: Temporary here before GUI in MCO2
@@ -157,7 +156,7 @@ public class Farmer {
             double fertilzierBonus = harvestTotal * 0.5 * Math.min(tile.getTimesFertilized(), harvest.getFertilizerNeedsBonusLimit() + this.getType().getFertilizerBonusLimitIncrease());
 
             //not sure if this is int or double
-            int total = (int) (harvestTotal + waterBonus + fertilzierBonus);
+            double total = harvestTotal + waterBonus + fertilzierBonus;
 
             //TODO: Temporary here before GUI in MCO2
             System.out.println("You have harvested " + productAmount + " " + harvest.getName() + "/s");

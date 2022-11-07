@@ -16,12 +16,11 @@ public class Tile {
 
     private boolean hasRock = false;
     private boolean hasWitheredCrop = false;
-
     private boolean isPlowed = false;
     private Crop cropPlanted = null;
+
     private int timesWatered = 0;
     private int timesFertilized = 0;
-
     private boolean isHarvestable = false;
     private int daysPast = 0;
 
