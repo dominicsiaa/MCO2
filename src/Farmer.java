@@ -5,7 +5,7 @@
  */
 public class Farmer {
     private String name = null;
-    private double objectcoins = 100;
+    private double objectcoins = 5;
     private int level = 0;
     private double exp = 0;
     private FarmerType type = MyFarm.FARMERTYPELIST.get(0);
@@ -133,9 +133,11 @@ public class Farmer {
      * @return true if the farmer successfully plants the crop
      */
     public boolean plantCrop(Crop crop, Tile tile) {
-        if(tile.plant(crop)) {
-            this.loseCoins(crop.getSeedCost() - this.type.getSeedCostReduction());
-            return true;
+        if(this.objectcoins >= crop.getSeedCost() + this.type.getSeedCostReduction()) {
+            if(tile.plant(crop)) {
+                this.loseCoins(crop.getSeedCost() - this.type.getSeedCostReduction());
+                return true;
+            }
         }
         return false;
     }
