@@ -135,7 +135,7 @@ public class Farmer {
     public boolean plantCrop(Crop crop, Tile tile) {
         if(this.objectcoins >= crop.getSeedCost() + this.type.getSeedCostReduction()) {
             if(tile.plant(crop)) {
-                this.loseCoins(crop.getSeedCost() - this.type.getSeedCostReduction());
+                this.loseCoins(crop.getSeedCost() + this.type.getSeedCostReduction());
                 return true;
             }
         }
