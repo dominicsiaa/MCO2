@@ -39,15 +39,15 @@ public class MyFarm {
     ));
 
     public static final List<Crop> CROPLIST = new ArrayList<Crop>(Arrays.asList(
-        new Crop("Turnip", "rootcrop", 2, 
-                1, 0, 
-                1, 2, 5, 6, 5) /*,
-        new Crop("Carrot", "rootcrop", 3, 
-                1, 0, 
+        new RootCrop("Turnip", "rootcrop", 2, 
+                1, 2, 0, 1, 
+                1, 2, 5, 6, 5),
+        new RootCrop("Carrot", "rootcrop", 3, 
+                1, 2, 0, 1, 
                 1, 2, 10, 9, 7.5),
-        new Crop("Potato", "rootcrop", 5,
-                3, 1, 
-                1, 10, 20, 3, 12.5)*/
+        new RootCrop("Potato", "rootcrop", 5,
+                3, 4, 1, 2,
+                1, 10, 20, 3, 12.5)
     ));
 
     // Declare variables
@@ -125,12 +125,11 @@ public class MyFarm {
 
         //Create rock from file input
         boolean[][] rockInput = new boolean[ROWS][COLS];
+
         try {
 
             //Read rock input from file
-            File rocks = new File("../rockinput/RockInput1.txt");
-            System.out.println("Reading rock input from file: " + rocks.getName());
-            System.out.println("Is rock readable: " + rocks.canRead());
+            File rocks = new File("rockinput/RockInput2.txt");
             Scanner rockReader = new Scanner(rocks);
             while (rockReader.hasNextLine()) {
                 for (int i = 0; i < ROWS; i++) {
@@ -149,7 +148,6 @@ public class MyFarm {
 
         } catch (FileNotFoundException e) {
 
-            System.out.println(e);
             //Default rock input, no rocks
             for(int i = 0; i < ROWS; i++) {
                 for(int j = 0; j < COLS; j++) {
@@ -157,7 +155,7 @@ public class MyFarm {
                 }
             }
         }
-
+        
         for(int i = 0; i < ROWS; i++) {
             for(int j = 0; j < COLS; j++) {
                 this.lot[i][j] = new Tile(rockInput[i][j]);

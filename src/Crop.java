@@ -38,7 +38,9 @@ public class Crop {
                 String type, 
                 int harvestTime, 
                 int waterNeeds, 
+                int waterNeedsBonusLimit,
                 int fertilizerNeeds, 
+                int fertilizerNeedsBonusLimit,
                 int minProductsProduced, 
                 int maxProductsProduced, 
                 int seedCost, 
@@ -50,16 +52,9 @@ public class Crop {
         this.harvestTime = harvestTime;
 
         this.waterNeeds = waterNeeds;
+        this.waterNeedsBonusLimit = waterNeedsBonusLimit;
         this.fertilizerNeeds = fertilizerNeeds;
-
-        //extra feature of rootcrop and flower
-        if(type.equals("rootcrop") || type.equals("flower")) {
-            this.waterNeedsBonusLimit = waterNeeds + 1;
-            this.fertilizerNeedsBonusLimit = fertilizerNeeds + 1;
-        } else {
-            this.waterNeedsBonusLimit = waterNeeds;
-            this.fertilizerNeedsBonusLimit = fertilizerNeeds;
-        }
+        this.fertilizerNeedsBonusLimit = fertilizerNeedsBonusLimit;
 
         this.minProductsProduced = minProductsProduced;
         this.maxProductsProduced = maxProductsProduced;

@@ -5,7 +5,7 @@
  */
 public class Farmer {
     private String name = null;
-    private double objectcoins = 5;
+    private double objectcoins = 100;
     private int level = 0;
     private double exp = 0;
     private FarmerType type = MyFarm.FARMERTYPELIST.get(0);
