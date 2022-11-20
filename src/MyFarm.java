@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
+import java.io.File; 
+import java.io.FileNotFoundException;  
+
 /**
  * Represents the farm in the game.
  */
@@ -115,11 +118,49 @@ public class MyFarm {
         //Create farmer
         this.farmer = new Farmer(name);
 
-        //Create lot - TODO: 1 tile for MCO1
-        this.lot = new Tile[1][1];
-        for(int i = 0; i < 1; i++) {
-            for(int j = 0; j < 1; j++) {
-                this.lot[i][j] = new Tile();
+        //Create lot
+        int ROWS = 5;
+        int COLS = 10;
+        this.lot = new Tile[ROWS][COLS];
+
+        //Create rock from file input
+        boolean[][] rockInput = new boolean[ROWS][COLS];
+        try {
+
+            //Read rock input from file
+            File rocks = new File("../rockinput/RockInput1.txt");
+            System.out.println("Reading rock input from file: " + rocks.getName());
+            System.out.println("Is rock readable: " + rocks.canRead());
+            Scanner rockReader = new Scanner(rocks);
+            while (rockReader.hasNextLine()) {
+                for (int i = 0; i < ROWS; i++) {
+                    String[] line = rockReader.nextLine().trim().split(" ");
+                    for (int j = 0; j < COLS; j++) {
+                        if(Integer.parseInt(line[j]) == 1) {
+                            rockInput[i][j] = true;
+                        }
+                        else {
+                            rockInput[i][j] = false;
+                        }
+                    }
+                }
+            }
+            rockReader.close();
+
+        } catch (FileNotFoundException e) {
+
+            System.out.println(e);
+            //Default rock input, no rocks
+            for(int i = 0; i < ROWS; i++) {
+                for(int j = 0; j < COLS; j++) {
+                    rockInput[i][j] = false;
+                }
+            }
+        }
+
+        for(int i = 0; i < ROWS; i++) {
+            for(int j = 0; j < COLS; j++) {
+                this.lot[i][j] = new Tile(rockInput[i][j]);
             }
         }
 

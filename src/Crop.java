@@ -61,7 +61,6 @@ public class Crop {
             this.fertilizerNeedsBonusLimit = fertilizerNeeds;
         }
 
-        //rootcrop 1-x, flowers 1 only, trees x-y
         this.minProductsProduced = minProductsProduced;
         this.maxProductsProduced = maxProductsProduced;
 
