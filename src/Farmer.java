@@ -4,18 +4,22 @@
  * level, experience points, and farmer type
  */
 public class Farmer {
-    private String name = null;
+    private String name = "Farmer";
     private double objectcoins = 100;
     private int level = 0;
     private double exp = 0;
-    private FarmerType type = MyFarm.FARMERTYPELIST.get(0);
+    private FarmerType type = MyFarmModel.FARMERTYPELIST.get(0);
 
     /**
      * This constructor initializes a farmer object
      * @param name
      */
     public Farmer(String name) {
-        this.name = name;
+        if(name.equals("")) {
+            this.name = "Farmer";
+        } else {
+            this.name = name;
+        }
     }
 
     /**

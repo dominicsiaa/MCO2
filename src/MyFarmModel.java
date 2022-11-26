@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 /**
  * Represents the farm in the game.
  */
-public class MyFarm {
+public class MyFarmModel {
 
     // Declare global variables
     public static final List<Tool> TOOLLIST = new ArrayList<Tool>(Arrays.asList(
@@ -59,7 +59,7 @@ public class MyFarm {
     /**
      * Constructor for MyFarm.
      */
-    public MyFarm() {
+    public MyFarmModel() {
         // Default constructor
     }
 
@@ -106,14 +106,9 @@ public class MyFarm {
     /**
      * This method runs the game.
      */
-    public void run() {
+    public void run(String name) {
         this.isRunning = true;
         Scanner sc = new Scanner(System.in);
-
-        System.out.println("Welcome to MyFarm!");
-        System.out.println("Please enter your name: ");
-        String name = sc.nextLine();
-        System.out.println();
 
         //Create farmer
         this.farmer = new Farmer(name);
@@ -162,21 +157,13 @@ public class MyFarm {
             }
         }
 
-        //Display - TODO: 1 tile for MCO1, GUI for MCO2
-        System.out.print("\nTile 1: ");
-        System.out.println(lot[0][0] + "\n");
-        System.out.println("<< Day " + this.day + " >>");
-
+        /* 
         while(true) {
             //Variables setup
             Tile tile;
             Tool tool;
             Crop crop;
             FarmerType farmerType;
-
-            /*
-            TODO: GUI implementation for MCO2
-            */
 
             //SHOW MENU
             System.out.println("What would you like to do?");
@@ -355,5 +342,18 @@ public class MyFarm {
         System.out.println("\n-------------------------------------------\n\n");
 
         sc.close();
+        */
+    }
+
+    /*
+     * GETTERS AND SETTERS
+     */
+
+    public String getFarmerName() {
+        return this.farmer.getName();
+    }
+
+    public double getFarmerObjectcoins() {
+        return this.farmer.getObjectcoins();
     }
 }
