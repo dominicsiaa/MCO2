@@ -8,9 +8,16 @@ import javax.swing.event.*;
 public class MyFarmView {
 
     private JFrame mainFrame;
-
     private JButton btnRun;
     private JTextField tfName;
+
+    //tools
+    private JLabel lblTool;
+    private JButton btnPlow;
+    private JButton btnWateringCan;
+    private JButton btnFertilizer;
+    private JButton btnPickaxe;
+    private JButton btnShovel;
 
     public MyFarmView() {
         this.mainFrame = new JFrame("MyFarm");
@@ -25,7 +32,8 @@ public class MyFarmView {
         */
         this.initializeIntroScreen();
 
-        this.mainFrame.setSize(750, 500);
+        this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.mainFrame.setSize(750, 500);
         this.mainFrame.setVisible(true);
     }
 
@@ -90,12 +98,33 @@ public class MyFarmView {
         toolPanel.setLayout(new GridLayout(6,1));
         toolPanel.setBackground(Color.BLUE);
 
+        lblTool = new JLabel("Tools");
+        lblTool.setFont(new Font("Verdana", Font.BOLD, 35));
+        toolPanel.add(lblTool);
+
+        btnPlow = new JButton("Plow");
+        toolPanel.add(btnPlow);
+
+        btnWateringCan = new JButton("Watering Can");
+        toolPanel.add(btnWateringCan);
+
+        btnFertilizer = new JButton("Fertilizer");
+        toolPanel.add(btnFertilizer);
+
+        btnPickaxe = new JButton("Pickaxe");
+        toolPanel.add(btnPickaxe);
+
+        btnShovel = new JButton("Shovel");
+        toolPanel.add(btnShovel);
+
+        /*
         toolPanel.add(new JLabel("Tools"));
         toolPanel.add(new JButton("Plow"));
         toolPanel.add(new JButton("Watering Can"));
         toolPanel.add(new JButton("Fertilizer"));
         toolPanel.add(new JButton("Pickaxe"));
         toolPanel.add(new JButton("Shovel"));
+        */
 
         this.mainFrame.add(toolPanel, BorderLayout.WEST);
 
@@ -117,8 +146,23 @@ public class MyFarmView {
         infoPanel.setBackground(Color.YELLOW);
 
         JLabel lbInfo = new JLabel("Info");
+        lbInfo.setFont(new Font("Verdana", Font.BOLD, 35));
         infoPanel.add(lbInfo, BorderLayout.NORTH);
 
+        //TODO: add info
+        JLabel lbPlant = new JLabel("[Plot]");
+        infoPanel.add(lbPlant, BorderLayout.CENTER);
+
+        JPanel seedPanel = new JPanel();
+        seedPanel.setLayout(new GridLayout(3,3));
+        seedPanel.setBackground(Color.GREEN);
+
+        for(int i = 0; i < 9; i++) {
+            seedPanel.add(new JButton(Integer.toString(i)));
+        }
+
+
+        infoPanel.add(seedPanel, BorderLayout.SOUTH);
         this.mainFrame.add(infoPanel, BorderLayout.EAST);
     }
 
