@@ -37,6 +37,7 @@ public class MyFarmView {
         this.mainFrame.setVisible(true);
     }
 
+
     private void initializeIntroScreen() {
 
         //Intro panel to ask for name
@@ -66,6 +67,7 @@ public class MyFarmView {
         this.mainFrame.add(introPanel, BorderLayout.CENTER);
     }
 
+
     private void initializeGameScreen(String name, double objectcoins) {
 
         //North - farmer info
@@ -73,6 +75,7 @@ public class MyFarmView {
         topPanel.setLayout(new BorderLayout());
         topPanel.setBackground(Color.GREEN);
         topPanel.setBorder(new EmptyBorder(5,5,5,5));
+        topPanel.setPreferredSize(new Dimension(0, 180));
 
         JPanel farmerInfoPanel = new JPanel();
         farmerInfoPanel.setLayout(new FlowLayout());
@@ -144,6 +147,7 @@ public class MyFarmView {
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setBorder(new EmptyBorder(5,5,5,5));
         infoPanel.setBackground(Color.YELLOW);
+        infoPanel.setPreferredSize(new Dimension(348, 0));
 
         JLabel lbInfo = new JLabel("Info");
         lbInfo.setFont(new Font("Verdana", Font.BOLD, 35));
