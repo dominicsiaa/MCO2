@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-public class MyFarmView {
+public class MyFarmView extends JFrame {
 
     private JFrame mainFrame;
     private JButton btnRun;
@@ -18,6 +18,7 @@ public class MyFarmView {
     private JButton btnFertilizer;
     private JButton btnPickaxe;
     private JButton btnShovel;
+    private JLabel lbPlant;
 
     public MyFarmView() {
         this.mainFrame = new JFrame("MyFarm");
@@ -79,13 +80,15 @@ public class MyFarmView {
 
         JPanel farmerInfoPanel = new JPanel();
         farmerInfoPanel.setLayout(new FlowLayout());
+        farmerInfoPanel.setBackground(Color.GREEN);
 
-        farmerInfoPanel.add(new JLabel(name));
+        farmerInfoPanel.add(new JLabel("Farmer " + name));
         farmerInfoPanel.add(new JLabel("Objectcoins: " + Double.toString(objectcoins)));
         farmerInfoPanel.add(new JLabel("EXP: TODO"));
 
         JPanel actionsPanel = new JPanel();
         actionsPanel.setLayout(new FlowLayout());
+        actionsPanel.setBackground(Color.GREEN);
 
         actionsPanel.add(new JLabel("Rank: TODO"));
         actionsPanel.add(new JButton("Rank Up!"));
@@ -154,12 +157,14 @@ public class MyFarmView {
         infoPanel.add(lbInfo, BorderLayout.NORTH);
 
         //TODO: add info
-        JLabel lbPlant = new JLabel("[Plot]");
+        lbPlant = new JLabel("[Plot]");
         infoPanel.add(lbPlant, BorderLayout.CENTER);
 
         JPanel seedPanel = new JPanel();
         seedPanel.setLayout(new GridLayout(3,3));
-        seedPanel.setBackground(Color.GREEN);
+        seedPanel.setBackground(Color.decode("#964B00"));
+        seedPanel.setPreferredSize(new Dimension(300, 300));
+        seedPanel.setBorder(new EmptyBorder(50,50,50,50));
 
         for(int i = 0; i < 9; i++) {
             seedPanel.add(new JButton(Integer.toString(i)));

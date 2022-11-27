@@ -22,5 +22,6 @@ public class MyFarmController implements ActionListener {
 
             this.gui.loadGameScreen(this.farm.getFarmerName(), this.farm.getFarmerObjectcoins());
         }
+
     }
 }
