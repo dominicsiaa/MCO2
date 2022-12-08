@@ -124,8 +124,10 @@ public class MyFarmView extends JFrame {
         toolPanel.add(lblTool);
 
         for(int i = 0; i < MyFarmModel.TOOLLIST.size(); i++) {
-            this.btnlistTools.add(new JButton(MyFarmModel.TOOLLIST.get(i).getName()));
-            this.btnlistTools.get(i).setActionCommand(MyFarmModel.TOOLLIST.get(i).getName());
+            JButton btn = new JButton(MyFarmModel.TOOLLIST.get(i).getName());
+            
+            btn.setActionCommand(MyFarmModel.TOOLLIST.get(i).getName());
+            this.btnlistTools.add(btn);
             toolPanel.add(this.btnlistTools.get(i));
         }
 
