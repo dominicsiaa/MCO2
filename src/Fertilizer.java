@@ -1,5 +1,5 @@
 public class Fertilizer extends Tool{
-    public Fertilizer(String name, int cost, double expGain) {
+    public Fertilizer() {
         super("Fertilizer", 10, 4.0);
     }
 }

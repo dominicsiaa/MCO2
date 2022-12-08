@@ -1,15 +1,5 @@
 public class Apple extends TreeCrop{
-    public Apple(String name,
-                 int harvestTime,
-                 int waterNeeds,
-                 int waterNeedsBonusLimit,
-                 int fertilizerNeeds,
-                 int fertilizerNeedsBonusLimit,
-                 int minProductsProduced,
-                 int maxProductsProduced,
-                 int seedCost,
-                 int sellingPrice,
-                 double expGain)
+    public Apple()
     {
         super("Mango", 10,
                 7, 7, 4, 4,

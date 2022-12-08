@@ -1,5 +1,5 @@
 public class Shovel extends Tool{
-    public Shovel(String name, int cost, double expGain) {
+    public Shovel() {
         super("Shovel", 7, 2);
     }
 }

@@ -14,35 +14,29 @@ public class MyFarmModel {
 
     // Declare global variables
     public static final List<Tool> TOOLLIST = new ArrayList<Tool>(Arrays.asList(
-        new Tool("Plow",
-                0, 0.5),
-        new Tool("Watering Can",
-                0, 0.5),
-        new Tool("Fertilizer",
-                10, 4),
-        new Tool("Pickaxe",
-                50, 15),
-        new Tool("Shovel",
-                7, 2)
+        new Plow(),
+        new WateringCan(),
+        new Fertilizer(),
+        new Pickaxe(),
+        new Shovel()
     ));
 
     public static final List<FarmerType> FARMERTYPELIST = new ArrayList<FarmerType>(Arrays.asList(
-        new FarmerType("Farmer", 0, 0, 0, 0, 0, 0),
-        new FarmerType("Registered Farmer",5, 1, -1, 0, 0, 200),
-        new FarmerType("Distinguished Farmer", 10, 2, -2, 1, 0, 300),
-        new FarmerType("Legendary Farmer", 15, 4, -3, 2, 1, 400)
+        new FarmerDefault(),
+        new RegisteredFarmer(),
+        new DistinguishedFarmer(),
+        new LegendaryFarmer()
     ));
 
     public static final List<Crop> CROPLIST = new ArrayList<Crop>(Arrays.asList(
-        new RootCrop("Turnip", 2,
-                1, 2, 0, 1, 
-                1, 2, 5, 6, 5),
-        new RootCrop("Carrot", 3,
-                1, 2, 0, 1, 
-                1, 2, 10, 9, 7.5),
-        new RootCrop("Potato",5,
-                3, 4, 1, 2,
-                1, 10, 20, 3, 12.5)
+        new Turnip(),
+        new Carrot(),
+        new Potato(),
+        new Rose(),
+        new Tulip(),
+        new Sunflower(),
+        new Mango(),
+        new Apple()
     ));
 
     // Declare variables

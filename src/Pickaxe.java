@@ -1,5 +1,5 @@
 public class Pickaxe extends Tool{
-    public Pickaxe(String name, int cost, double expGain) {
+    public Pickaxe() {
         super("Pickaxe", 10, 15);
     }
 }

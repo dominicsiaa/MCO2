@@ -21,12 +21,8 @@ public class MyFarmView extends JFrame {
     private JLabel lblDay = new JLabel();
 
     //tools
-    private JLabel lblTool;
-    private JButton btnPlow;
-    private JButton btnWateringCan;
-    private JButton btnFertilizer;
-    private JButton btnPickaxe;
-    private JButton btnShovel;
+    private ArrayList<JButton> btnlistTools = new ArrayList<JButton>();
+
     //plot
     private ArrayList<JButton> btnlistPlot = new ArrayList<JButton>();
 
@@ -123,24 +119,15 @@ public class MyFarmView extends JFrame {
         toolPanel.setLayout(new GridLayout(6,1));
         toolPanel.setBackground(Color.BLUE);
 
-        lblTool = new JLabel("Tools");
+        JLabel lblTool = new JLabel("Tools");
         lblTool.setFont(new Font("Verdana", Font.BOLD, 35));
         toolPanel.add(lblTool);
 
-        btnPlow = new JButton("Plow");
-        toolPanel.add(btnPlow);
-
-        btnWateringCan = new JButton("Watering Can");
-        toolPanel.add(btnWateringCan);
-
-        btnFertilizer = new JButton("Fertilizer");
-        toolPanel.add(btnFertilizer);
-
-        btnPickaxe = new JButton("Pickaxe");
-        toolPanel.add(btnPickaxe);
-
-        btnShovel = new JButton("Shovel");
-        toolPanel.add(btnShovel);
+        for(int i = 0; i < MyFarmModel.TOOLLIST.size(); i++) {
+            this.btnlistTools.add(new JButton(MyFarmModel.TOOLLIST.get(i).getName()));
+            this.btnlistTools.get(i).setActionCommand(MyFarmModel.TOOLLIST.get(i).getName());
+            toolPanel.add(this.btnlistTools.get(i));
+        }
 
         this.mainFrame.add(toolPanel, BorderLayout.WEST);
 
@@ -225,7 +212,7 @@ public class MyFarmView extends JFrame {
         this.initializeGameScreen(name);
         this.updateFarmerInfo(objectcoins, level, exp);
         this.updateFarmerRank("Farmer");
-        this.updateDay(0);
+        this.updateDay(1);
         this.updatePlot(lot);
 
         this.mainFrame.revalidate();
@@ -281,11 +268,13 @@ public class MyFarmView extends JFrame {
 
     public void setActionListener(ActionListener listener) {
         btnRun.addActionListener(listener);
-        //System.out.println("Added action listener to " + btnRun.getActionCommand());
 
         for(JButton btn : this.btnlistPlot) {
             btn.addActionListener(listener);
-            //System.out.println("Added action listener to " + btn.getActionCommand());
+        }
+
+        for(JButton btn : this.btnlistTools) {
+            btn.addActionListener(listener);
         }
     }
 
