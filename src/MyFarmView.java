@@ -32,9 +32,9 @@ public class MyFarmView extends JFrame {
         this.mainFrame.setSize(screenSize.width-50,screenSize.height-50);
         */
         this.initializeIntroScreen();
-
-        this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //this.mainFrame.setSize(750, 500);
+        //this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.mainFrame.setSize(1920, 1080);
+        this.mainFrame.setResizable(false);
         this.mainFrame.setVisible(true);
     }
 

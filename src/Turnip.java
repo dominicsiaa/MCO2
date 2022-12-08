@@ -1,6 +1,5 @@
-public class RootCrop extends Crop{
-
-    public RootCrop(String name,
+public class Turnip extends RootCrop{
+    public Turnip(String name,
                     int harvestTime,
                     int waterNeeds,
                     int waterNeedsBonusLimit,
@@ -12,7 +11,9 @@ public class RootCrop extends Crop{
                     int sellingPrice,
                     double expGain)
     {
-        super(name, harvestTime, waterNeeds, waterNeedsBonusLimit, fertilizerNeeds, fertilizerNeedsBonusLimit, minProductsProduced, maxProductsProduced, seedCost, sellingPrice, expGain);
+        super("Turnip",2,
+                1, 2, 0, 1,
+                1, 2, 5, 6, 5);
     }
 
 }

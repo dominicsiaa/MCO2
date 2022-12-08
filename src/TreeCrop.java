@@ -1,7 +1,6 @@
 public class TreeCrop extends Crop{
 
     public TreeCrop(String name,
-                    String type,
                     int harvestTime,
                     int waterNeeds,
                     int waterNeedsBonusLimit,
@@ -13,7 +12,7 @@ public class TreeCrop extends Crop{
                     int sellingPrice,
                     double expGain)
     {
-        super(name, type, harvestTime, waterNeeds, waterNeedsBonusLimit, fertilizerNeeds, fertilizerNeedsBonusLimit, minProductsProduced, maxProductsProduced, seedCost, sellingPrice, expGain);
+        super(name, harvestTime, waterNeeds, waterNeedsBonusLimit, fertilizerNeeds, fertilizerNeedsBonusLimit, minProductsProduced, maxProductsProduced, seedCost, sellingPrice, expGain);
     }
 
 }
