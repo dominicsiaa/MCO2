@@ -353,7 +353,35 @@ public class MyFarmModel {
         return this.farmer.getName();
     }
 
+    public String getFarmerType() {
+        return this.farmer.getType().getName();
+    }
+
+    public int getFarmerLevel() {
+        return this.farmer.getLevel();
+    }
+
+    public double getFarmerExp() {
+        return this.farmer.getExp();
+    }
+
     public double getFarmerObjectcoins() {
         return this.farmer.getObjectcoins();
+    }
+
+    public int getTileStatus(int n) {
+        return this.lot[n/10][n%10].getStatus();
+    }
+
+    public Tile getTile(int n) {
+        return this.lot[n/10][n%10];
+    }
+
+    public Tile getTile(int r, int c) {
+        return this.lot[r][c];
+    }
+
+    public Tile[][] getLot() {
+        return this.lot;
     }
 }

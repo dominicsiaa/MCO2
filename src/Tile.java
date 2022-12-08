@@ -179,6 +179,14 @@ public class Tile {
     }
 
     /**
+     * This method returns the days past
+     * @return daysPast
+     */
+    public int getDaysPast() {
+        return this.daysPast;
+    }
+
+    /**
      * This method returns the status of the tile
      * @return status
      */
@@ -212,16 +220,16 @@ public class Tile {
                 status = "Plowed";
                 break;
             case ISPLANTED:
-                status = "Planted\nPlant: " + this.cropPlanted.getName() + " | Days Past: " + this.daysPast + " | Watered: " + this.timesWatered + " | Fertilized: " + this.timesFertilized;
+                status = this.cropPlanted.getName();
                 break;
             case ISHARVESTABLE:
-                status = "Harvestable\nPlant: " + this.cropPlanted.getName() + " | Days Past: " + this.daysPast + " | Watered: " + this.timesWatered + " | Fertilized: " + this.timesFertilized;
+                status = "H:" + this.cropPlanted.getName();
                 break;
             case HASWITHERED:
-                status = "Has Withered Crop";
+                status = "Withered";
                 break;
 
         }
-        return "\n _____ \n" + "|     |\n" + "|  " + this.getStatus() + "  |\n" + "|_____|\nStatus: (" + this.getStatus() + ") " + status;
+        return status;
     }
 }
