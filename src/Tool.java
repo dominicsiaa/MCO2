@@ -5,20 +5,17 @@
  */
 public class Tool {
     private String name;
-    private String function;
     private int cost;
     private double expGain;
 
     /**
      * This constructor initializes a tool object
      * @param name
-     * @param function
      * @param cost
      * @param expGain
      */
-    public Tool(String name, String function, int cost, double expGain) {
+    public Tool(String name, int cost, double expGain) {
         this.name = name;
-        this.function = function;
         this.cost = cost;
         this.expGain = expGain;
     }
@@ -29,14 +26,6 @@ public class Tool {
      */
     public String getName() {
         return this.name;
-    }
-
-    /**
-     * This method returns the tool function
-     * @return function
-     */
-    public String getFunction() {
-        return this.function;
     }
 
     /**

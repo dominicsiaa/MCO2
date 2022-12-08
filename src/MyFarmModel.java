@@ -15,19 +15,14 @@ public class MyFarmModel {
     // Declare global variables
     public static final List<Tool> TOOLLIST = new ArrayList<Tool>(Arrays.asList(
         new Tool("Plow",
-                "Converts an unplowed tile to a plowed tile. Can only be performed on an unplowed tile.",
                 0, 0.5),
         new Tool("Watering Can",
-                "Adds to the total number of tiles a tile/crop has been watered. Can only be performed on a plowed tile with a crop.",
                 0, 0.5),
         new Tool("Fertilizer",
-                "Adds to the total number of tiles a tile/crop has been applied with fertilizer. Can only be performed on a plowed tile with a crop.",
                 10, 4),
         new Tool("Pickaxe",
-                "Removes a rock from a tile. Can only be applied to tiles with a rock.",
                 50, 15),
         new Tool("Shovel",
-                "Removes a withered plant from a tile. Can be used on any tile/crop with varying effects, as described above.",
                 7, 2)
     ));
 
@@ -39,13 +34,13 @@ public class MyFarmModel {
     ));
 
     public static final List<Crop> CROPLIST = new ArrayList<Crop>(Arrays.asList(
-        new RootCrop("Turnip", "rootcrop", 2, 
+        new RootCrop("Turnip", 2,
                 1, 2, 0, 1, 
                 1, 2, 5, 6, 5),
-        new RootCrop("Carrot", "rootcrop", 3, 
+        new RootCrop("Carrot", 3,
                 1, 2, 0, 1, 
                 1, 2, 10, 9, 7.5),
-        new RootCrop("Potato", "rootcrop", 5,
+        new RootCrop("Potato",5,
                 3, 4, 1, 2,
                 1, 10, 20, 3, 12.5)
     ));

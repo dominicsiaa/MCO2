@@ -6,7 +6,6 @@
  */
 public class Crop {
     private String name;
-    private String type;
     private int harvestTime;
 
     //add inheritance stuff next time
@@ -24,7 +23,6 @@ public class Crop {
     /**
      * This constructor initializes a crop object
      * @param name
-     * @param type
      * @param harvestTime
      * @param waterNeeds
      * @param fertilizerNeeds
@@ -34,8 +32,7 @@ public class Crop {
      * @param sellingPrice
      * @param expGain
      */
-    public Crop(String name, 
-                String type, 
+    public Crop(String name,
                 int harvestTime, 
                 int waterNeeds, 
                 int waterNeedsBonusLimit,
@@ -48,7 +45,6 @@ public class Crop {
                 double expGain) 
     {
         this.name = name;
-        this.type = type;
         this.harvestTime = harvestTime;
 
         this.waterNeeds = waterNeeds;
@@ -82,14 +78,6 @@ public class Crop {
      */
     public String getName() {
         return this.name;
-    }
-
-    /**
-     * This method returns the type of the crop
-     * @return type
-     */
-    public String getType() {
-        return this.type;
     }
 
     /**
