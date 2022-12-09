@@ -28,11 +28,6 @@ public class Farmer {
      */
     public void gainCoins(double amount){
         this.objectcoins += amount;
-
-        //TODO: Temporary here before GUI in MCO2
-        if(amount > 0) {
-            System.out.println("You have earned " + amount + " objectcoins");
-        }
     }
 
     /**
@@ -41,11 +36,6 @@ public class Farmer {
      */
     public void loseCoins(double amount){
         this.objectcoins -= amount;
-
-        //TODO: Temporary here before GUI in MCO2
-        if(amount > 0) {
-            System.out.println("You have lost " + amount + " objectcoins");
-        }
     }
 
     /**
@@ -54,16 +44,9 @@ public class Farmer {
      */
     public void gainExp(double amount){
         this.exp += amount;
-
-        //TODO: Temporary here before GUI in MCO2
-        if(amount > 0) {
-            System.out.println("You have gained " + amount + " exp");
-        }
-
         if (this.exp >=100) {
             if ((int) (this.exp / 100) > level) {
                 this.level = (int) (this.exp / 100);
-                System.out.println("You have leveled up! You are now level " + this.level);
             }
         }
     }

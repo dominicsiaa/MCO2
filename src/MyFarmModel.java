@@ -337,25 +337,8 @@ public class MyFarmModel {
     /*
      * GETTERS AND SETTERS
      */
-
-    public String getFarmerName() {
-        return this.farmer.getName();
-    }
-
-    public String getFarmerType() {
-        return this.farmer.getType().getName();
-    }
-
-    public int getFarmerLevel() {
-        return this.farmer.getLevel();
-    }
-
-    public double getFarmerExp() {
-        return this.farmer.getExp();
-    }
-
-    public double getFarmerObjectcoins() {
-        return this.farmer.getObjectcoins();
+    public Farmer getFarmer() {
+        return this.farmer;
     }
 
     public int getTileStatus(int n) {

@@ -13,22 +13,27 @@ public class MyFarmView extends JFrame {
     private JButton btnRun;
     private JTextField tfName;
 
+    //misc
+    private JLabel lblConsole;
+    private JButton btnRankUp;
+    private JButton btnAdvanceDay;
+
     //farmer info
     private JLabel lblName = new JLabel();
     private JLabel lblCoins = new JLabel();
     private JLabel lblExp = new JLabel();
     private JLabel lblLevel = new JLabel();
     private JLabel lblRank = new JLabel();
-    private JButton btnRank = new JButton();
     private JLabel lblDay = new JLabel();
-    private JButton btnDay = new JButton();
-
 
     //tools
     private ArrayList<JButton> btnlistTools = new ArrayList<JButton>();
 
     //plot
     private ArrayList<JButton> btnlistPlot = new ArrayList<JButton>();
+
+    //seeds
+    private ArrayList<JButton> btnlistSeeds = new ArrayList<JButton>();
 
     //tile-info
     private JLabel lblTileNumber = new JLabel();
@@ -121,9 +126,12 @@ public class MyFarmView extends JFrame {
         lblDay.setFont(new Font("Verdana", Font.BOLD, 25));
 
         actionsPanel.add(this.lblRank);
-        actionsPanel.add(new JButton("Rank Up!"));
+        this.btnRankUp = new JButton("Rank Up!");
+        actionsPanel.add(this.btnRankUp);
+
         actionsPanel.add(this.lblDay);
-        actionsPanel.add(new JButton(">>"));
+        this.btnAdvanceDay = new JButton("Advance Day");
+        actionsPanel.add(this.btnAdvanceDay);
 
         topPanel.add(farmerInfoPanel, BorderLayout.WEST);
         topPanel.add(actionsPanel, BorderLayout.EAST);
@@ -152,18 +160,30 @@ public class MyFarmView extends JFrame {
         this.mainFrame.add(toolPanel, BorderLayout.WEST);
 
         //Center - lot
+        JPanel farmPanel = new JPanel();
+        farmPanel.setLayout(new BorderLayout());
+        farmPanel.setBackground(Color.GREEN);
+
+        this.lblConsole = new JLabel("");
+        this.lblConsole.setForeground(Color.RED);
+        farmPanel.add(lblConsole, BorderLayout.NORTH);
+        
         JPanel lotPanel = new JPanel();
         lotPanel.setLayout(new GridLayout(5,10));
         lotPanel.setBorder(new EmptyBorder(40,15,40,15));
         lotPanel.setBackground(Color.GREEN);
 
         for(int i = 0; i < 50; i++) {
-            this.btnlistPlot.add(new JButton(Integer.toString(i)));
-            this.btnlistPlot.get(i).setActionCommand("TILE:" + Integer.toString(i));
+            JButton btn = new JButton(Integer.toString(i));
+            btn.setBackground(Color.LIGHT_GRAY);
+
+            btn.setActionCommand("TILE:" + Integer.toString(i));
+            this.btnlistPlot.add(btn);
             lotPanel.add(btnlistPlot.get(i));
         }
 
-        this.mainFrame.add(lotPanel, BorderLayout.CENTER);
+        farmPanel.add(lotPanel, BorderLayout.CENTER);
+        this.mainFrame.add(farmPanel, BorderLayout.CENTER);
 
         //East - info
         JPanel infoPanel = new JPanel();
@@ -214,8 +234,17 @@ public class MyFarmView extends JFrame {
         seedPanel.setPreferredSize(new Dimension(300, 300));
         seedPanel.setBorder(new EmptyBorder(50,60,50,60));
 
-        for(int i = 0; i < 9; i++) {
-            seedPanel.add(new JButton(Integer.toString(i)));
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(i*3+j >= MyFarmModel.CROPLIST.size()) {
+                    break;
+                }
+                JButton btn = new JButton(MyFarmModel.CROPLIST.get(i*3+j).getName());
+
+                btn.setActionCommand("SEED:" + Integer.toString(i*3+j));
+                this.btnlistSeeds.add(btn);
+                seedPanel.add(btn);
+            }
         }
 
         infoPanel.add(seedPanel, BorderLayout.SOUTH);
@@ -243,6 +272,7 @@ public class MyFarmView extends JFrame {
      * UPDATE INFO FUNCTIONS
      */
     public void updateFarmerInfo(double objectcoins, int level, double exp) {
+        this.mainFrame.repaint();
         this.lblCoins.setText("Objectcoins: " + Double.toString(objectcoins));
         this.lblLevel.setText("Level: " + Integer.toString(level));
         this.lblExp.setText("Exp: "+ Double.toString(exp) + " / 100");
@@ -267,7 +297,7 @@ public class MyFarmView extends JFrame {
     }
 
     public void updateTileInfo(int tileNumber, Tile tile) {
-        this.lblTileNumber.setText("Tile (" + Integer.toString(tileNumber/10) + "," + Integer.toString(tileNumber%10) + ")");
+        this.lblTileNumber.setText("Tile (" + Integer.toString(tileNumber/10+1) + "," + Integer.toString(tileNumber%10+1) + ")");
         this.lblTileDisplay.setText(tile.toString());
 
         if(tile.getStatus() == Tile.ISPLANTED || tile.getStatus() == Tile.ISHARVESTABLE) {
@@ -297,6 +327,10 @@ public class MyFarmView extends JFrame {
         for(JButton btn : this.btnlistTools) {
             btn.addActionListener(listener);
         }
+
+        for(JButton btn : this.btnlistSeeds) {
+            btn.addActionListener(listener);
+        }
     }
 
     /*
@@ -310,4 +344,18 @@ public class MyFarmView extends JFrame {
     /*
      * SETTERS
      */
+
+    public void setTileSelected(int n) {
+        this.btnlistPlot.get(n).setBackground(Color.GRAY);
+        System.out.println("Tile " + n + " selected");
+    }
+
+    public void setTileUnselected(int n) {
+        this.btnlistPlot.get(n).setBackground(Color.LIGHT_GRAY);
+        System.out.println("Tile " + n + " unselected");
+    }
+
+    public void sendConsoleMessage(String message) {
+        this.lblConsole.setText(message);
+    }
 }
