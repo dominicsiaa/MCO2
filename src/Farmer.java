@@ -1,3 +1,5 @@
+import Tools.*;
+
 /**
  * Represents a farmer in the game.
  * Contains the farmer name, amount of objectcoins,

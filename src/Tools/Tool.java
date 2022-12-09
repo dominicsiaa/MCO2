@@ -1,3 +1,4 @@
+package Tools;
 /**
  * Represents a tool in the game.
  * Contains the tool name, function,

@@ -1,3 +1,5 @@
+import Tools.*;
+
 import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
