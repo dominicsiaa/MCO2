@@ -106,7 +106,10 @@ public class MyFarmView extends JFrame {
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
         topPanel.setBackground((Color.decode("#a85812")));
-        topPanel.setBorder(BorderFactory.createMatteBorder(20, 20, 20, 20, TopTexture));
+        topPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.decode("#813b00")),
+                (BorderFactory.createCompoundBorder(
+                        BorderFactory.createMatteBorder(20, 20, 20, 20, TopTexture),
+                        BorderFactory.createMatteBorder(10, 10, 10, 10, Color.decode("#813b00"))))));
         topPanel.setPreferredSize(new Dimension(0, 200));
 
         //North-West - farmer info
@@ -116,6 +119,7 @@ public class MyFarmView extends JFrame {
 
         lblName.setText("Farmer: " + name);
         lblName.setFont(new Font("Verdana", Font.BOLD, 25));
+        lblName.setForeground(Color.WHITE);
         lblCoins.setFont(new Font("Verdana", Font.BOLD, 25));
         lblLevel.setFont(new Font("Verdana", Font.BOLD, 25));
         lblExp.setFont(new Font("Verdana", Font.BOLD, 25));
@@ -183,7 +187,9 @@ public class MyFarmView extends JFrame {
         JPanel lotPanel = new JPanel();
         lotPanel.setLayout(new GridLayout(5,10));
         lotPanel.setBackground(Color.decode("#44a318"));
-        lotPanel.setBorder(BorderFactory.createMatteBorder(20, 20, 20, 20, PlotTexture));
+        lotPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(0, 0, 10, 0, Color.decode("#813b00")),
+                BorderFactory.createMatteBorder(20, 20, 20, 20, PlotTexture)));
 
         for(int i = 0; i < 50; i++) {
             JButton btn = new JButton(Integer.toString(i));
@@ -198,11 +204,16 @@ public class MyFarmView extends JFrame {
         this.mainFrame.add(farmPanel, BorderLayout.CENTER);
 
         //East - info
+        Icon InfoTexture = new ImageIcon(getClass().getResource("InfoTexture.png"));
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setBorder(new EmptyBorder(5,5,5,5));
-        infoPanel.setBackground(Color.YELLOW);
+        infoPanel.setBackground(Color.decode("#813b00"));
         infoPanel.setPreferredSize(new Dimension(350, 0));
+        infoPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 10, 10, 10, Color.decode("#813b00")),
+                (BorderFactory.createCompoundBorder(
+                        BorderFactory.createMatteBorder(20, 20, 20, 20, InfoTexture),
+                        BorderFactory.createMatteBorder(10, 10, 10, 10, Color.decode("#813b00"))))));
 
         JLabel lbInfo = new JLabel("Info");
         lbInfo.setFont(new Font("Verdana", Font.BOLD, 35));
@@ -254,7 +265,7 @@ public class MyFarmView extends JFrame {
         seedPanel.setLayout(new GridLayout(3,3));
         seedPanel.setBackground(Color.decode("#964B00"));
         seedPanel.setPreferredSize(new Dimension(300, 300));
-        seedPanel.setBorder(BorderFactory.createMatteBorder(50, 60, 50, 60, SeedTexture));
+        seedPanel.setBorder(BorderFactory.createMatteBorder(30, 30, 30, 30, SeedTexture));
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
