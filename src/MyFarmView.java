@@ -14,11 +14,15 @@ public class MyFarmView extends JFrame {
     private JTextField tfName;
 
     //farmer info
+    private JLabel lblName = new JLabel();
     private JLabel lblCoins = new JLabel();
     private JLabel lblExp = new JLabel();
     private JLabel lblLevel = new JLabel();
     private JLabel lblRank = new JLabel();
+    private JButton btnRank = new JButton();
     private JLabel lblDay = new JLabel();
+    private JButton btnDay = new JButton();
+
 
     //tools
     private ArrayList<JButton> btnlistTools = new ArrayList<JButton>();
@@ -46,9 +50,9 @@ public class MyFarmView extends JFrame {
         this.mainFrame.setSize(screenSize.width-50,screenSize.height-50);
         */
         this.initializeIntroScreen();
-        //this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.mainFrame.setSize(1920, 1080);
-        this.mainFrame.setResizable(false);
+        this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.mainFrame.setSize(1920, 1080);
+        //this.mainFrame.setResizable(false);
         this.mainFrame.setVisible(true);
     }
 
@@ -88,22 +92,33 @@ public class MyFarmView extends JFrame {
         //North - farmer info
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
-        topPanel.setBackground(Color.GREEN);
+        topPanel.setBackground(Color.ORANGE);
         topPanel.setBorder(new EmptyBorder(5,5,5,5));
-        topPanel.setPreferredSize(new Dimension(0, 180));
+        topPanel.setPreferredSize(new Dimension(0, 200));
 
         //North-West - farmer info
         JPanel farmerInfoPanel = new JPanel();
-        farmerInfoPanel.setLayout(new FlowLayout());
+        farmerInfoPanel.setLayout(new GridLayout(2,2));
+        farmerInfoPanel.setBackground(new Color(0,0,0,0));
 
-        farmerInfoPanel.add(new JLabel("Farmer " + name));
+        lblName.setText("Farmer: " + name);
+        lblName.setFont(new Font("Verdana", Font.BOLD, 25));
+        lblCoins.setFont(new Font("Verdana", Font.BOLD, 25));
+        lblLevel.setFont(new Font("Verdana", Font.BOLD, 25));
+        lblExp.setFont(new Font("Verdana", Font.BOLD, 25));
+
+        farmerInfoPanel.add(this.lblName);
         farmerInfoPanel.add(this.lblCoins);
         farmerInfoPanel.add(this.lblLevel);
         farmerInfoPanel.add(this.lblExp);
 
         //North-East - actions
         JPanel actionsPanel = new JPanel();
-        actionsPanel.setLayout(new FlowLayout());
+        actionsPanel.setLayout(new GridLayout(2,1));
+        actionsPanel.setBackground(new Color(0,0,0,0));
+
+        lblRank.setFont(new Font("Verdana", Font.BOLD, 25));
+        lblDay.setFont(new Font("Verdana", Font.BOLD, 25));
 
         actionsPanel.add(this.lblRank);
         actionsPanel.add(new JButton("Rank Up!"));
@@ -117,10 +132,13 @@ public class MyFarmView extends JFrame {
         //West - tool stuff
         JPanel toolPanel = new JPanel();
         toolPanel.setLayout(new GridLayout(6,1));
+        toolPanel.setPreferredSize(new Dimension(150, 60));
+        toolPanel.setBorder(new EmptyBorder(0,15,80,15));
         toolPanel.setBackground(Color.BLUE);
 
         JLabel lblTool = new JLabel("Tools");
         lblTool.setFont(new Font("Verdana", Font.BOLD, 35));
+        lblTool.setHorizontalAlignment(JLabel.CENTER);
         toolPanel.add(lblTool);
 
         for(int i = 0; i < MyFarmModel.TOOLLIST.size(); i++) {
@@ -136,7 +154,8 @@ public class MyFarmView extends JFrame {
         //Center - lot
         JPanel lotPanel = new JPanel();
         lotPanel.setLayout(new GridLayout(5,10));
-        lotPanel.setBackground(Color.RED);
+        lotPanel.setBorder(new EmptyBorder(40,15,40,15));
+        lotPanel.setBackground(Color.GREEN);
 
         for(int i = 0; i < 50; i++) {
             this.btnlistPlot.add(new JButton(Integer.toString(i)));
@@ -151,10 +170,11 @@ public class MyFarmView extends JFrame {
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setBorder(new EmptyBorder(5,5,5,5));
         infoPanel.setBackground(Color.YELLOW);
-        infoPanel.setPreferredSize(new Dimension(348, 0));
+        infoPanel.setPreferredSize(new Dimension(350, 0));
 
         JLabel lbInfo = new JLabel("Info");
         lbInfo.setFont(new Font("Verdana", Font.BOLD, 35));
+        lbInfo.setHorizontalAlignment(JLabel.CENTER);
         infoPanel.add(lbInfo, BorderLayout.NORTH);
 
         //East-North - tile info
@@ -192,12 +212,11 @@ public class MyFarmView extends JFrame {
         seedPanel.setLayout(new GridLayout(3,3));
         seedPanel.setBackground(Color.decode("#964B00"));
         seedPanel.setPreferredSize(new Dimension(300, 300));
-        seedPanel.setBorder(new EmptyBorder(50,50,50,50));
+        seedPanel.setBorder(new EmptyBorder(50,60,50,60));
 
         for(int i = 0; i < 9; i++) {
             seedPanel.add(new JButton(Integer.toString(i)));
         }
-
 
         infoPanel.add(seedPanel, BorderLayout.SOUTH);
         this.mainFrame.add(infoPanel, BorderLayout.EAST);
