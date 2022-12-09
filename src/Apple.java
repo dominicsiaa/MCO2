@@ -3,7 +3,7 @@ public class Apple extends TreeCrop{
     {
         super("Apple", 10,
                 7, 7, 4, 4,
-                5, 15, 100, 8, 25);
+                5, 15, 200, 8, 25);
     }
 
 }

@@ -5,8 +5,8 @@
  */
 public class Farmer {
     private String name = "Farmer";
-    private double objectcoins = 10000; //default is 100
-    private int level = 100; //default is 0
+    private double objectcoins = 100; //default is 100
+    private int level = 0; //default is 0
     private double exp = 0; //default is 0
     private FarmerType type = MyFarmModel.FARMERTYPELIST.get(0);
 
@@ -144,6 +144,10 @@ public class Farmer {
             double waterBonus = harvestTotal * 0.2 * (Math.min(tile.getTimesWatered(), harvest.getWaterNeedsBonusLimit() + this.getType().getWaterBonusLimitIncrease()) - 1);
             double fertilizerBonus = harvestTotal * 0.5 * Math.min(tile.getTimesFertilized(), harvest.getFertilizerNeedsBonusLimit() + this.getType().getFertilizerBonusLimitIncrease());
             double total = harvestTotal + waterBonus + fertilizerBonus;
+
+            if(harvest instanceof FlowerCrop) {
+                total *= 1.1;
+            }
 
             this.gainCoins(total);
             this.gainExp(harvest.getExpGain());

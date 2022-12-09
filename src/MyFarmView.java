@@ -263,6 +263,25 @@ public class MyFarmView extends JFrame {
         this.mainFrame.add(infoPanel, BorderLayout.EAST);
     }
 
+    public void initializeEndScreen() {
+        JPanel outroPanel = new JPanel();
+
+        outroPanel.setLayout(new GridBagLayout());
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(5,5,5,5);
+        c.gridx = 0;
+        c.gridy = 0;
+        
+        outroPanel.add(new JLabel("Unfortunately, you no longer have the means to continue"), c);
+
+        c.gridy = 1;
+        outroPanel.add(new JLabel("Thank you for playing our game!"), c);
+
+        this.mainFrame.add(outroPanel, BorderLayout.CENTER);
+    }
+
     /*
      * LOAD SCREEN FUNCTIONS
      */
@@ -276,6 +295,15 @@ public class MyFarmView extends JFrame {
         this.updateFarmerRank("Farmer");
         this.updateDay(1);
         this.updatePlot(lot);
+
+        this.mainFrame.revalidate();
+    }
+
+    public void loadEndScreen() {
+        this.mainFrame.getContentPane().removeAll();
+        this.mainFrame.repaint();
+
+        this.initializeEndScreen();
 
         this.mainFrame.revalidate();
     }

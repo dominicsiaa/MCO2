@@ -19,7 +19,6 @@ public class MyFarmController implements ActionListener {
     }
 
     public void updateTileInfo(int tileNumber, Tile tile) {
-        System.out.println("Tile status = " + tile.getStatus());
         if(tile.getStatus() == Tile.ISHARVESTABLE) {
             this.gui.updateTileInfoHarvestable(tileNumber, tile);
         } else if(tile.getStatus() == Tile.ISPLANTED) {
@@ -58,8 +57,7 @@ public class MyFarmController implements ActionListener {
 
             //GAME END
             if(!this.farm.getIsRunning()) {
-                //TODO: Game End
-                this.gui.sendConsoleMessage("GAME SHOULD END HERE");
+                this.gui.loadEndScreen();
             }
 
         //HARVEST
@@ -98,7 +96,7 @@ public class MyFarmController implements ActionListener {
                     Tool tool = MyFarmModel.TOOLLIST.get(parameter);
                     Farmer farmer = this.farm.getFarmer();
                     if(farmer.useTool(tool, this.farm.getTile(this.selectedTile))) {
-                        this.gui.sendConsoleMessage("\nYou have successfully used " + tool + " on tile (" + Integer.toString(parameter/10+1) + "," + Integer.toString(parameter%10+1) + ")");
+                        this.gui.sendConsoleMessage("\nYou have successfully used " + tool + " on tile (" + Integer.toString(this.selectedTile/10+1) + "," + Integer.toString(this.selectedTile%10+1) + ")");
                         this.updateTileInfo(this.selectedTile, this.farm.getTile(this.selectedTile));
                         this.gui.updateFarmerInfo(farmer.getObjectcoins(), farmer.getLevel(), farmer.getExp());
                         this.gui.updatePlot(this.farm.getLot());
@@ -110,15 +108,40 @@ public class MyFarmController implements ActionListener {
                 } else if(action.equals("SEED")) {
                     Crop crop = MyFarmModel.CROPLIST.get(parameter);
                     Farmer farmer = this.farm.getFarmer();
-                    if(farmer.plantCrop(crop, this.farm.getTile(this.selectedTile))) {
-                        this.gui.sendConsoleMessage("You have successfully planted a " + crop + " on tile (" + Integer.toString(parameter/10+1) + "," + Integer.toString(parameter%10+1) + ")");
-                        this.updateTileInfo(this.selectedTile, this.farm.getTile(this.selectedTile));
-                        this.gui.updateFarmerInfo(farmer.getObjectcoins(), farmer.getLevel(), farmer.getExp());
-                        this.gui.updatePlot(this.farm.getLot());
-                    } else {
-                        this.gui.sendConsoleMessage("Invalid use of Plant " + crop);   
+                    boolean allowed = true;
+
+                    if(crop instanceof TreeCrop) {
+                        for(int i = 0; i < 3; i++) {
+                            for(int j = 0; j < 3; j++) {
+                                if(allowed) {
+                                    try {
+                                        Tile tileCheck = this.farm.getTile((this.selectedTile/10 - 1 + i),(this.selectedTile%10 - 1 + j));
+                                        System.out.println("Cur Tile: " + this.selectedTile + " Tile:" + (this.selectedTile/10 - 1 + i) + (this.selectedTile%10 - 1 + j) + " Status:" + tileCheck.getStatus());
+                                        if(!(tileCheck.getStatus() == Tile.ISPLOWED || tileCheck.getStatus() == Tile.ISUNPLOWED)) {
+                                            allowed = false;
+                                            this.gui.sendConsoleMessage("The space around the fruit tree is not empty");
+                                        }
+                                    } catch(IndexOutOfBoundsException ex) {
+                                        allowed = false;
+                                        this.gui.sendConsoleMessage("Cannot plant fruit trees at the edge of the lot");
+                                    }
+                                }
+                            }
+                        }
                     }
 
+                    if(allowed) {
+                        if(farmer.plantCrop(crop, this.farm.getTile(this.selectedTile))) {
+                            this.gui.sendConsoleMessage("You have successfully planted a " + crop + " on tile (" + Integer.toString(parameter/10+1) + "," + Integer.toString(parameter%10+1) + ")");
+                            this.updateTileInfo(this.selectedTile, this.farm.getTile(this.selectedTile));
+                            this.gui.updateFarmerInfo(farmer.getObjectcoins(), farmer.getLevel(), farmer.getExp());
+                            this.gui.updatePlot(this.farm.getLot());
+                        } else {
+                            this.gui.sendConsoleMessage("Invalid use of Plant " + crop);   
+                        }
+                    }
+
+                //REGISTER FARMER
                 } else if(action.equals("RANKUP")) {
                     FarmerType type = MyFarmModel.FARMERTYPELIST.get(parameter);
                     Farmer farmer = this.farm.getFarmer();
