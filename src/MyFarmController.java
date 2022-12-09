@@ -149,15 +149,17 @@ public class MyFarmController implements ActionListener {
                     if(farmer.register(type)) {
                         this.gui.sendConsoleMessage("You have successfully registered as a " + type);
                         this.gui.updateFarmerInfo(farmer.getObjectcoins(), farmer.getLevel(), farmer.getExp());
+                        
 
                         if(type.toString().equals(MyFarmModel.FARMERTYPELIST.get(MyFarmModel.FARMERTYPELIST.size()-1).toString())) {
                             this.gui.setBtnRankUpText("Max rank!");
                             this.gui.setBtnRankUpEnabled(false);
                         } else {
-                            this.gui.setBtnRankUpText("Rank Up! (" + MyFarmModel.FARMERTYPELIST.get(parameter+1).getRegistrationFee() + " coins)");
+                            FarmerType newType = MyFarmModel.FARMERTYPELIST.get(parameter+1);
+                            this.gui.setBtnRankUpText("Rank Up! (Level " + newType.getLevelRequirement() + ", " + newType.getRegistrationFee() + " coins)");
                             this.gui.setBtnRankUpActionCommand("RANKUP:" + Integer.toString(parameter+1));
                         }
-                        this.gui.updateFarmerRank(type.toString());
+                        this.gui.updateFarmerRank(type);
                         
                     } else {
                         this.gui.sendConsoleMessage("Invalid use of Register as " + type);

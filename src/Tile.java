@@ -219,7 +219,7 @@ public class Tile {
                 status = "Plowed";
                 break;
             case ISPLANTED:
-                status = this.cropPlanted.getName();
+                status = "P:" + this.cropPlanted.getName();
                 break;
             case ISHARVESTABLE:
                 status = "H:" + this.cropPlanted.getName();

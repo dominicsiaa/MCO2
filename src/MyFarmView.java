@@ -32,6 +32,12 @@ public class MyFarmView extends JFrame {
     private JLabel lblDay = new JLabel();
     private JButton btnHarvest = new JButton();
 
+    //farmer rank info
+    private JLabel lblBonusEarningsPerProduce = new JLabel();
+    private JLabel lblseedCostReduction = new JLabel();
+    private JLabel lblWaterBonusLimitIncrease = new JLabel();
+    private JLabel lblFertilizerBonusLimitIncrease = new JLabel();
+
     //tools
     private ArrayList<JButton> btnlistTools = new ArrayList<JButton>();
 
@@ -130,21 +136,26 @@ public class MyFarmView extends JFrame {
 
         //North-East - actions
         JPanel actionsPanel = new JPanel();
-        actionsPanel.setLayout(new FlowLayout());
+        actionsPanel.setLayout(new GridLayout(3,3));
         actionsPanel.setBackground(new Color(0,0,0,0));
 
-        lblRank.setFont(new Font("Verdana", Font.BOLD, 25));
-        lblDay.setFont(new Font("Verdana", Font.BOLD, 25));
-        
         actionsPanel.add(this.lblRank);
-        this.btnRankUp = new JButton("Rank Up! (200 Coins)");
+
+        this.btnRankUp = new JButton("Rank Up! (Level 5, 200 Coins)");
         this.btnRankUp.setActionCommand("RANKUP:1");
         actionsPanel.add(this.btnRankUp);
 
-        actionsPanel.add(this.lblDay);
         this.btnAdvanceDay = new JButton("Advance Day");
         this.btnAdvanceDay.setActionCommand("Advance Day");
         actionsPanel.add(this.btnAdvanceDay);
+
+        actionsPanel.add(this.lblBonusEarningsPerProduce);
+        actionsPanel.add(this.lblWaterBonusLimitIncrease);
+
+        actionsPanel.add(this.lblDay);
+
+        actionsPanel.add(this.lblseedCostReduction);
+        actionsPanel.add(this.lblFertilizerBonusLimitIncrease);
 
         topPanel.add(farmerInfoPanel, BorderLayout.WEST);
         topPanel.add(actionsPanel, BorderLayout.EAST);
@@ -281,7 +292,13 @@ public class MyFarmView extends JFrame {
                 if(i*3+j >= MyFarmModel.CROPLIST.size()) {
                     break;
                 }
-                JButton btn = new JButton(MyFarmModel.CROPLIST.get(i*3+j).getName());
+
+                JButton btn;
+                try {
+                    btn = new JButton(new ImageIcon(getClass().getResource("resources/" + MyFarmModel.CROPLIST.get(i*3+j).getName() + ".png")));
+                } catch (Exception e) {
+                    btn = new JButton(MyFarmModel.CROPLIST.get(i*3+j).getName());
+                }
 
                 btn.setActionCommand("SEED:" + Integer.toString(i*3+j));
                 this.btnlistSeeds.add(btn);
@@ -322,7 +339,7 @@ public class MyFarmView extends JFrame {
 
         this.initializeGameScreen(name);
         this.updateFarmerInfo(objectcoins, level, exp);
-        this.updateFarmerRank("Farmer");
+        this.updateFarmerRank(new FarmerDefault());
         this.updateDay(1);
         this.updatePlot(lot);
 
@@ -348,9 +365,14 @@ public class MyFarmView extends JFrame {
         this.lblExp.setText("Exp: "+ (new DecimalFormat("0.00")).format(exp) + " / 100");
     }
 
-    public void updateFarmerRank(String type) {
+    public void updateFarmerRank(FarmerType type) {
         this.mainFrame.repaint();
         this.lblRank.setText("Rank: " + type);
+        this.lblBonusEarningsPerProduce.setText("Bonus Earnings: +" + type.getBonusEarningsPerProduce());
+        this.lblseedCostReduction.setText("Seed Cost: -" + type.getSeedCostReduction());
+        this.lblWaterBonusLimitIncrease.setText("Water Bonus Limit: +" + type.getWaterBonusLimitIncrease());
+        this.lblFertilizerBonusLimitIncrease.setText("Fert. Bonus Limit: +" + type.getFertilizerBonusLimitIncrease());
+
     }
 
     public void updateDay(int day) {
@@ -359,7 +381,21 @@ public class MyFarmView extends JFrame {
     }
 
     public void updateTile(int n, Tile tile) {
-        this.btnlistPlot.get(n).setText(tile.toString());
+        String strStatus = tile.toString();
+        int intStatus = tile.getStatus();
+
+        try {
+            if(intStatus == Tile.ISHARVESTABLE) {
+                this.btnlistPlot.get(n).setIcon(new ImageIcon(getClass().getResource("resources/" + strStatus.substring(2) + ".png")));
+            } else if(intStatus == Tile.ISPLANTED) {
+                this.btnlistPlot.get(n).setIcon(new ImageIcon(getClass().getResource("resources/Seed.png")));
+            } else {
+                this.btnlistPlot.get(n).setIcon(new ImageIcon(getClass().getResource("resources/" + strStatus + ".png")));
+            }
+            this.btnlistPlot.get(n).setText("");
+        } catch (Exception e) {
+            this.btnlistPlot.get(n).setText(strStatus);
+        }
     }
 
     public void updatePlot(Tile[][] lot) {
