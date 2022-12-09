@@ -105,7 +105,7 @@ public class MyFarmView extends JFrame {
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
-        topPanel.setBackground((Color.decode("#a85812")));
+        topPanel.setBackground((Color.decode("#c16b1b")));
         topPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.decode("#813b00")),
                 (BorderFactory.createCompoundBorder(
                         BorderFactory.createMatteBorder(20, 20, 20, 20, TopTexture),
@@ -119,7 +119,6 @@ public class MyFarmView extends JFrame {
 
         lblName.setText("Farmer: " + name);
         lblName.setFont(new Font("Verdana", Font.BOLD, 25));
-        lblName.setForeground(Color.WHITE);
         lblCoins.setFont(new Font("Verdana", Font.BOLD, 25));
         lblLevel.setFont(new Font("Verdana", Font.BOLD, 25));
         lblExp.setFont(new Font("Verdana", Font.BOLD, 25));
@@ -155,8 +154,10 @@ public class MyFarmView extends JFrame {
         JPanel toolPanel = new JPanel();
         toolPanel.setLayout(new GridLayout(6,1));
         toolPanel.setPreferredSize(new Dimension(150, 60));
-        toolPanel.setBorder(new EmptyBorder(0,15,80,15));
-        toolPanel.setBackground(Color.BLUE);
+        toolPanel.setBackground(Color.decode("#813b00"));
+        toolPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(0, 10, 10, 10, Color.decode("#813b00")),
+                BorderFactory.createMatteBorder(0, 15, 80, 15, Color.decode("#813b00"))));
 
         JLabel lblTool = new JLabel("Tools");
         lblTool.setFont(new Font("Verdana", Font.BOLD, 35));
@@ -208,15 +209,16 @@ public class MyFarmView extends JFrame {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setBorder(new EmptyBorder(5,5,5,5));
-        infoPanel.setBackground(Color.decode("#813b00"));
+        infoPanel.setBackground(Color.decode("#735c57"));
         infoPanel.setPreferredSize(new Dimension(350, 0));
         infoPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 10, 10, 10, Color.decode("#813b00")),
                 (BorderFactory.createCompoundBorder(
                         BorderFactory.createMatteBorder(20, 20, 20, 20, InfoTexture),
-                        BorderFactory.createMatteBorder(10, 10, 10, 10, Color.decode("#813b00"))))));
+                        BorderFactory.createMatteBorder(10, 10, 10, 10, Color.decode("#735c57"))))));
 
         JLabel lbInfo = new JLabel("Info");
         lbInfo.setFont(new Font("Verdana", Font.BOLD, 35));
+        lbInfo.setForeground(Color.WHITE);
         lbInfo.setHorizontalAlignment(JLabel.CENTER);
         infoPanel.add(lbInfo, BorderLayout.NORTH);
 
