@@ -101,7 +101,7 @@ public class MyFarmView extends JFrame {
     private void initializeGameScreen(String name) {
 
         //North - farmer info
-        ImageIcon TopTexture = new ImageIcon(getClass().getResource("TopTexture.png"));
+        ImageIcon TopTexture = new ImageIcon(getClass().getResource("resources/TopTexture.png"));
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
@@ -182,7 +182,7 @@ public class MyFarmView extends JFrame {
         this.lblConsole.setForeground(Color.RED);
         farmPanel.add(lblConsole, BorderLayout.NORTH);
 
-        ImageIcon PlotTexture = new ImageIcon(getClass().getResource("PlotTexture.png"));
+        ImageIcon PlotTexture = new ImageIcon(getClass().getResource("resources/PlotTexture.png"));
 
         JPanel lotPanel = new JPanel();
         lotPanel.setLayout(new GridLayout(5,10));
@@ -204,7 +204,7 @@ public class MyFarmView extends JFrame {
         this.mainFrame.add(farmPanel, BorderLayout.CENTER);
 
         //East - info
-        Icon InfoTexture = new ImageIcon(getClass().getResource("InfoTexture.png"));
+        Icon InfoTexture = new ImageIcon(getClass().getResource("resources/InfoTexture.png"));
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setBorder(new EmptyBorder(5,5,5,5));
@@ -260,7 +260,7 @@ public class MyFarmView extends JFrame {
 
         //East-South - seed info
 
-        Icon SeedTexture = new ImageIcon(getClass().getResource("SeedTexture.png"));
+        Icon SeedTexture = new ImageIcon(getClass().getResource("resources/SeedTexture.png"));
         JPanel seedPanel = new JPanel();
         seedPanel.setLayout(new GridLayout(3,3));
         seedPanel.setBackground(Color.decode("#964B00"));
