@@ -412,6 +412,17 @@ public class MyFarmView extends JFrame {
         this.lblTileDaysPast.setText("");
         this.lblTileTimesWatered.setText("");
         this.lblTileTimesFertilized.setText("");
+
+        if(tile.getStatus() == Tile.ISPLOWED) {
+            for(JButton btn : this.btnlistSeeds) {
+                btn.setEnabled(true);
+            }
+        } else {
+            for(JButton btn : this.btnlistSeeds) {
+                btn.setEnabled(false);
+            }
+        }
+
         this.btnHarvest.setVisible(false);
     }
 
