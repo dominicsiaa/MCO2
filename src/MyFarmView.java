@@ -165,8 +165,15 @@ public class MyFarmView extends JFrame {
         toolPanel.add(lblTool);
 
         for(int i = 0; i < MyFarmModel.TOOLLIST.size(); i++) {
-            JButton btn = new JButton(MyFarmModel.TOOLLIST.get(i).getName());
+            //JButton btn = new JButton(MyFarmModel.TOOLLIST.get(i).getName());
+            JButton btn;
+            try {
+                btn = new JButton(new ImageIcon(getClass().getResource("resources/" + MyFarmModel.TOOLLIST.get(i).getName() + ".png")));
+            } catch (Exception e) {
+                btn = new JButton(MyFarmModel.TOOLLIST.get(i).getName());
+            }
 
+            btn.setBackground(Color.decode("#EEEEEE"));
             btn.setActionCommand("TOOL:" + Integer.toString(i));
             this.btnlistTools.add(btn);
             toolPanel.add(this.btnlistTools.get(i));
