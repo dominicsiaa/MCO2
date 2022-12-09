@@ -171,7 +171,7 @@ public class MyFarmView extends JFrame {
                 BorderFactory.createMatteBorder(0, 15, 80, 15, Color.decode("#813b00"))));
 
         JLabel lblTool = new JLabel("Tools");
-        lblTool.setFont(new Font("Verdana", Font.BOLD, 35));
+        lblTool.setFont(new Font("Verdana", Font.BOLD, 30));
         lblTool.setHorizontalAlignment(JLabel.CENTER);
         toolPanel.add(lblTool);
 
@@ -295,7 +295,7 @@ public class MyFarmView extends JFrame {
 
                 JButton btn;
                 try {
-                    btn = new JButton(new ImageIcon(getClass().getResource("resources/" + MyFarmModel.CROPLIST.get(i*3+j).getName() + ".png")));
+                    btn = new JButton(new ImageIcon(getClass().getResource("resources/" + MyFarmModel.CROPLIST.get(i*3+j).getName() + "Icon.png")));
                 } catch (Exception e) {
                     btn = new JButton(MyFarmModel.CROPLIST.get(i*3+j).getName());
                 }
