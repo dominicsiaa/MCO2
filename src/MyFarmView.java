@@ -1,10 +1,14 @@
 import javax.swing.*;
+import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
@@ -50,7 +54,7 @@ public class MyFarmView extends JFrame {
 
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.mainFrame.setLayout(new BorderLayout());
-        
+
         /*
         Toolkit tk=Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
@@ -97,10 +101,12 @@ public class MyFarmView extends JFrame {
     private void initializeGameScreen(String name) {
 
         //North - farmer info
+        ImageIcon TopTexture = new ImageIcon(getClass().getResource("TopTexture.png"));
+
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
-        topPanel.setBackground(Color.ORANGE);
-        topPanel.setBorder(new EmptyBorder(5,5,5,5));
+        topPanel.setBackground((Color.decode("#a85812")));
+        topPanel.setBorder(BorderFactory.createMatteBorder(20, 20, 20, 20, TopTexture));
         topPanel.setPreferredSize(new Dimension(0, 200));
 
         //North-West - farmer info
@@ -121,7 +127,7 @@ public class MyFarmView extends JFrame {
 
         //North-East - actions
         JPanel actionsPanel = new JPanel();
-        actionsPanel.setLayout(new GridLayout(2,1));
+        actionsPanel.setLayout(new FlowLayout());
         actionsPanel.setBackground(new Color(0,0,0,0));
 
         lblRank.setFont(new Font("Verdana", Font.BOLD, 25));
@@ -155,7 +161,7 @@ public class MyFarmView extends JFrame {
 
         for(int i = 0; i < MyFarmModel.TOOLLIST.size(); i++) {
             JButton btn = new JButton(MyFarmModel.TOOLLIST.get(i).getName());
-            
+
             btn.setActionCommand("TOOL:" + Integer.toString(i));
             this.btnlistTools.add(btn);
             toolPanel.add(this.btnlistTools.get(i));
@@ -166,16 +172,18 @@ public class MyFarmView extends JFrame {
         //Center - lot
         JPanel farmPanel = new JPanel();
         farmPanel.setLayout(new BorderLayout());
-        farmPanel.setBackground(Color.GREEN);
+        farmPanel.setBackground(Color.decode("#44a318"));
 
         this.lblConsole = new JLabel("");
         this.lblConsole.setForeground(Color.RED);
         farmPanel.add(lblConsole, BorderLayout.NORTH);
-        
+
+        ImageIcon PlotTexture = new ImageIcon(getClass().getResource("PlotTexture.png"));
+
         JPanel lotPanel = new JPanel();
         lotPanel.setLayout(new GridLayout(5,10));
-        lotPanel.setBorder(new EmptyBorder(40,15,40,15));
-        lotPanel.setBackground(Color.GREEN);
+        lotPanel.setBackground(Color.decode("#44a318"));
+        lotPanel.setBorder(BorderFactory.createMatteBorder(20, 20, 20, 20, PlotTexture));
 
         for(int i = 0; i < 50; i++) {
             JButton btn = new JButton(Integer.toString(i));
@@ -240,11 +248,13 @@ public class MyFarmView extends JFrame {
         infoPanel.add(tileInfoPanel, BorderLayout.CENTER);
 
         //East-South - seed info
+
+        Icon SeedTexture = new ImageIcon(getClass().getResource("SeedTexture.png"));
         JPanel seedPanel = new JPanel();
         seedPanel.setLayout(new GridLayout(3,3));
         seedPanel.setBackground(Color.decode("#964B00"));
         seedPanel.setPreferredSize(new Dimension(300, 300));
-        seedPanel.setBorder(new EmptyBorder(50,60,50,60));
+        seedPanel.setBorder(BorderFactory.createMatteBorder(50, 60, 50, 60, SeedTexture));
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
@@ -394,4 +404,5 @@ public class MyFarmView extends JFrame {
     public void sendConsoleMessage(String message) {
         this.lblConsole.setText(message);
     }
+
 }
