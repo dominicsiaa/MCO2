@@ -129,29 +129,28 @@ public class Tile {
 
     /**
      * This method advances the day
+     * @return true if the crop has withered, false otherwise
      */
-    public void advanceDay() {
+    public boolean advanceDay() {
         if (this.cropPlanted != null) {
             this.daysPast++;
 
-            // Check if crop is harvestable
-            //TODO: Change print statements to gui in MCO2
             if (this.daysPast == this.cropPlanted.getHarvestTime()) {
                 if(this.timesWatered >= this.cropPlanted.getWaterNeeds() && this.timesFertilized >= this.cropPlanted.getFertilizerNeeds()) {
                     this.isHarvestable = true;
-                    System.out.println("A crop is ready to harvest!");
                 } else {
                     this.clearTile();
                     this.hasWitheredCrop = true;
-                    System.out.println("A crop has withered!");
+                    return true;
                 }
             } 
             else if (this.daysPast > this.cropPlanted.getHarvestTime()) {
                 this.clearTile();
                 this.hasWitheredCrop = true;
-                System.out.println("A crop has withered!");
+                return true;
             }
         }
+        return false;
     }
 
     /**

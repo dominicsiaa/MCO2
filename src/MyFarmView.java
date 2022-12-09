@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.event.*;
 
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class MyFarmView extends JFrame {
 
@@ -15,8 +16,8 @@ public class MyFarmView extends JFrame {
 
     //misc
     private JLabel lblConsole;
-    private JButton btnRankUp;
-    private JButton btnAdvanceDay;
+    private JButton btnRankUp = new JButton();
+    private JButton btnAdvanceDay = new JButton();
 
     //farmer info
     private JLabel lblName = new JLabel();
@@ -25,6 +26,7 @@ public class MyFarmView extends JFrame {
     private JLabel lblLevel = new JLabel();
     private JLabel lblRank = new JLabel();
     private JLabel lblDay = new JLabel();
+    private JButton btnHarvest = new JButton();
 
     //tools
     private ArrayList<JButton> btnlistTools = new ArrayList<JButton>();
@@ -124,13 +126,15 @@ public class MyFarmView extends JFrame {
 
         lblRank.setFont(new Font("Verdana", Font.BOLD, 25));
         lblDay.setFont(new Font("Verdana", Font.BOLD, 25));
-
+        
         actionsPanel.add(this.lblRank);
-        this.btnRankUp = new JButton("Rank Up!");
+        this.btnRankUp = new JButton("Rank Up! (200 Coins)");
+        this.btnRankUp.setActionCommand("RANKUP:1");
         actionsPanel.add(this.btnRankUp);
 
         actionsPanel.add(this.lblDay);
         this.btnAdvanceDay = new JButton("Advance Day");
+        this.btnAdvanceDay.setActionCommand("Advance Day");
         actionsPanel.add(this.btnAdvanceDay);
 
         topPanel.add(farmerInfoPanel, BorderLayout.WEST);
@@ -225,6 +229,14 @@ public class MyFarmView extends JFrame {
         c.gridx = 1;
         tileInfoPanel.add(this.lblTileTimesFertilized, c);
 
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 2;
+        this.btnHarvest = new JButton("Harvest");
+        this.btnHarvest.setActionCommand("Harvest");
+        this.btnHarvest.setVisible(false);
+        tileInfoPanel.add(this.btnHarvest, c);
+
         infoPanel.add(tileInfoPanel, BorderLayout.CENTER);
 
         //East-South - seed info
@@ -273,16 +285,18 @@ public class MyFarmView extends JFrame {
      */
     public void updateFarmerInfo(double objectcoins, int level, double exp) {
         this.mainFrame.repaint();
-        this.lblCoins.setText("Objectcoins: " + Double.toString(objectcoins));
+        this.lblCoins.setText("Objectcoins: " + (new DecimalFormat("0.00")).format(objectcoins));
         this.lblLevel.setText("Level: " + Integer.toString(level));
-        this.lblExp.setText("Exp: "+ Double.toString(exp) + " / 100");
+        this.lblExp.setText("Exp: "+ (new DecimalFormat("0.00")).format(exp) + " / 100");
     }
 
     public void updateFarmerRank(String type) {
+        this.mainFrame.repaint();
         this.lblRank.setText("Rank: " + type);
     }
 
     public void updateDay(int day) {
+        this.mainFrame.repaint();
         this.lblDay.setText("Day " + Integer.toString(day));
     }
 
@@ -296,21 +310,28 @@ public class MyFarmView extends JFrame {
         }
     }
 
-    public void updateTileInfo(int tileNumber, Tile tile) {
+    public void updateTileInfoDefault(int tileNumber, Tile tile) {
         this.lblTileNumber.setText("Tile (" + Integer.toString(tileNumber/10+1) + "," + Integer.toString(tileNumber%10+1) + ")");
         this.lblTileDisplay.setText(tile.toString());
 
-        if(tile.getStatus() == Tile.ISPLANTED || tile.getStatus() == Tile.ISHARVESTABLE) {
-            this.lblTileCropName.setText("Crop: " + tile.getCropPlanted().getName());
-            this.lblTileDaysPast.setText("Days Past: " + Integer.toString(tile.getDaysPast()));
-            this.lblTileTimesWatered.setText("Times Watered: " + Integer.toString(tile.getTimesWatered()));
-            this.lblTileTimesFertilized.setText("Times Fertilized: " + Integer.toString(tile.getTimesFertilized()));
-        } else {
-            this.lblTileCropName.setText("");
-            this.lblTileDaysPast.setText("");
-            this.lblTileTimesWatered.setText("");
-            this.lblTileTimesFertilized.setText("");
-        }
+        this.lblTileCropName.setText("");
+        this.lblTileDaysPast.setText("");
+        this.lblTileTimesWatered.setText("");
+        this.lblTileTimesFertilized.setText("");
+        this.btnHarvest.setVisible(false);
+    }
+
+    public void updateTileInfoPlanted(int tileNumber, Tile tile) {
+        this.updateTileInfoDefault(tileNumber, tile);
+        this.lblTileCropName.setText("Crop: " + tile.getCropPlanted().getName());
+        this.lblTileDaysPast.setText("Days Past: " + Integer.toString(tile.getDaysPast()));
+        this.lblTileTimesWatered.setText("Times Watered: " + Integer.toString(tile.getTimesWatered()));
+        this.lblTileTimesFertilized.setText("Times Fertilized: " + Integer.toString(tile.getTimesFertilized()));
+    }
+
+    public void updateTileInfoHarvestable(int tileNumber, Tile tile) {
+        this.updateTileInfoPlanted(tileNumber, tile);
+        this.btnHarvest.setVisible(true);
     }
 
     /*
@@ -318,7 +339,10 @@ public class MyFarmView extends JFrame {
      */
 
     public void setActionListener(ActionListener listener) {
-        btnRun.addActionListener(listener);
+        this.btnRun.addActionListener(listener);
+        this.btnRankUp.addActionListener(listener);
+        this.btnAdvanceDay.addActionListener(listener);
+        this.btnHarvest.addActionListener(listener);
 
         for(JButton btn : this.btnlistPlot) {
             btn.addActionListener(listener);
@@ -353,6 +377,18 @@ public class MyFarmView extends JFrame {
     public void setTileUnselected(int n) {
         this.btnlistPlot.get(n).setBackground(Color.LIGHT_GRAY);
         System.out.println("Tile " + n + " unselected");
+    }
+
+    public void setBtnRankUpText(String text) {
+        this.btnRankUp.setText(text);
+    }
+
+    public void setBtnRankUpActionCommand(String text) {
+        this.btnRankUp.setActionCommand(text);
+    }
+
+    public void setBtnRankUpEnabled(boolean enabled) {
+        this.btnRankUp.setEnabled(enabled);
     }
 
     public void sendConsoleMessage(String message) {

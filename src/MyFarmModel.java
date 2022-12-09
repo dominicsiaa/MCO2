@@ -54,16 +54,21 @@ public class MyFarmModel {
 
     /**
      * This method advances the day and checks if the game is over.
-     * @return false if the game is no longer running, true otherwise
+     * @return true if a crop has withered, false otherwise
      */
-    private boolean advanceDay() {
+    public boolean advanceDay() {
         this.day++;
+        boolean withered = false;
 
         //Advances day for each tile
         boolean lotHasCrops = false;
         for(Tile lotRow[] : this.lot) {
             for(Tile tile : lotRow) {
-                tile.advanceDay();
+                if(!withered) {
+                    withered = tile.advanceDay();
+                } else {
+                    tile.advanceDay();
+                }
 
                 //Checks if at least one tile has crop
                 if(tile.getStatus() == Tile.ISPLANTED || tile.getStatus() == Tile.ISHARVESTABLE) {
@@ -80,10 +85,12 @@ public class MyFarmModel {
 
         //Checks if game is over
         if(!lotHasCrops && (this.farmer.getObjectcoins() < cheapestCropPrice + this.farmer.getType().getSeedCostReduction())) {
-            return false;
+            this.isRunning = false;
         } else {
-            return true;
+            this.isRunning = true;
         }
+
+        return withered;
     }
 
     /*
@@ -96,7 +103,7 @@ public class MyFarmModel {
      * This method runs the game.
      */
     public void run(String name) {
-        this.isRunning = true;
+        //this.isRunning = true;
         Scanner sc = new Scanner(System.in);
 
         //Create farmer
@@ -113,7 +120,7 @@ public class MyFarmModel {
         try {
 
             //Read rock input from file
-            File rocks = new File("rockinput/RockInput2.txt");
+            File rocks = new File("rockinput/RockInput.txt");
             Scanner rockReader = new Scanner(rocks);
             while (rockReader.hasNextLine()) {
                 for (int i = 0; i < ROWS; i++) {
@@ -355,5 +362,13 @@ public class MyFarmModel {
 
     public Tile[][] getLot() {
         return this.lot;
+    }
+
+    public int getDay() {
+        return this.day;
+    }
+
+    public boolean getIsRunning() {
+        return this.isRunning;
     }
 }
