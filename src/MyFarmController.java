@@ -23,37 +23,29 @@ public class MyFarmController implements ActionListener {
         String command = e.getActionCommand();
         System.out.println("Command: " + command);
 
-        switch(command) {
-            case "Start":
-                this.farm.run(gui.getTfName());
-                this.gui.loadGameScreen(this.farm.getFarmerName(), this.farm.getFarmerObjectcoins(), this.farm.getFarmerLevel(), this.farm.getFarmerExp(), this.farm.getLot());
-                this.gui.setActionListener(this);
-                break;
-            case "Plow":
-                this.selectedAction = "Plow";
-                break;
-            case "Watering Can":
-                this.selectedAction = "Watering Can";
-                break;
-            case "Fertilizer":
-                this.selectedAction = "Fertilizer";
-                break;
-            case "Pickaxe":
-                this.selectedAction = "Pickaxe";
-                break;
-            case "Shovel":
-                this.selectedAction = "Shovel";
-                break;
-            default:
-                try {
-                    int n = Integer.parseInt(command);
-                    System.out.println("Tile " + n + " clicked");
-                    this.selectedTile = n;
-                    gui.updateTileInfo(n, this.farm.getTile(n));
-                } catch (NumberFormatException ex) {
+        if(command.equals("Start")) {
+            this.farm.run(gui.getTfName());
+            this.gui.loadGameScreen(this.farm.getFarmerName(), this.farm.getFarmerObjectcoins(), this.farm.getFarmerLevel(), this.farm.getFarmerExp(), this.farm.getLot());
+            this.gui.setActionListener(this);
+        } else {
+            String[] args = command.split(":");
+            String action = args[0];
+
+            try {
+                int parameter = Integer.parseInt(args[1]);
+                if(action.equals("TILE")) {
+                    System.out.println("Tile " + parameter + " clicked");
+                    this.selectedTile = parameter;
+                    gui.updateTileInfo(parameter, this.farm.getTile(parameter));
                     
+                } else if(action.equals("TOOL")) {
+                    System.out.println("Tool " + parameter + " clicked, " + MyFarmModel.TOOLLIST.get(parameter).getName());
                 }
-                break;
+
+            } catch (NumberFormatException ex) {
+            
+            }
+            
         }
     }
 }

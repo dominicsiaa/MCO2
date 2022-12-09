@@ -126,7 +126,7 @@ public class MyFarmView extends JFrame {
         for(int i = 0; i < MyFarmModel.TOOLLIST.size(); i++) {
             JButton btn = new JButton(MyFarmModel.TOOLLIST.get(i).getName());
             
-            btn.setActionCommand(MyFarmModel.TOOLLIST.get(i).getName());
+            btn.setActionCommand("TOOL:" + Integer.toString(i));
             this.btnlistTools.add(btn);
             toolPanel.add(this.btnlistTools.get(i));
         }
@@ -140,7 +140,7 @@ public class MyFarmView extends JFrame {
 
         for(int i = 0; i < 50; i++) {
             this.btnlistPlot.add(new JButton(Integer.toString(i)));
-            this.btnlistPlot.get(i).setActionCommand(Integer.toString(i));
+            this.btnlistPlot.get(i).setActionCommand("TILE:" + Integer.toString(i));
             lotPanel.add(btnlistPlot.get(i));
         }
 
