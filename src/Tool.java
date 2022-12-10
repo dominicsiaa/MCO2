@@ -44,6 +44,10 @@ public class Tool {
         return this.expGain;
     }
 
+    /**
+     * This method returns the name of the tool
+     * @return name
+     */
     @Override
     public String toString(){
         return this.name;

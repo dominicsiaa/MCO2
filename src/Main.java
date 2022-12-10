@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Create a new Farm
+
+        // Create the MVC architecture for MyFarm
         MyFarmView farmView = new MyFarmView();
         MyFarmModel farmModel = new MyFarmModel();
         

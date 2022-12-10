@@ -8,6 +8,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
+/**
+ * Represents the view/gui of the application
+ */
 public class MyFarmView extends JFrame {
 
     private JFrame mainFrame;
@@ -55,6 +58,10 @@ public class MyFarmView extends JFrame {
     private JLabel lblTileTimesFertilized = new JLabel();
     private JLabel lblTileDaysPast = new JLabel();
 
+    /**
+     * Constructor for MyFarmView
+     * Initializes and sets up the mainFrame
+     */
     public MyFarmView() {
         this.mainFrame = new JFrame("MyFarm");
 
@@ -74,6 +81,9 @@ public class MyFarmView extends JFrame {
     }
 
 
+    /**
+     * Initializes the intro screen
+     */
     private void initializeIntroScreen() {
 
         //Intro panel to ask for name
@@ -103,7 +113,10 @@ public class MyFarmView extends JFrame {
         this.mainFrame.add(introPanel, BorderLayout.CENTER);
     }
 
-
+    /**
+     * Initializes the game screen
+     * @param name the name of the farmer
+     */
     private void initializeGameScreen(String name) {
 
         //North - farmer info
@@ -321,6 +334,9 @@ public class MyFarmView extends JFrame {
         this.mainFrame.add(infoPanel, BorderLayout.EAST);
     }
 
+    /**
+     * Initializes the end screen
+     */
     public void initializeEndScreen() {
         JPanel outroPanel = new JPanel();
 
@@ -353,6 +369,14 @@ public class MyFarmView extends JFrame {
      * LOAD SCREEN FUNCTIONS
      */
 
+    /**
+     * Loads in the main menu screen
+     * @param name          the name of the farmer
+     * @param objectcoins   the amount of coins the farmer has
+     * @param level         the level of the farmer
+     * @param exp           the amount of experience the farmer has
+     * @param lot           the plot of land the farmer has
+     */
     public void loadGameScreen(String name, double objectcoins, int level, double exp, Tile[][] lot) {
         this.mainFrame.getContentPane().removeAll();
         this.mainFrame.repaint();
@@ -366,6 +390,9 @@ public class MyFarmView extends JFrame {
         this.mainFrame.revalidate();
     }
 
+    /**
+     * Loads in the end screen
+     */
     public void loadEndScreen() {
         this.mainFrame.getContentPane().removeAll();
         this.mainFrame.repaint();
@@ -378,6 +405,13 @@ public class MyFarmView extends JFrame {
     /*
      * UPDATE INFO FUNCTIONS
      */
+
+    /**
+     * Updates the farmer info in the GUI north panel
+     * @param objectcoins   the amount of coins the farmer has
+     * @param level         the level of the farmer
+     * @param exp           the amount of experience the farmer has
+     */
     public void updateFarmerInfo(double objectcoins, int level, double exp) {
         this.mainFrame.repaint();
         this.lblCoins.setText("Objectcoins: " + (new DecimalFormat("0.00")).format(objectcoins));
@@ -385,6 +419,10 @@ public class MyFarmView extends JFrame {
         this.lblExp.setText("Exp: "+ (new DecimalFormat("0.00")).format(exp) + " / 100");
     }
 
+    /**
+     * Updates the farmer rank in the GUI north panel
+     * @param type the type of farmer
+     */
     public void updateFarmerRank(FarmerType type) {
         this.mainFrame.repaint();
         this.lblRank.setText("Rank: " + type);
@@ -395,11 +433,19 @@ public class MyFarmView extends JFrame {
 
     }
 
+    /**
+     * Updates the day in the GUI north panel
+     * @param day the day
+     */
     public void updateDay(int day) {
         this.mainFrame.repaint();
         this.lblDay.setText("Day " + Integer.toString(day));
     }
 
+    /**
+     * Updates the plot in the GUI center panel
+     * @param lot the plot of land
+     */
     public void updateTile(int n, Tile tile) {
         String strStatus = tile.toString();
         int intStatus = tile.getStatus();
@@ -418,12 +464,21 @@ public class MyFarmView extends JFrame {
         }
     }
 
+    /**
+     * Updates the plot in the GUI center panel
+     * @param lot the plot of land
+     */
     public void updatePlot(Tile[][] lot) {
         for(int i = 0; i < 50; i++) {
             this.updateTile(i, lot[i/10][i%10]);
         }
     }
 
+    /**
+     * Updates the tile info in the GUI east panel
+     * @param tileNumber    the tile number
+     * @param tile          the tile
+     */
     public void updateTileInfoDefault(int tileNumber, Tile tile) {
         this.lblTileNumber.setText("Tile (" + Integer.toString(tileNumber/10+1) + "," + Integer.toString(tileNumber%10+1) + ")");
         this.lblTileDisplay.setText(tile.toString());
@@ -436,6 +491,11 @@ public class MyFarmView extends JFrame {
         this.btnHarvest.setVisible(false);
     }
 
+    /**
+     * Updates the tile info in the GUI east panel for a planted tile
+     * @param tileNumber    the tile number
+     * @param tile          the tile
+     */
     public void updateTileInfoPlanted(int tileNumber, Tile tile) {
         this.updateTileInfoDefault(tileNumber, tile);
         this.lblTileCropName.setText("Crop: " + tile.getCropPlanted().getName());
@@ -444,6 +504,11 @@ public class MyFarmView extends JFrame {
         this.lblTileTimesFertilized.setText("Times Fertilized: " + Integer.toString(tile.getTimesFertilized()));
     }
 
+    /**
+     * Updates the tile info in the GUI east panel for a harvestable tile
+     * @param tileNumber    the tile number
+     * @param tile          the tile
+     */
     public void updateTileInfoHarvestable(int tileNumber, Tile tile) {
         this.updateTileInfoPlanted(tileNumber, tile);
         this.btnHarvest.setVisible(true);
@@ -453,6 +518,10 @@ public class MyFarmView extends JFrame {
      * ACTIONLISTENER/UPDATE STUFF
      */
 
+    /**
+     * Sets action listener for all relevant buttons
+     * @param listener      the action listener
+     */
     public void setActionListener(ActionListener listener) {
         this.btnRun.addActionListener(listener);
         this.btnExitGame.addActionListener(listener);
@@ -476,10 +545,16 @@ public class MyFarmView extends JFrame {
         }
     }
 
+    /**
+     * Closes the main window
+     */
     public void closeWindow() {
         this.mainFrame.dispose();
     }
 
+    /**
+     * Shows the info popup from the info button
+     */
     public void showInfoPopup() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -525,6 +600,10 @@ public class MyFarmView extends JFrame {
      * GETTERS
      */
 
+    /**
+     * Gets the name from the name text field
+     * @return     the name
+     */
     public String getTfName() {
         return this.tfName.getText();
     }
@@ -533,34 +612,62 @@ public class MyFarmView extends JFrame {
      * SETTERS
      */
 
+    /**
+     * Sets the ui to reflect the tile currently selected by the user
+     * @param n    the tile number
+     */
     public void setTileSelected(int n) {
         this.btnlistPlot.get(n).setBackground(Color.GRAY);
         this.btnlistPlot.get(n).setBorder(BorderFactory.createLineBorder(Color.yellow, 5));;
         System.out.println("Tile " + n + " selected");
     }
 
+    /**
+     * Sets the ui to reflect the tile currently unselected by the user
+     * @param n    the tile number
+     */
     public void setTileUnselected(int n) {
         this.btnlistPlot.get(n).setBackground(Color.LIGHT_GRAY);
         this.btnlistPlot.get(n).setBorder(BorderFactory.createLineBorder(Color.gray, 1));
         System.out.println("Tile " + n + " unselected");
     }
 
+    /**
+     * Sets the rank up button text to show coins and level requirement
+     * @param text   the text to set the button to
+     */
     public void setBtnRankUpText(String text) {
         this.btnRankUp.setText(text);
     }
 
+    /**
+     * Sets the action command for the rank up button
+     * @param text   the text to set the button to
+     */
     public void setBtnRankUpActionCommand(String text) {
         this.btnRankUp.setActionCommand(text);
     }
 
+    /**
+     * Sets the rank up button enabled or disabled
+     * @param enabled   true if enabled, false if disabled
+     */
     public void setBtnRankUpEnabled(boolean enabled) {
         this.btnRankUp.setEnabled(enabled);
     }
 
+    /**
+     * Sets the console message
+     * @param text   the text to set the console message label to
+     */
     public void sendConsoleMessage(String message) {
         this.lblConsole.setText("   >   [  " + message + "  ]");
     }
 
+    /**
+     * Enable or disable the seed buttons
+     * @param enabled   true if enabled, false if disabled
+     */
     public void setBtnSeedListEnabled(boolean enabled) {
         for(JButton btn : this.btnlistSeeds) {
             btn.setEnabled(enabled);

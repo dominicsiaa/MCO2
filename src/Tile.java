@@ -205,6 +205,10 @@ public class Tile {
         }
     }
 
+    /**
+     * This method returns the string version of the status of the crop
+     * @return status
+     */
     @Override
     public String toString() {
         String status = "Error";

@@ -17,13 +17,13 @@ public class FarmerType {
 
     /**
      * This constructor initializes a farmer type object
-     * @param name
-     * @param levelRequirement
-     * @param bonusEarningsPerProduce
-     * @param seedCostReduction
-     * @param waterBonusLimitIncrease
-     * @param fertilizerBonusLimitIncrease
-     * @param registrationFee
+     * @param name                          name of the farmer type
+     * @param levelRequirement              level requirement to reach the rank
+     * @param bonusEarningsPerProduce       bonus earnings per produce
+     * @param seedCostReduction             seed cost reduction
+     * @param waterBonusLimitIncrease       water bonus limit increase
+     * @param fertilizerBonusLimitIncrease  fertilizer bonus limit increase
+     * @param registrationFee               registration fee needed to register as the farmer type
      */
     public FarmerType(String name, int levelRequirement, int bonusEarningsPerProduce, int seedCostReduction, int waterBonusLimitIncrease, int fertilizerBonusLimitIncrease, int registrationFee) {
         this.name = name;
@@ -37,7 +37,7 @@ public class FarmerType {
 
     /**
      * This method returns the farmer type name
-     * @return name
+     * @return name of the farmer type
      */
     public String getName() {
         return this.name;
@@ -45,7 +45,7 @@ public class FarmerType {
 
     /**
      * This method returns the level requirement to reach the rank
-     * @return levelRequirement
+     * @return level requirement of the farmer type
      */
     public int getLevelRequirement() {
         return this.levelRequirement;
@@ -53,7 +53,7 @@ public class FarmerType {
 
     /**
      * This method returns the bonus earnings per produce
-     * @return bonusEarningsPerProduce
+     * @return bonus earnings per produce of the farmer type
      */
     public int getBonusEarningsPerProduce() {
         return this.bonusEarningsPerProduce;
@@ -61,7 +61,7 @@ public class FarmerType {
 
     /**
      * This method returns the seed cost reduction
-     * @return seedCostReduction
+     * @return seed cost reduction of the farmer type
      */
     public int getSeedCostReduction() {
         return this.seedCostReduction;
@@ -69,7 +69,7 @@ public class FarmerType {
 
     /**
      * This method returns the water bonus limit increase
-     * @return waterBonusLimitIncrease
+     * @return water bonus limit increase of the farmer type
      */
     public int getWaterBonusLimitIncrease() {
         return this.waterBonusLimitIncrease;
@@ -77,7 +77,7 @@ public class FarmerType {
 
     /**
      * This method returns the fertilizer bonus limit increase
-     * @return fertilizerBonusLimitIncrease
+     * @return fertilizer bonus limit increase of the farmer type
      */
     public int getFertilizerBonusLimitIncrease() {
         return this.fertilizerBonusLimitIncrease;
@@ -85,7 +85,7 @@ public class FarmerType {
 
     /**
      * This method returns the registration fee needed to register as the farmer type
-     * @return registrationFee
+     * @return registration fee of the farmer type
      */
     public int getRegistrationFee() {
         return this.registrationFee;
@@ -93,7 +93,7 @@ public class FarmerType {
 
     /**
      * This method returns the farmer type name
-     * @return name
+     * @return name of the farmer type
      */
     @Override
     public String toString(){

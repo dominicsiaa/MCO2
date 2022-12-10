@@ -20,15 +20,15 @@ public abstract class Crop {
 
     /**
      * This constructor initializes a crop object
-     * @param name
-     * @param harvestTime
-     * @param waterNeeds
-     * @param fertilizerNeeds
-     * @param minProductsProduced
-     * @param maxProductsProduced
-     * @param seedCost
-     * @param sellingPrice
-     * @param expGain
+     * @param name                  name of the crop
+     * @param harvestTime           harvest time of the crop
+     * @param waterNeeds            water needs of the crop
+     * @param fertilizerNeeds       fertilizer needs of the crop
+     * @param minProductsProduced   minimum products produced of the crop
+     * @param maxProductsProduced   maximum products produced of the crop
+     * @param seedCost              seed cost of the crop
+     * @param sellingPrice          selling price of the crop
+     * @param expGain               experience gained from harvesting the crop
      */
     public Crop(String name,
                 int harvestTime, 
@@ -68,7 +68,7 @@ public abstract class Crop {
 
     /**
      * This method returns the harvest time of the crop
-     * @return harvestTime
+     * @return harvest time of the crop
      */
     public int getHarvestTime() {
         return this.harvestTime;
@@ -76,7 +76,7 @@ public abstract class Crop {
 
     /**
      * This method returns the water needs of the crop
-     * @return waterNeeds
+     * @return water needs of the crop
      */
     public int getWaterNeeds() {
         return this.waterNeeds;
@@ -84,7 +84,7 @@ public abstract class Crop {
 
     /**
      * This method returns the water needs bonus limit of the crop
-     * @return waterNeedsBonusLimit
+     * @return water needs bonus limit of the crop
      */
     public int getWaterNeedsBonusLimit() {
         return this.waterNeedsBonusLimit;
@@ -92,7 +92,7 @@ public abstract class Crop {
 
     /**
      * This method returns the fertilizer needs of the crop
-     * @return fertilizerNeeds
+     * @return fertilizer needs of the crop
      */
     public int getFertilizerNeeds() {
         return this.fertilizerNeeds;
@@ -100,7 +100,7 @@ public abstract class Crop {
 
     /**
      * This method returns the fertilizer needs bonus limit of the crop
-     * @return fertilizerNeedsBonusLimit
+     * @return fertilizer needs bonus limit of the crop
      */
     public int getFertilizerNeedsBonusLimit() {
         return this.fertilizerNeedsBonusLimit;
@@ -108,7 +108,7 @@ public abstract class Crop {
 
     /**
      * This method returns the minimum products produced of the crop
-     * @return minProductsProduced
+     * @return mininimum number of possible products produced
      */
     public int getMinProductsProduced() {
         return this.minProductsProduced;
@@ -116,7 +116,7 @@ public abstract class Crop {
 
     /**
      * This method returns the maximum products produced of the crop
-     * @return maxProductsProduced
+     * @return maximum number of possible products produced
      */
     public int getMaxProductsProduced() {
         return this.maxProductsProduced;
@@ -124,7 +124,7 @@ public abstract class Crop {
 
     /**
      * This method returns the seed cost of the crop
-     * @return seedCost
+     * @return seed cost of the crop
      */
     public int getSeedCost() {
         return this.seedCost;
@@ -132,7 +132,7 @@ public abstract class Crop {
 
     /**
      * This method returns the selling price of the crop
-     * @return sellingPrice
+     * @return selling price of the crop
      */
     public int getSellingPrice() {
         return this.sellingPrice;
@@ -140,7 +140,7 @@ public abstract class Crop {
 
     /**
      * This method returns the exp gain of the crop
-     * @return expGain
+     * @return exp gain of the crop
      */
     public double getExpGain() {
         return this.expGain;

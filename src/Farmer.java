@@ -12,7 +12,7 @@ public class Farmer {
 
     /**
      * This constructor initializes a farmer object
-     * @param name
+     * @param name name of the farmer
      */
     public Farmer(String name) {
         if(name.equals("")) {
@@ -24,7 +24,7 @@ public class Farmer {
 
     /**
      * This method adds objectcoins to the farmer's objectcoins
-     * @param amount
+     * @param amount amount of objectcoins to add
      */
     public void gainCoins(double amount){
         this.objectcoins += amount;
@@ -32,7 +32,7 @@ public class Farmer {
 
     /**
      * This method subtracts objectcoins from the farmer's objectcoins
-     * @param amount
+     * @param amount amount of objectcoins to subtract
      */
     public void loseCoins(double amount){
         this.objectcoins -= amount;
@@ -40,7 +40,7 @@ public class Farmer {
 
     /**
      * This method adds experience points to the farmer's experience points
-     * @param amount
+     * @param amount amount of experience points to add
      */
     public void gainExp(double amount){
         this.exp += amount;
@@ -52,7 +52,7 @@ public class Farmer {
 
     /**
      * This method allows a farmer to register if they meet the minimum requirements
-     * @param farmerType
+     * @param farmerType type of farmer to register as
      * @return true if the farmer meets the minimum requirements
      */
     public boolean register(FarmerType farmerType) {
@@ -70,7 +70,7 @@ public class Farmer {
 
     /**
      * This method allows a farmer to use a tool
-     * @param tool
+     * @param tool tool to use
      * @return true if the farmer has enough objectcoins to use the tool
      */
     public boolean useTool (Tool tool, Tile tile)
@@ -113,8 +113,8 @@ public class Farmer {
 
     /**
      * This method allows a farmer to plant a crop
-     * @param crop
-     * @param tile
+     * @param crop crop to plant
+     * @param tile tile to plant the crop on
      * @return true if the farmer successfully plants the crop
      */
     public boolean plantCrop(Crop crop, Tile tile) {
@@ -129,7 +129,7 @@ public class Farmer {
 
     /**
      * This method allows a farmer to harvest a crop
-     * @param tile
+     * @param tile tile to harvest
      * @return the number of crops produced
      */
     public int harvestTile(Tile tile) {
@@ -162,7 +162,7 @@ public class Farmer {
 
     /**
      * This method gets the farmer's name
-     * @return name
+     * @return name of the farmer
      */
     public String getName() {
         return this.name;
@@ -170,7 +170,7 @@ public class Farmer {
 
     /**
      * This method gets the farmer's objectcoins
-     * @return objectcoins
+     * @return objectcoins of the farmer
      */
     public double getObjectcoins() {
         return this.objectcoins;
@@ -178,7 +178,7 @@ public class Farmer {
 
     /**
      * This method gets the farmer's level
-     * @return level
+     * @return level of the farmer
      */
     public int getLevel() {
         return this.level;
@@ -186,7 +186,7 @@ public class Farmer {
 
     /**
      * This method gets the farmer's experience points
-     * @return exp
+     * @return exp of the farmer
      */
     public double getExp() {
         return this.exp;
@@ -194,7 +194,7 @@ public class Farmer {
 
     /**
      * This method gets the farmer's type
-     * @return type
+     * @return farmer type of the farmer
      */
     public FarmerType getType() {
         return this.type;

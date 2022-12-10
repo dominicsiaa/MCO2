@@ -1,12 +1,21 @@
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
+/**
+ * Represents the controller of the application
+ */
 public class MyFarmController implements ActionListener {
     private MyFarmModel farm;
     private MyFarmView gui;
 
     private int selectedTile = 0;
 
+
+    /**
+     * This constructor initializes the controller
+     * @param farm  the model
+     * @param gui   the view
+     */
     public MyFarmController(MyFarmModel farm, MyFarmView gui) {
         this.farm = farm;
         this.gui = gui;
@@ -14,6 +23,11 @@ public class MyFarmController implements ActionListener {
         this.gui.setActionListener(this);
     }
 
+    /**
+     * Helper function for the update tile events
+     * @param tileNumber  the tile number of the tile to update
+     * @param tile        the tile object to update the gui from
+     */
     private void updateTileInfo(int tileNumber, Tile tile) {
         if(tile.getStatus() == Tile.ISHARVESTABLE) {
             this.gui.updateTileInfoHarvestable(tileNumber, tile);
@@ -31,6 +45,9 @@ public class MyFarmController implements ActionListener {
 
     }
 
+    /**
+     * Helper function for starting the game
+     */
     private void startGame() {
         this.farm.run(gui.getTfName());
         Farmer farmer = this.farm.getFarmer();
@@ -42,6 +59,10 @@ public class MyFarmController implements ActionListener {
         this.gui.sendConsoleMessage("Tile (1,1) selected");
     }
 
+    /**
+     * This method handles the action events
+     * @param e     the action event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();

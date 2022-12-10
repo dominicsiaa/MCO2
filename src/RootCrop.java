@@ -7,15 +7,15 @@
 public class RootCrop extends Crop{
     /**
      * This constructor initializes a root crop object
-     * @param name
-     * @param harvestTime
-     * @param waterNeeds
-     * @param fertilizerNeeds
-     * @param minProductsProduced
-     * @param maxProductsProduced
-     * @param seedCost
-     * @param sellingPrice
-     * @param expGain
+     * @param name                  name of the crop
+     * @param harvestTime           harvest time of the crop
+     * @param waterNeeds            water needs of the crop
+     * @param fertilizerNeeds       fertilizer needs of the crop
+     * @param minProductsProduced   minimum products produced of the crop
+     * @param maxProductsProduced   maximum products produced of the crop
+     * @param seedCost              seed cost of the crop
+     * @param sellingPrice          selling price of the crop
+     * @param expGain               experience gained from harvesting the crop
      */
     public RootCrop(String name,
                     int harvestTime,
