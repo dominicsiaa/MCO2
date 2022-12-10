@@ -155,8 +155,30 @@ public class MyFarmModel {
             cheapestCropPrice = Math.min(cheapestCropPrice, crop.getSeedCost());
         }
 
+        //check if rock/withered crops fill the field
+        int nRocks = 0;
+        int nWithered = 0;
+        for(Tile[] tileRow : lot) {
+            for(Tile tile : tileRow) {
+                if(tile.getStatus() == Tile.HASROCK) {
+                    nRocks++;
+                } else if(tile.getStatus() == Tile.HASWITHERED) {
+                    nWithered++;
+                }
+            }
+        }
+
+        boolean lotCheck = true;
+        if(nRocks + nWithered == 50) {
+            if(nRocks == 50 && this.farmer.getObjectcoins() < 50) {
+                lotCheck = false;
+            } else if(this.farmer.getObjectcoins() < 7) {
+                lotCheck = false;
+            }
+        }
+
         //Checks if game is over
-        if(!lotHasCrops && (this.farmer.getObjectcoins() < cheapestCropPrice + this.farmer.getType().getSeedCostReduction())) {
+        if(!lotCheck || (!lotHasCrops && (this.farmer.getObjectcoins() < cheapestCropPrice + this.farmer.getType().getSeedCostReduction()))) {
             this.isRunning = false;
         } else {
             this.isRunning = true;

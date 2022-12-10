@@ -82,6 +82,9 @@ public class MyFarmController implements ActionListener {
             this.gui.setTileUnselected(this.selectedTile);
             this.selectedTile = 0;
 
+            this.gui.closeWindow();
+            this.gui = new MyFarmView();
+
             this.startGame();
 
         //ADVANCE DAY
