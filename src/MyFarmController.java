@@ -1,9 +1,5 @@
-import java.awt.*;
 import java.awt.event.*;
-import java.io.Console;
 import java.text.DecimalFormat;
-
-import javax.swing.event.*;
 
 public class MyFarmController implements ActionListener {
     private MyFarmModel farm;
@@ -18,7 +14,7 @@ public class MyFarmController implements ActionListener {
         this.gui.setActionListener(this);
     }
 
-    public void updateTileInfo(int tileNumber, Tile tile) {
+    private void updateTileInfo(int tileNumber, Tile tile) {
         if(tile.getStatus() == Tile.ISHARVESTABLE) {
             this.gui.updateTileInfoHarvestable(tileNumber, tile);
         } else if(tile.getStatus() == Tile.ISPLANTED) {
@@ -28,6 +24,17 @@ public class MyFarmController implements ActionListener {
         }
     }
 
+    private void startGame() {
+        this.farm.run(gui.getTfName());
+        Farmer farmer = this.farm.getFarmer();
+        this.gui.loadGameScreen(farmer.getName(), farmer.getObjectcoins(), farmer.getLevel(), farmer.getExp(), this.farm.getLot());
+        this.gui.setActionListener(this);
+
+        this.gui.setTileSelected(0);
+        this.gui.updateTileInfoDefault(0, this.farm.getTile(0));
+        this.gui.sendConsoleMessage("Tile (1,1) selected");
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -35,14 +42,16 @@ public class MyFarmController implements ActionListener {
 
         //GAME START
         if (command.equals("Start")) {
-            this.farm.run(gui.getTfName());
-            Farmer farmer = this.farm.getFarmer();
-            this.gui.loadGameScreen(farmer.getName(), farmer.getObjectcoins(), farmer.getLevel(), farmer.getExp(), this.farm.getLot());
-            this.gui.setActionListener(this);
+            this.startGame();
 
-            this.gui.setTileSelected(0);
-            this.gui.updateTileInfoDefault(0, this.farm.getTile(0));
-            this.gui.sendConsoleMessage("Tile (1,1) selected");
+        //EXIT GAME
+        } else if (command.equals("Exit Game")) {
+            this.gui.closeWindow();
+
+        //RESTART GAME
+        } else if (command.equals("Restart Game")) {
+            this.farm = new MyFarmModel();
+            this.startGame();
 
         //ADVANCE DAY
         } else if (command.equals("Advance Day")) {
@@ -58,15 +67,20 @@ public class MyFarmController implements ActionListener {
             //GAME END
             if(!this.farm.getIsRunning()) {
                 this.gui.loadEndScreen();
+                this.gui.setActionListener(this);
             }
 
         //HARVEST
         } else if (command.equals("Harvest")) {
             Farmer farmer = this.farm.getFarmer();
             double initialCoins = farmer.getObjectcoins();
-            Crop crop = farmer.harvestTile(this.farm.getTile(this.selectedTile));
-            if(crop != null) {
-                this.gui.sendConsoleMessage("You have successfully harvested a " + crop + " from tile (" + Integer.toString(this.selectedTile/10+1) + "," + Integer.toString(this.selectedTile%10+1) + ") -> You have earned " + (new DecimalFormat("0.00")).format(farmer.getObjectcoins() - initialCoins) + " coins");
+            Tile tile = this.farm.getTile(this.selectedTile);
+            Crop crop = tile.getCropPlanted();
+            
+            int nCropsProduced = farmer.harvestTile(tile);
+
+            if(nCropsProduced != -1) {
+                this.gui.sendConsoleMessage("You have successfully harvested " + nCropsProduced + " " + crop + "/s from tile (" + Integer.toString(this.selectedTile/10+1) + "," + Integer.toString(this.selectedTile%10+1) + ") -> You have earned " + (new DecimalFormat("0.00")).format(farmer.getObjectcoins() - initialCoins) + " coins");
                 this.updateTileInfo(this.selectedTile, this.farm.getTile(this.selectedTile));
                 this.gui.updateFarmerInfo(farmer.getObjectcoins(), farmer.getLevel(), farmer.getExp());
                 this.gui.updatePlot(this.farm.getLot());

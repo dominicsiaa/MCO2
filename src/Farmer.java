@@ -5,8 +5,8 @@
  */
 public class Farmer {
     private String name = "Farmer";
-    private double objectcoins = 10000; //default is 100
-    private int level = 10; //default is 0
+    private double objectcoins = 100; //default is 100
+    private int level = 0; //default is 0
     private double exp = 0; //default is 0
     private FarmerType type = MyFarmModel.FARMERTYPELIST.get(0);
 
@@ -132,9 +132,9 @@ public class Farmer {
     /**
      * This method allows a farmer to harvest a crop
      * @param tile
-     * @return crop harvested
+     * @return the number of crops produced
      */
-    public Crop harvestTile(Tile tile) {
+    public int harvestTile(Tile tile) {
         if(tile.getStatus() == Tile.ISHARVESTABLE) {
             Crop harvest = tile.getCropPlanted();
             int productAmount = harvest.generateProductAmount();
@@ -151,9 +151,9 @@ public class Farmer {
             this.gainCoins(total);
             this.gainExp(harvest.getExpGain());
             tile.harvest();
-            return harvest;
+            return productAmount;
         }
-        return null;
+        return -1;
     }
 
     /**
@@ -195,17 +195,5 @@ public class Farmer {
     public FarmerType getType() {
         return this.type;
     }
-
-
-    //override tostring
-    /**
-     * This method returns a string representation of the farmer
-     * @return string representation of the farmer
-     */
-    @Override
-    public String toString(){
-        return "Farmer: " + this.name + " | Type: " + this.type.getName() + " | Coins: " + this.objectcoins + " | Level: " + this.level + " | Exp: " + this.exp;
-    }
-
 }
 

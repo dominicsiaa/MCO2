@@ -8,7 +8,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
@@ -17,6 +16,9 @@ public class MyFarmView extends JFrame {
     private JFrame mainFrame;
     private JButton btnRun;
     private JTextField tfName;
+
+    private JButton btnExitGame = new JButton();
+    private JButton btnRestartGame = new JButton();
 
     //misc
     private JLabel lblConsole;
@@ -163,7 +165,7 @@ public class MyFarmView extends JFrame {
 
         //West - tool stuff
         JPanel toolPanel = new JPanel();
-        toolPanel.setLayout(new GridLayout(6,1));
+        toolPanel.setLayout(new GridLayout(MyFarmModel.TOOLLIST.size()+1 ,1));
         toolPanel.setPreferredSize(new Dimension(150, 60));
         toolPanel.setBackground(Color.decode("#813b00"));
         toolPanel.setBorder(BorderFactory.createCompoundBorder(
@@ -299,6 +301,7 @@ public class MyFarmView extends JFrame {
                 } catch (Exception e) {
                     btn = new JButton(MyFarmModel.CROPLIST.get(i*3+j).getName());
                 }
+                btn.setBackground(Color.decode("#EEEEEE"));
 
                 btn.setActionCommand("SEED:" + Integer.toString(i*3+j));
                 this.btnlistSeeds.add(btn);
@@ -320,11 +323,20 @@ public class MyFarmView extends JFrame {
         c.insets = new Insets(5,5,5,5);
         c.gridx = 0;
         c.gridy = 0;
-        
+        c.gridwidth = 2;
         outroPanel.add(new JLabel("Unfortunately, you no longer have the means to continue"), c);
 
         c.gridy = 1;
         outroPanel.add(new JLabel("Thank you for playing our game!"), c);
+
+        c.gridy = 2;
+        c.gridwidth = 1;
+        this.btnExitGame = new JButton("Exit Game");
+        outroPanel.add(btnExitGame, c);
+
+        c.gridx = 1;
+        this.btnRestartGame = new JButton("Restart Game");
+        outroPanel.add(btnRestartGame, c);
 
         this.mainFrame.add(outroPanel, BorderLayout.CENTER);
     }
@@ -369,7 +381,7 @@ public class MyFarmView extends JFrame {
         this.mainFrame.repaint();
         this.lblRank.setText("Rank: " + type);
         this.lblBonusEarningsPerProduce.setText("Bonus Earnings: +" + type.getBonusEarningsPerProduce());
-        this.lblseedCostReduction.setText("Seed Cost: -" + type.getSeedCostReduction());
+        this.lblseedCostReduction.setText("Seed Cost: " + type.getSeedCostReduction());
         this.lblWaterBonusLimitIncrease.setText("Water Bonus Limit: +" + type.getWaterBonusLimitIncrease());
         this.lblFertilizerBonusLimitIncrease.setText("Fert. Bonus Limit: +" + type.getFertilizerBonusLimitIncrease());
 
@@ -445,6 +457,9 @@ public class MyFarmView extends JFrame {
 
     public void setActionListener(ActionListener listener) {
         this.btnRun.addActionListener(listener);
+        this.btnExitGame.addActionListener(listener);
+        this.btnRestartGame.addActionListener(listener);
+
         this.btnRankUp.addActionListener(listener);
         this.btnAdvanceDay.addActionListener(listener);
         this.btnHarvest.addActionListener(listener);
@@ -460,6 +475,10 @@ public class MyFarmView extends JFrame {
         for(JButton btn : this.btnlistSeeds) {
             btn.addActionListener(listener);
         }
+    }
+
+    public void closeWindow() {
+        this.mainFrame.dispose();
     }
 
     /*
