@@ -23,7 +23,9 @@ public abstract class Crop {
      * @param name                  name of the crop
      * @param harvestTime           harvest time of the crop
      * @param waterNeeds            water needs of the crop
+     * @param waterNeedsBonusLimit  water needs bonus limit of the crop
      * @param fertilizerNeeds       fertilizer needs of the crop
+     * @param fertilizerNeedsBonusLimit fertilizer needs bonus limit of the crop
      * @param minProductsProduced   minimum products produced of the crop
      * @param maxProductsProduced   maximum products produced of the crop
      * @param seedCost              seed cost of the crop

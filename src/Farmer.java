@@ -71,6 +71,7 @@ public class Farmer {
     /**
      * This method allows a farmer to use a tool
      * @param tool tool to use
+     * @param tile tile to use the tool on
      * @return true if the farmer has enough objectcoins to use the tool
      */
     public boolean useTool (Tool tool, Tile tile)

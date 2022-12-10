@@ -13,6 +13,9 @@ import java.io.FileNotFoundException;
 public class MyFarmModel {
 
     // Declare global variables
+    /**
+     * The list of tools in the game.
+     */
     public static final List<Tool> TOOLLIST = new ArrayList<Tool>(Arrays.asList(
         new Plow(),
         new WateringCan(),
@@ -21,6 +24,9 @@ public class MyFarmModel {
         new Shovel()
     ));
 
+    /**
+     * The list of farmer types in the game.
+     */
     public static final List<FarmerType> FARMERTYPELIST = new ArrayList<FarmerType>(Arrays.asList(
         new FarmerDefault(),
         new RegisteredFarmer(),
@@ -28,6 +34,9 @@ public class MyFarmModel {
         new LegendaryFarmer()
     ));
 
+    /**
+     * The list of crops in the game.
+     */
     public static final List<Crop> CROPLIST = new ArrayList<Crop>(Arrays.asList(
         new Turnip(),
         new Carrot(),

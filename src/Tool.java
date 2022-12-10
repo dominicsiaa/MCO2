@@ -10,9 +10,9 @@ public class Tool {
 
     /**
      * This constructor initializes a tool object
-     * @param name
-     * @param cost
-     * @param expGain
+     * @param name      name of the tool
+     * @param cost      cost of the tool
+     * @param expGain   experience gained from using the tool
      */
     public Tool(String name, int cost, double expGain) {
         this.name = name;

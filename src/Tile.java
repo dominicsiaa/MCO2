@@ -7,11 +7,29 @@
  */
 public class Tile {
 
+    /**
+     * This constant represents the tile has a rock
+     */
     public static final int HASROCK = 0;
+    /**
+     * This constant represents the tile is unplowed
+     */
     public static final int ISUNPLOWED = 1;
+    /**
+     * This constant represents the tile is plowed
+     */
     public static final int ISPLOWED = 2;
+    /**
+     * This constant represents the tile has a crop planted
+     */
     public static final int ISPLANTED = 3;
+    /**
+     * This constant represents the tile has a harvestable crop
+     */
     public static final int ISHARVESTABLE = 4;
+    /**
+     * This constant represents the tile has a withered crop
+     */
     public static final int HASWITHERED = 5;
 
     private boolean hasRock = false;
@@ -33,7 +51,7 @@ public class Tile {
 
     /**
      * This constructor initializes a tile object
-     * @param hasRock
+     * @param hasRock true if tile has rock, false otherwise
      */
     public Tile(boolean hasRock) {
         this.hasRock = hasRock;
@@ -53,7 +71,7 @@ public class Tile {
 
     /**
      * This method plants a crop on a tile
-     * @param crop
+     * @param crop the crop to be planted
      * @return true if successfully planted, false otherwise
      */
     public boolean plant(Crop crop) {

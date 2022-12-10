@@ -443,8 +443,9 @@ public class MyFarmView extends JFrame {
     }
 
     /**
-     * Updates the plot in the GUI center panel
-     * @param lot the plot of land
+     * Updates tile in the GUI center panel
+     * @param  n   the index of the tile
+     * @param  tile the tile
      */
     public void updateTile(int n, Tile tile) {
         String strStatus = tile.toString();
@@ -658,7 +659,7 @@ public class MyFarmView extends JFrame {
 
     /**
      * Sets the console message
-     * @param text   the text to set the console message label to
+     * @param message   the text to set the console message label to
      */
     public void sendConsoleMessage(String message) {
         this.lblConsole.setText("   >   [  " + message + "  ]");
