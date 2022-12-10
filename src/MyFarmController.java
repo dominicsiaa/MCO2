@@ -1,8 +1,6 @@
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
-import javax.swing.JOptionPane;
-
 public class MyFarmController implements ActionListener {
     private MyFarmModel farm;
     private MyFarmView gui;
@@ -24,6 +22,13 @@ public class MyFarmController implements ActionListener {
         } else {
             this.gui.updateTileInfoDefault(tileNumber, tile);
         }
+
+        if(tile.getStatus() == Tile.ISPLOWED) {
+            this.gui.setBtnSeedListEnabled(true);
+        } else {
+            this.gui.setBtnSeedListEnabled(false);
+        }
+
     }
 
     private void startGame() {

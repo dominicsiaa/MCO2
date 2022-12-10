@@ -4,11 +4,6 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.Array;
-
-import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.*;
 
 import java.util.ArrayList;
 import java.text.DecimalFormat;
@@ -438,16 +433,6 @@ public class MyFarmView extends JFrame {
         this.lblTileTimesWatered.setText("");
         this.lblTileTimesFertilized.setText("");
 
-        if(tile.getStatus() == Tile.ISPLOWED) {
-            for(JButton btn : this.btnlistSeeds) {
-                btn.setEnabled(true);
-            }
-        } else {
-            for(JButton btn : this.btnlistSeeds) {
-                btn.setEnabled(false);
-            }
-        }
-
         this.btnHarvest.setVisible(false);
     }
 
@@ -574,5 +559,11 @@ public class MyFarmView extends JFrame {
 
     public void sendConsoleMessage(String message) {
         this.lblConsole.setText("   >   [  " + message + "  ]");
+    }
+
+    public void setBtnSeedListEnabled(boolean enabled) {
+        for(JButton btn : this.btnlistSeeds) {
+            btn.setEnabled(enabled);
+        }
     }
 }

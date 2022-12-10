@@ -137,7 +137,13 @@ public class Farmer {
     public int harvestTile(Tile tile) {
         if(tile.getStatus() == Tile.ISHARVESTABLE) {
             Crop harvest = tile.getCropPlanted();
-            int productAmount = harvest.generateProductAmount();
+            int productAmount;
+
+            if(harvest.getMinProductsProduced() == harvest.getMaxProductsProduced()) {
+                productAmount = harvest.getMinProductsProduced();
+            } else {
+                productAmount = (int)(Math.random() * (harvest.getMaxProductsProduced() - harvest.getMinProductsProduced() + 1) + harvest.getMinProductsProduced());
+            }
 
             double harvestTotal = productAmount * (harvest.getSellingPrice() + this.type.getBonusEarningsPerProduce());
             double waterBonus = harvestTotal * 0.2 * (Math.min(tile.getTimesWatered(), harvest.getWaterNeedsBonusLimit() + this.getType().getWaterBonusLimitIncrease()) - 1);

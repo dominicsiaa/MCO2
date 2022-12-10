@@ -4,7 +4,7 @@
  * fertilizer needs (and bonus), minimum and maximum products produced,
  * seed cost, selling price, and exp gain
  */
-public class Crop {
+public abstract class Crop {
     private String name;
     private int harvestTime;
 
@@ -58,18 +58,6 @@ public class Crop {
         this.seedCost = seedCost;
         this.sellingPrice = sellingPrice;
         this.expGain = expGain;
-    }
-
-    /**
-     * This method generates a random number of products produced
-     * @return name
-     */
-    public int generateProductAmount() {
-        if(this.minProductsProduced == this.maxProductsProduced) {
-            return this.minProductsProduced;
-        } else {
-            return (int)(Math.random() * (this.maxProductsProduced - this.minProductsProduced + 1) + this.minProductsProduced);
-        }
     }
 
     /**

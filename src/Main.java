@@ -4,6 +4,6 @@ public class Main {
         MyFarmView farmView = new MyFarmView();
         MyFarmModel farmModel = new MyFarmModel();
         
-        MyFarmController farmController = new MyFarmController(farmModel, farmView);
+        new MyFarmController(farmModel, farmView);
     }
 }
