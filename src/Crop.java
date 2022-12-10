@@ -7,8 +7,6 @@
 public abstract class Crop {
     private String name;
     private int harvestTime;
-
-    //add inheritance stuff next time
     private int waterNeeds;
     private int waterNeedsBonusLimit;
     private int fertilizerNeeds;
@@ -62,7 +60,7 @@ public abstract class Crop {
 
     /**
      * This method returns the name of the crop
-     * @return name
+     * @return random number of products produced
      */
     public String getName() {
         return this.name;

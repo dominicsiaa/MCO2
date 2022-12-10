@@ -5,9 +5,9 @@
  */
 public class Farmer {
     private String name = "Farmer";
-    private double objectcoins = 100; //default is 100
-    private int level = 0; //default is 0
-    private double exp = 0; //default is 0
+    private double objectcoins = 100;
+    private int level = 0;
+    private double exp = 0;
     private FarmerType type = MyFarmModel.FARMERTYPELIST.get(0);
 
     /**
@@ -111,7 +111,6 @@ public class Farmer {
         return success;
     }
 
-    //TODO: Implementation for fruit tree conditions for MCO2
     /**
      * This method allows a farmer to plant a crop
      * @param crop
@@ -128,7 +127,6 @@ public class Farmer {
         return false;
     }
 
-    //TODO: Implementation for flower seeds for MCO2
     /**
      * This method allows a farmer to harvest a crop
      * @param tile

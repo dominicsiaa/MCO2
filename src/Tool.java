@@ -1,7 +1,7 @@
 /**
  * Represents a tool in the game.
- * Contains the tool name, function,
- * cost, and exp gained from using the tool
+ * Contains the tool name, cost,
+ * and exp gained from using the tool
  */
 public class Tool {
     private String name;
