@@ -170,7 +170,7 @@ public class MyFarmView extends JFrame {
         toolPanel.setBackground(Color.decode("#813b00"));
         toolPanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createMatteBorder(0, 10, 10, 10, Color.decode("#813b00")),
-                BorderFactory.createMatteBorder(0, 15, 80, 15, Color.decode("#813b00"))));
+                BorderFactory.createMatteBorder(0, 15, 90, 15, Color.decode("#813b00"))));
 
         JLabel lblTool = new JLabel("Tools");
         lblTool.setFont(new Font("Verdana", Font.BOLD, 30));
@@ -197,10 +197,10 @@ public class MyFarmView extends JFrame {
         //Center - lot
         JPanel farmPanel = new JPanel();
         farmPanel.setLayout(new BorderLayout());
-        farmPanel.setBackground(Color.decode("#44a318"));
+        farmPanel.setBackground(Color.decode("#3c8419"));
 
         this.lblConsole = new JLabel("");
-        this.lblConsole.setForeground(Color.RED);
+        this.lblConsole.setForeground(Color.WHITE);
         farmPanel.add(lblConsole, BorderLayout.NORTH);
 
         ImageIcon PlotTexture = new ImageIcon(getClass().getResource("resources/PlotTexture.png"));
@@ -516,7 +516,7 @@ public class MyFarmView extends JFrame {
     }
 
     public void sendConsoleMessage(String message) {
-        this.lblConsole.setText(message);
+        this.lblConsole.setText("   >   [  " + message + "  ]");
     }
 
 }
