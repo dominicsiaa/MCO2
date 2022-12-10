@@ -1,6 +1,8 @@
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
+import javax.swing.JOptionPane;
+
 public class MyFarmController implements ActionListener {
     private MyFarmModel farm;
     private MyFarmView gui;
@@ -51,6 +53,9 @@ public class MyFarmController implements ActionListener {
         //RESTART GAME
         } else if (command.equals("Restart Game")) {
             this.farm = new MyFarmModel();
+            this.gui.setTileUnselected(this.selectedTile);
+            this.selectedTile = 0;
+
             this.startGame();
 
         //ADVANCE DAY
@@ -87,6 +92,9 @@ public class MyFarmController implements ActionListener {
             } else {
                 this.gui.sendConsoleMessage("Invalid use of Harvest Crop");   
             }
+
+        } else if (command.equals("?")) {
+            this.gui.showInfoPopup();
 
         } else {
             String[] args = command.split(":");

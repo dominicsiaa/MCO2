@@ -4,6 +4,8 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.reflect.Array;
+
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
@@ -24,6 +26,7 @@ public class MyFarmView extends JFrame {
     private JLabel lblConsole;
     private JButton btnRankUp = new JButton();
     private JButton btnAdvanceDay = new JButton();
+    private JButton btnInfo = new JButton();
 
     //farmer info
     private JLabel lblName = new JLabel();
@@ -215,6 +218,7 @@ public class MyFarmView extends JFrame {
         for(int i = 0; i < 50; i++) {
             JButton btn = new JButton(Integer.toString(i));
             btn.setBackground(Color.LIGHT_GRAY);
+            btn.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
 
             btn.setActionCommand("TILE:" + Integer.toString(i));
             this.btnlistPlot.add(btn);
@@ -236,11 +240,20 @@ public class MyFarmView extends JFrame {
                         BorderFactory.createMatteBorder(20, 20, 20, 20, InfoTexture),
                         BorderFactory.createMatteBorder(10, 10, 10, 10, Color.decode("#735c57"))))));
 
+        JPanel infoPanelText = new JPanel();
+        infoPanelText.setLayout(new FlowLayout());
+        infoPanelText.setBackground(Color.decode("#735c57"));
+
         JLabel lbInfo = new JLabel("Info");
         lbInfo.setFont(new Font("Verdana", Font.BOLD, 35));
         lbInfo.setForeground(Color.WHITE);
         lbInfo.setHorizontalAlignment(JLabel.CENTER);
-        infoPanel.add(lbInfo, BorderLayout.NORTH);
+        infoPanelText.add(lbInfo);
+
+        this.btnInfo = new JButton("?");
+        infoPanelText.add(this.btnInfo);
+
+        infoPanel.add(infoPanelText, BorderLayout.NORTH);
 
         //East-North - tile info
         JPanel tileInfoPanel = new JPanel();
@@ -463,6 +476,7 @@ public class MyFarmView extends JFrame {
         this.btnRankUp.addActionListener(listener);
         this.btnAdvanceDay.addActionListener(listener);
         this.btnHarvest.addActionListener(listener);
+        this.btnInfo.addActionListener(listener);
 
         for(JButton btn : this.btnlistPlot) {
             btn.addActionListener(listener);
@@ -481,6 +495,47 @@ public class MyFarmView extends JFrame {
         this.mainFrame.dispose();
     }
 
+    public void showInfoPopup() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        
+        panel.add(new JLabel("Game Info"), BorderLayout.NORTH);
+
+        String[] infoColumns = {"Tool", "Cost", "EXP Gain"};
+        String[][] infoData = new String[MyFarmModel.TOOLLIST.size()][3];
+        for(int i = 0; i < MyFarmModel.TOOLLIST.size(); i++) {
+            infoData[i][0] = MyFarmModel.TOOLLIST.get(i).getName();
+            infoData[i][1] = Integer.toString(MyFarmModel.TOOLLIST.get(i).getCost());
+            infoData[i][2] = Double.toString(MyFarmModel.TOOLLIST.get(i).getExpGain());
+        }
+        JTable toolInfo = new JTable(infoData, infoColumns);
+        JScrollPane toolPane = new JScrollPane(toolInfo);
+        toolPane.setPreferredSize(new Dimension(700, 140));
+
+        panel.add(toolPane, BorderLayout.CENTER);
+
+        String[] seedColumns = {"Seed", "Cost", "EXP Gain", "Min Produce", "Max Produce", "Sell Price", "Days to Grow", "Water Needs", "Fertilizer Needs"};
+        String[][]seedData = new String[MyFarmModel.CROPLIST.size()][9];
+        for(int i = 0; i < MyFarmModel.CROPLIST.size(); i++) {
+            seedData[i][0] = MyFarmModel.CROPLIST.get(i).getName();
+            seedData[i][1] = Integer.toString(MyFarmModel.CROPLIST.get(i).getSeedCost());
+            seedData[i][2] = Double.toString(MyFarmModel.CROPLIST.get(i).getExpGain());
+            seedData[i][3] = Integer.toString(MyFarmModel.CROPLIST.get(i).getMinProductsProduced());
+            seedData[i][4] = Integer.toString(MyFarmModel.CROPLIST.get(i).getMaxProductsProduced());
+            seedData[i][5] = Integer.toString(MyFarmModel.CROPLIST.get(i).getSellingPrice());
+            seedData[i][6] = Integer.toString(MyFarmModel.CROPLIST.get(i).getHarvestTime());
+            seedData[i][7] = Integer.toString(MyFarmModel.CROPLIST.get(i).getWaterNeeds());
+            seedData[i][8] = Integer.toString(MyFarmModel.CROPLIST.get(i).getFertilizerNeeds());
+        }
+        JTable seedInfo = new JTable(seedData, seedColumns);
+        JScrollPane seedPane = new JScrollPane(seedInfo);
+        seedPane.setPreferredSize(new Dimension(700, 200));
+
+        panel.add(seedPane, BorderLayout.SOUTH);
+
+        JOptionPane.showMessageDialog(null, panel, "Game Info", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     /*
      * GETTERS
      */
@@ -495,11 +550,13 @@ public class MyFarmView extends JFrame {
 
     public void setTileSelected(int n) {
         this.btnlistPlot.get(n).setBackground(Color.GRAY);
+        this.btnlistPlot.get(n).setBorder(BorderFactory.createLineBorder(Color.yellow, 5));;
         System.out.println("Tile " + n + " selected");
     }
 
     public void setTileUnselected(int n) {
         this.btnlistPlot.get(n).setBackground(Color.LIGHT_GRAY);
+        this.btnlistPlot.get(n).setBorder(BorderFactory.createLineBorder(Color.gray, 1));
         System.out.println("Tile " + n + " unselected");
     }
 
@@ -518,5 +575,4 @@ public class MyFarmView extends JFrame {
     public void sendConsoleMessage(String message) {
         this.lblConsole.setText("   >   [  " + message + "  ]");
     }
-
 }
